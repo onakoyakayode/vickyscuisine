@@ -1,0 +1,348 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPERADMIN
+  ADMIN
+  CASHIER
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  TRANSFER
+  POS
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  DEPOSIT_PAID
+  FULLY_PAID
+  REFUNDED
+}
+
+enum OrderSource {
+  CUSTOMER
+  ADMIN
+}
+
+enum FoodPackStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+enum DeliveryMethod {
+  PICKUP
+  DELIVERY
+}
+
+enum EventType {
+  WEDDING
+  BIRTHDAY
+  CORPORATE
+  CHURCH_COMMUNITY
+  GRADUATION
+  OWAMBE
+  NAMING_CEREMONY
+  BULK_ORDER
+  OTHER
+}
+
+enum ServiceType {
+  FULL_CATERING
+  DELIVERY_ONLY
+  BUFFET_SETUP
+  PACKED_MEALS
+  SMALL_CHOPS_ONLY
+}
+
+enum VenueType {
+  INDOOR
+  OUTDOOR
+  OPEN_FIELD
+  HALL
+  HOME
+  NOT_SPECIFIED
+}
+
+enum EventStatus {
+  PENDING_REVIEW
+  QUOTE_SENT
+  CONFIRMED
+  DEPOSIT_PAID
+  FULLY_PAID
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(CASHIER)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  ordersCreated   Order[]        @relation("CreatedBy")
+  ordersConfirmed Order[]        @relation("ConfirmedBy")
+  auditLogs       AuditLog[]
+  activeSession   ActiveSession?
+
+  @@map("users")
+}
+
+model ActiveSession {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  sessionId String   @unique @default(cuid())
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("active_sessions")
+}
+
+model Order {
+  id            String         @id @default(cuid())
+  ref           String         @unique
+  customerName  String
+  customerPhone String?
+  items         Json
+  subtotal      Float
+  total         Float
+  status        OrderStatus    @default(PENDING)
+  paymentMethod PaymentMethod?
+  paymentStatus PaymentStatus  @default(UNPAID)
+  source        OrderSource    @default(CUSTOMER)
+  notes         String?
+
+  createdById   String?
+  confirmedById String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  confirmedAt   DateTime?
+
+  createdBy   User? @relation("CreatedBy", fields: [createdById], references: [id])
+  confirmedBy User? @relation("ConfirmedBy", fields: [confirmedById], references: [id])
+
+  @@index([ref])
+  @@index([status])
+  @@index([createdAt])
+  @@map("orders")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  userName  String?
+  action    String
+  entity    String
+  entityId  String?
+  meta      Json?
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([entity])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+model MenuCategory {
+  id        String @id @default(cuid())
+  name      String
+  slug      String @unique
+  sortOrder Int    @default(0)
+
+  items MenuItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("menu_categories")
+}
+
+model MenuItem {
+  id          String  @id @default(cuid())
+  name        String
+  slug        String
+  description String?
+  priceNGN    Float
+  publicId    String?
+
+  imageUrl    String?
+  isAvailable Boolean @default(true)
+  isFeatured  Boolean @default(false)
+  isSpicy     Boolean @default(false)
+
+  tags String[]
+
+  sortOrder Int @default(0)
+
+  categoryId String
+  category   MenuCategory @relation(fields: [categoryId], references: [id])
+
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  FoodPackOrderItem  FoodPackOrderItem[]
+  EventMenuSelection EventMenuSelection[]
+
+  @@unique([slug, categoryId])
+  @@map("menu_items")
+}
+
+model FoodPackOrder {
+  id              String         @id @default(cuid())
+  orderNumber     String         @unique @default(cuid())
+  status          FoodPackStatus @default(PENDING)
+  customerName    String
+  customerPhone   String
+  customerEmail   String?
+  deliveryMethod  DeliveryMethod @default(DELIVERY)
+  deliveryAddress String?
+  deliveryDate    DateTime?
+  specialNotes    String?
+  totalAmountNGN  Float
+  isPaid          Boolean        @default(false)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  items FoodPackOrderItem[]
+
+  @@map("food_pack_orders")
+}
+
+model FoodPackOrderItem {
+  id         String @id @default(cuid())
+  quantity   Int
+  unitPrice  Float
+  totalPrice Float
+
+  order   FoodPackOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId String
+
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
+  menuItemId String
+
+  @@map("food_pack_order_items")
+}
+
+model EventOrder {
+  id       String @id @default(cuid())
+  orderRef String @unique
+
+  clientName     String
+  clientPhone    String
+  clientEmail    String?
+  clientWhatsApp String?
+
+  eventType  EventType
+  eventDate  DateTime
+  eventTime  String?
+  guestCount Int
+
+  venueType    VenueType @default(NOT_SPECIFIED)
+  venueAddress String?
+  venueLGA     String?
+
+  serviceType ServiceType
+
+  status EventStatus @default(PENDING_REVIEW)
+
+  dietaryNotes    String?
+  specialRequests String?
+
+  perHeadRateNGN Float?
+  subtotalNGN    Float?
+  deliveryFeeNGN Float  @default(0)
+  setupFeeNGN    Float  @default(0)
+  discountNGN    Float  @default(0)
+  totalNGN       Float?
+
+  paymentStatus PaymentStatus @default(UNPAID)
+
+  depositAmtNGN Float?
+  depositPaidAt DateTime?
+
+  balanceDueNGN Float?
+  balancePaidAt DateTime?
+
+  setupTime String?
+
+  servingStaffCount Int     @default(0)
+  cleanupIncluded   Boolean @default(false)
+
+  equipmentList String[]
+
+  internalNotes String?
+
+  quoteSentAt DateTime?
+  confirmedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  menuSelections EventMenuSelection[]
+  payments       EventPayment[]
+
+  @@map("event_orders")
+}
+
+model EventMenuSelection {
+  id String @id @default(cuid())
+
+  quantityPerHead Float   @default(1)
+  totalQuantity   Float
+  unit            String
+  notes           String?
+
+  eventOrder   EventOrder @relation(fields: [eventOrderId], references: [id], onDelete: Cascade)
+  eventOrderId String
+
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
+  menuItemId String
+
+  @@map("event_menu_selections")
+}
+
+model EventPayment {
+  id String @id @default(cuid())
+
+  amountNGN     Float
+  paymentMethod String
+  reference     String?
+  paidAt        DateTime @default(now())
+  note          String?
+
+  eventOrder   EventOrder @relation(fields: [eventOrderId], references: [id], onDelete: Cascade)
+  eventOrderId String
+
+  @@map("event_payments")
+}
