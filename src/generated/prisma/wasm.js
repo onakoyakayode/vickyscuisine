@@ -188,19 +188,19 @@ exports.Prisma.MenuCategoryScalarFieldEnum = {
 exports.Prisma.MenuItemScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  slug: 'slug',
   description: 'description',
   priceNGN: 'priceNGN',
-  publicId: 'publicId',
   imageUrl: 'imageUrl',
   isAvailable: 'isAvailable',
   isFeatured: 'isFeatured',
   isSpicy: 'isSpicy',
   tags: 'tags',
-  sortOrder: 'sortOrder',
-  categoryId: 'categoryId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  categoryId: 'categoryId',
+  slug: 'slug',
+  sortOrder: 'sortOrder',
+  publicId: 'publicId'
 };
 
 exports.Prisma.FoodPackOrderScalarFieldEnum = {

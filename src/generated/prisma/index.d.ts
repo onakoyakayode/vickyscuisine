@@ -1870,15 +1870,15 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    ordersCreated: number
-    ordersConfirmed: number
     auditLogs: number
+    ordersConfirmed: number
+    ordersCreated: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    ordersCreated?: boolean | UserCountOutputTypeCountOrdersCreatedArgs
-    ordersConfirmed?: boolean | UserCountOutputTypeCountOrdersConfirmedArgs
     auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
+    ordersConfirmed?: boolean | UserCountOutputTypeCountOrdersConfirmedArgs
+    ordersCreated?: boolean | UserCountOutputTypeCountOrdersCreatedArgs
   }
 
   // Custom InputTypes
@@ -1895,8 +1895,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountOrdersCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OrderWhereInput
+  export type UserCountOutputTypeCountAuditLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AuditLogWhereInput
   }
 
   /**
@@ -1909,8 +1909,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountAuditLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AuditLogWhereInput
+  export type UserCountOutputTypeCountOrdersCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderWhereInput
   }
 
 
@@ -1950,13 +1950,13 @@ export namespace Prisma {
    */
 
   export type MenuItemCountOutputType = {
-    FoodPackOrderItem: number
     EventMenuSelection: number
+    FoodPackOrderItem: number
   }
 
   export type MenuItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    FoodPackOrderItem?: boolean | MenuItemCountOutputTypeCountFoodPackOrderItemArgs
     EventMenuSelection?: boolean | MenuItemCountOutputTypeCountEventMenuSelectionArgs
+    FoodPackOrderItem?: boolean | MenuItemCountOutputTypeCountFoodPackOrderItemArgs
   }
 
   // Custom InputTypes
@@ -1973,15 +1973,15 @@ export namespace Prisma {
   /**
    * MenuItemCountOutputType without action
    */
-  export type MenuItemCountOutputTypeCountFoodPackOrderItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: FoodPackOrderItemWhereInput
+  export type MenuItemCountOutputTypeCountEventMenuSelectionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventMenuSelectionWhereInput
   }
 
   /**
    * MenuItemCountOutputType without action
    */
-  export type MenuItemCountOutputTypeCountEventMenuSelectionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EventMenuSelectionWhereInput
+  export type MenuItemCountOutputTypeCountFoodPackOrderItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FoodPackOrderItemWhereInput
   }
 
 
@@ -2248,10 +2248,10 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    ordersCreated?: boolean | User$ordersCreatedArgs<ExtArgs>
-    ordersConfirmed?: boolean | User$ordersConfirmedArgs<ExtArgs>
-    auditLogs?: boolean | User$auditLogsArgs<ExtArgs>
     activeSession?: boolean | User$activeSessionArgs<ExtArgs>
+    auditLogs?: boolean | User$auditLogsArgs<ExtArgs>
+    ordersConfirmed?: boolean | User$ordersConfirmedArgs<ExtArgs>
+    ordersCreated?: boolean | User$ordersCreatedArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2278,10 +2278,10 @@ export namespace Prisma {
   }
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    ordersCreated?: boolean | User$ordersCreatedArgs<ExtArgs>
-    ordersConfirmed?: boolean | User$ordersConfirmedArgs<ExtArgs>
-    auditLogs?: boolean | User$auditLogsArgs<ExtArgs>
     activeSession?: boolean | User$activeSessionArgs<ExtArgs>
+    auditLogs?: boolean | User$auditLogsArgs<ExtArgs>
+    ordersConfirmed?: boolean | User$ordersConfirmedArgs<ExtArgs>
+    ordersCreated?: boolean | User$ordersCreatedArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2289,10 +2289,10 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      ordersCreated: Prisma.$OrderPayload<ExtArgs>[]
-      ordersConfirmed: Prisma.$OrderPayload<ExtArgs>[]
-      auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
       activeSession: Prisma.$ActiveSessionPayload<ExtArgs> | null
+      auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
+      ordersConfirmed: Prisma.$OrderPayload<ExtArgs>[]
+      ordersCreated: Prisma.$OrderPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2667,10 +2667,10 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    ordersCreated<T extends User$ordersCreatedArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany"> | Null>
-    ordersConfirmed<T extends User$ordersConfirmedArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersConfirmedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany"> | Null>
-    auditLogs<T extends User$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany"> | Null>
     activeSession<T extends User$activeSessionArgs<ExtArgs> = {}>(args?: Subset<T, User$activeSessionArgs<ExtArgs>>): Prisma__ActiveSessionClient<$Result.GetResult<Prisma.$ActiveSessionPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    auditLogs<T extends User$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany"> | Null>
+    ordersConfirmed<T extends User$ordersConfirmedArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersConfirmedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany"> | Null>
+    ordersCreated<T extends User$ordersCreatedArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3022,43 +3022,18 @@ export namespace Prisma {
   }
 
   /**
-   * User.ordersCreated
+   * User.activeSession
    */
-  export type User$ordersCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$activeSessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Order
+     * Select specific fields to fetch from the ActiveSession
      */
-    select?: OrderSelect<ExtArgs> | null
+    select?: ActiveSessionSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderInclude<ExtArgs> | null
-    where?: OrderWhereInput
-    orderBy?: OrderOrderByWithRelationInput | OrderOrderByWithRelationInput[]
-    cursor?: OrderWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: OrderScalarFieldEnum | OrderScalarFieldEnum[]
-  }
-
-  /**
-   * User.ordersConfirmed
-   */
-  export type User$ordersConfirmedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Order
-     */
-    select?: OrderSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OrderInclude<ExtArgs> | null
-    where?: OrderWhereInput
-    orderBy?: OrderOrderByWithRelationInput | OrderOrderByWithRelationInput[]
-    cursor?: OrderWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: OrderScalarFieldEnum | OrderScalarFieldEnum[]
+    include?: ActiveSessionInclude<ExtArgs> | null
+    where?: ActiveSessionWhereInput
   }
 
   /**
@@ -3082,18 +3057,43 @@ export namespace Prisma {
   }
 
   /**
-   * User.activeSession
+   * User.ordersConfirmed
    */
-  export type User$activeSessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$ordersConfirmedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ActiveSession
+     * Select specific fields to fetch from the Order
      */
-    select?: ActiveSessionSelect<ExtArgs> | null
+    select?: OrderSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ActiveSessionInclude<ExtArgs> | null
-    where?: ActiveSessionWhereInput
+    include?: OrderInclude<ExtArgs> | null
+    where?: OrderWhereInput
+    orderBy?: OrderOrderByWithRelationInput | OrderOrderByWithRelationInput[]
+    cursor?: OrderWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrderScalarFieldEnum | OrderScalarFieldEnum[]
+  }
+
+  /**
+   * User.ordersCreated
+   */
+  export type User$ordersCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Order
+     */
+    select?: OrderSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderInclude<ExtArgs> | null
+    where?: OrderWhereInput
+    orderBy?: OrderOrderByWithRelationInput | OrderOrderByWithRelationInput[]
+    cursor?: OrderWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrderScalarFieldEnum | OrderScalarFieldEnum[]
   }
 
   /**
@@ -4362,8 +4362,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     confirmedAt?: boolean
-    createdBy?: boolean | Order$createdByArgs<ExtArgs>
     confirmedBy?: boolean | Order$confirmedByArgs<ExtArgs>
+    createdBy?: boolean | Order$createdByArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4384,8 +4384,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     confirmedAt?: boolean
-    createdBy?: boolean | Order$createdByArgs<ExtArgs>
     confirmedBy?: boolean | Order$confirmedByArgs<ExtArgs>
+    createdBy?: boolean | Order$createdByArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectScalar = {
@@ -4409,19 +4409,19 @@ export namespace Prisma {
   }
 
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    createdBy?: boolean | Order$createdByArgs<ExtArgs>
     confirmedBy?: boolean | Order$confirmedByArgs<ExtArgs>
+    createdBy?: boolean | Order$createdByArgs<ExtArgs>
   }
   export type OrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    createdBy?: boolean | Order$createdByArgs<ExtArgs>
     confirmedBy?: boolean | Order$confirmedByArgs<ExtArgs>
+    createdBy?: boolean | Order$createdByArgs<ExtArgs>
   }
 
   export type $OrderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Order"
     objects: {
-      createdBy: Prisma.$UserPayload<ExtArgs> | null
       confirmedBy: Prisma.$UserPayload<ExtArgs> | null
+      createdBy: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4805,8 +4805,8 @@ export namespace Prisma {
    */
   export interface Prisma__OrderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    createdBy<T extends Order$createdByArgs<ExtArgs> = {}>(args?: Subset<T, Order$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     confirmedBy<T extends Order$confirmedByArgs<ExtArgs> = {}>(args?: Subset<T, Order$confirmedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    createdBy<T extends Order$createdByArgs<ExtArgs> = {}>(args?: Subset<T, Order$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5171,9 +5171,9 @@ export namespace Prisma {
   }
 
   /**
-   * Order.createdBy
+   * Order.confirmedBy
    */
-  export type Order$createdByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Order$confirmedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -5186,9 +5186,9 @@ export namespace Prisma {
   }
 
   /**
-   * Order.confirmedBy
+   * Order.createdBy
    */
-  export type Order$confirmedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Order$createdByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -7238,53 +7238,53 @@ export namespace Prisma {
   export type MenuItemMinAggregateOutputType = {
     id: string | null
     name: string | null
-    slug: string | null
     description: string | null
     priceNGN: number | null
-    publicId: string | null
     imageUrl: string | null
     isAvailable: boolean | null
     isFeatured: boolean | null
     isSpicy: boolean | null
-    sortOrder: number | null
-    categoryId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    categoryId: string | null
+    slug: string | null
+    sortOrder: number | null
+    publicId: string | null
   }
 
   export type MenuItemMaxAggregateOutputType = {
     id: string | null
     name: string | null
-    slug: string | null
     description: string | null
     priceNGN: number | null
-    publicId: string | null
     imageUrl: string | null
     isAvailable: boolean | null
     isFeatured: boolean | null
     isSpicy: boolean | null
-    sortOrder: number | null
-    categoryId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    categoryId: string | null
+    slug: string | null
+    sortOrder: number | null
+    publicId: string | null
   }
 
   export type MenuItemCountAggregateOutputType = {
     id: number
     name: number
-    slug: number
     description: number
     priceNGN: number
-    publicId: number
     imageUrl: number
     isAvailable: number
     isFeatured: number
     isSpicy: number
     tags: number
-    sortOrder: number
-    categoryId: number
     createdAt: number
     updatedAt: number
+    categoryId: number
+    slug: number
+    sortOrder: number
+    publicId: number
     _all: number
   }
 
@@ -7302,53 +7302,53 @@ export namespace Prisma {
   export type MenuItemMinAggregateInputType = {
     id?: true
     name?: true
-    slug?: true
     description?: true
     priceNGN?: true
-    publicId?: true
     imageUrl?: true
     isAvailable?: true
     isFeatured?: true
     isSpicy?: true
-    sortOrder?: true
-    categoryId?: true
     createdAt?: true
     updatedAt?: true
+    categoryId?: true
+    slug?: true
+    sortOrder?: true
+    publicId?: true
   }
 
   export type MenuItemMaxAggregateInputType = {
     id?: true
     name?: true
-    slug?: true
     description?: true
     priceNGN?: true
-    publicId?: true
     imageUrl?: true
     isAvailable?: true
     isFeatured?: true
     isSpicy?: true
-    sortOrder?: true
-    categoryId?: true
     createdAt?: true
     updatedAt?: true
+    categoryId?: true
+    slug?: true
+    sortOrder?: true
+    publicId?: true
   }
 
   export type MenuItemCountAggregateInputType = {
     id?: true
     name?: true
-    slug?: true
     description?: true
     priceNGN?: true
-    publicId?: true
     imageUrl?: true
     isAvailable?: true
     isFeatured?: true
     isSpicy?: true
     tags?: true
-    sortOrder?: true
-    categoryId?: true
     createdAt?: true
     updatedAt?: true
+    categoryId?: true
+    slug?: true
+    sortOrder?: true
+    publicId?: true
     _all?: true
   }
 
@@ -7441,19 +7441,19 @@ export namespace Prisma {
   export type MenuItemGroupByOutputType = {
     id: string
     name: string
-    slug: string
     description: string | null
     priceNGN: number
-    publicId: string | null
     imageUrl: string | null
     isAvailable: boolean
     isFeatured: boolean
     isSpicy: boolean
     tags: string[]
-    sortOrder: number
-    categoryId: string
     createdAt: Date
     updatedAt: Date
+    categoryId: string
+    slug: string
+    sortOrder: number
+    publicId: string | null
     _count: MenuItemCountAggregateOutputType | null
     _avg: MenuItemAvgAggregateOutputType | null
     _sum: MenuItemSumAggregateOutputType | null
@@ -7478,66 +7478,66 @@ export namespace Prisma {
   export type MenuItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    slug?: boolean
     description?: boolean
     priceNGN?: boolean
-    publicId?: boolean
     imageUrl?: boolean
     isAvailable?: boolean
     isFeatured?: boolean
     isSpicy?: boolean
     tags?: boolean
-    sortOrder?: boolean
-    categoryId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    category?: boolean | MenuCategoryDefaultArgs<ExtArgs>
-    FoodPackOrderItem?: boolean | MenuItem$FoodPackOrderItemArgs<ExtArgs>
+    categoryId?: boolean
+    slug?: boolean
+    sortOrder?: boolean
+    publicId?: boolean
     EventMenuSelection?: boolean | MenuItem$EventMenuSelectionArgs<ExtArgs>
+    FoodPackOrderItem?: boolean | MenuItem$FoodPackOrderItemArgs<ExtArgs>
+    category?: boolean | MenuCategoryDefaultArgs<ExtArgs>
     _count?: boolean | MenuItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["menuItem"]>
 
   export type MenuItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    slug?: boolean
     description?: boolean
     priceNGN?: boolean
-    publicId?: boolean
     imageUrl?: boolean
     isAvailable?: boolean
     isFeatured?: boolean
     isSpicy?: boolean
     tags?: boolean
-    sortOrder?: boolean
-    categoryId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    categoryId?: boolean
+    slug?: boolean
+    sortOrder?: boolean
+    publicId?: boolean
     category?: boolean | MenuCategoryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["menuItem"]>
 
   export type MenuItemSelectScalar = {
     id?: boolean
     name?: boolean
-    slug?: boolean
     description?: boolean
     priceNGN?: boolean
-    publicId?: boolean
     imageUrl?: boolean
     isAvailable?: boolean
     isFeatured?: boolean
     isSpicy?: boolean
     tags?: boolean
-    sortOrder?: boolean
-    categoryId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    categoryId?: boolean
+    slug?: boolean
+    sortOrder?: boolean
+    publicId?: boolean
   }
 
   export type MenuItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | MenuCategoryDefaultArgs<ExtArgs>
-    FoodPackOrderItem?: boolean | MenuItem$FoodPackOrderItemArgs<ExtArgs>
     EventMenuSelection?: boolean | MenuItem$EventMenuSelectionArgs<ExtArgs>
+    FoodPackOrderItem?: boolean | MenuItem$FoodPackOrderItemArgs<ExtArgs>
+    category?: boolean | MenuCategoryDefaultArgs<ExtArgs>
     _count?: boolean | MenuItemCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MenuItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7547,26 +7547,26 @@ export namespace Prisma {
   export type $MenuItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "MenuItem"
     objects: {
-      category: Prisma.$MenuCategoryPayload<ExtArgs>
-      FoodPackOrderItem: Prisma.$FoodPackOrderItemPayload<ExtArgs>[]
       EventMenuSelection: Prisma.$EventMenuSelectionPayload<ExtArgs>[]
+      FoodPackOrderItem: Prisma.$FoodPackOrderItemPayload<ExtArgs>[]
+      category: Prisma.$MenuCategoryPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
-      slug: string
       description: string | null
       priceNGN: number
-      publicId: string | null
       imageUrl: string | null
       isAvailable: boolean
       isFeatured: boolean
       isSpicy: boolean
       tags: string[]
-      sortOrder: number
-      categoryId: string
       createdAt: Date
       updatedAt: Date
+      categoryId: string
+      slug: string
+      sortOrder: number
+      publicId: string | null
     }, ExtArgs["result"]["menuItem"]>
     composites: {}
   }
@@ -7931,9 +7931,9 @@ export namespace Prisma {
    */
   export interface Prisma__MenuItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    category<T extends MenuCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MenuCategoryDefaultArgs<ExtArgs>>): Prisma__MenuCategoryClient<$Result.GetResult<Prisma.$MenuCategoryPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    FoodPackOrderItem<T extends MenuItem$FoodPackOrderItemArgs<ExtArgs> = {}>(args?: Subset<T, MenuItem$FoodPackOrderItemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodPackOrderItemPayload<ExtArgs>, T, "findMany"> | Null>
     EventMenuSelection<T extends MenuItem$EventMenuSelectionArgs<ExtArgs> = {}>(args?: Subset<T, MenuItem$EventMenuSelectionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventMenuSelectionPayload<ExtArgs>, T, "findMany"> | Null>
+    FoodPackOrderItem<T extends MenuItem$FoodPackOrderItemArgs<ExtArgs> = {}>(args?: Subset<T, MenuItem$FoodPackOrderItemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodPackOrderItemPayload<ExtArgs>, T, "findMany"> | Null>
+    category<T extends MenuCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MenuCategoryDefaultArgs<ExtArgs>>): Prisma__MenuCategoryClient<$Result.GetResult<Prisma.$MenuCategoryPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7965,19 +7965,19 @@ export namespace Prisma {
   interface MenuItemFieldRefs {
     readonly id: FieldRef<"MenuItem", 'String'>
     readonly name: FieldRef<"MenuItem", 'String'>
-    readonly slug: FieldRef<"MenuItem", 'String'>
     readonly description: FieldRef<"MenuItem", 'String'>
     readonly priceNGN: FieldRef<"MenuItem", 'Float'>
-    readonly publicId: FieldRef<"MenuItem", 'String'>
     readonly imageUrl: FieldRef<"MenuItem", 'String'>
     readonly isAvailable: FieldRef<"MenuItem", 'Boolean'>
     readonly isFeatured: FieldRef<"MenuItem", 'Boolean'>
     readonly isSpicy: FieldRef<"MenuItem", 'Boolean'>
     readonly tags: FieldRef<"MenuItem", 'String[]'>
-    readonly sortOrder: FieldRef<"MenuItem", 'Int'>
-    readonly categoryId: FieldRef<"MenuItem", 'String'>
     readonly createdAt: FieldRef<"MenuItem", 'DateTime'>
     readonly updatedAt: FieldRef<"MenuItem", 'DateTime'>
+    readonly categoryId: FieldRef<"MenuItem", 'String'>
+    readonly slug: FieldRef<"MenuItem", 'String'>
+    readonly sortOrder: FieldRef<"MenuItem", 'Int'>
+    readonly publicId: FieldRef<"MenuItem", 'String'>
   }
     
 
@@ -8296,26 +8296,6 @@ export namespace Prisma {
   }
 
   /**
-   * MenuItem.FoodPackOrderItem
-   */
-  export type MenuItem$FoodPackOrderItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the FoodPackOrderItem
-     */
-    select?: FoodPackOrderItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FoodPackOrderItemInclude<ExtArgs> | null
-    where?: FoodPackOrderItemWhereInput
-    orderBy?: FoodPackOrderItemOrderByWithRelationInput | FoodPackOrderItemOrderByWithRelationInput[]
-    cursor?: FoodPackOrderItemWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: FoodPackOrderItemScalarFieldEnum | FoodPackOrderItemScalarFieldEnum[]
-  }
-
-  /**
    * MenuItem.EventMenuSelection
    */
   export type MenuItem$EventMenuSelectionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8333,6 +8313,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EventMenuSelectionScalarFieldEnum | EventMenuSelectionScalarFieldEnum[]
+  }
+
+  /**
+   * MenuItem.FoodPackOrderItem
+   */
+  export type MenuItem$FoodPackOrderItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodPackOrderItem
+     */
+    select?: FoodPackOrderItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FoodPackOrderItemInclude<ExtArgs> | null
+    where?: FoodPackOrderItemWhereInput
+    orderBy?: FoodPackOrderItemOrderByWithRelationInput | FoodPackOrderItemOrderByWithRelationInput[]
+    cursor?: FoodPackOrderItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FoodPackOrderItemScalarFieldEnum | FoodPackOrderItemScalarFieldEnum[]
   }
 
   /**
@@ -9654,8 +9654,8 @@ export namespace Prisma {
     totalPrice?: boolean
     orderId?: boolean
     menuItemId?: boolean
-    order?: boolean | FoodPackOrderDefaultArgs<ExtArgs>
     menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+    order?: boolean | FoodPackOrderDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["foodPackOrderItem"]>
 
   export type FoodPackOrderItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -9665,8 +9665,8 @@ export namespace Prisma {
     totalPrice?: boolean
     orderId?: boolean
     menuItemId?: boolean
-    order?: boolean | FoodPackOrderDefaultArgs<ExtArgs>
     menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+    order?: boolean | FoodPackOrderDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["foodPackOrderItem"]>
 
   export type FoodPackOrderItemSelectScalar = {
@@ -9679,19 +9679,19 @@ export namespace Prisma {
   }
 
   export type FoodPackOrderItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    order?: boolean | FoodPackOrderDefaultArgs<ExtArgs>
     menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+    order?: boolean | FoodPackOrderDefaultArgs<ExtArgs>
   }
   export type FoodPackOrderItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    order?: boolean | FoodPackOrderDefaultArgs<ExtArgs>
     menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+    order?: boolean | FoodPackOrderDefaultArgs<ExtArgs>
   }
 
   export type $FoodPackOrderItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "FoodPackOrderItem"
     objects: {
-      order: Prisma.$FoodPackOrderPayload<ExtArgs>
       menuItem: Prisma.$MenuItemPayload<ExtArgs>
+      order: Prisma.$FoodPackOrderPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10064,8 +10064,8 @@ export namespace Prisma {
    */
   export interface Prisma__FoodPackOrderItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    order<T extends FoodPackOrderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FoodPackOrderDefaultArgs<ExtArgs>>): Prisma__FoodPackOrderClient<$Result.GetResult<Prisma.$FoodPackOrderPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     menuItem<T extends MenuItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MenuItemDefaultArgs<ExtArgs>>): Prisma__MenuItemClient<$Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    order<T extends FoodPackOrderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FoodPackOrderDefaultArgs<ExtArgs>>): Prisma__FoodPackOrderClient<$Result.GetResult<Prisma.$FoodPackOrderPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13942,19 +13942,19 @@ export namespace Prisma {
   export const MenuItemScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    slug: 'slug',
     description: 'description',
     priceNGN: 'priceNGN',
-    publicId: 'publicId',
     imageUrl: 'imageUrl',
     isAvailable: 'isAvailable',
     isFeatured: 'isFeatured',
     isSpicy: 'isSpicy',
     tags: 'tags',
-    sortOrder: 'sortOrder',
-    categoryId: 'categoryId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    categoryId: 'categoryId',
+    slug: 'slug',
+    sortOrder: 'sortOrder',
+    publicId: 'publicId'
   };
 
   export type MenuItemScalarFieldEnum = (typeof MenuItemScalarFieldEnum)[keyof typeof MenuItemScalarFieldEnum]
@@ -14353,10 +14353,10 @@ export namespace Prisma {
     isActive?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    ordersCreated?: OrderListRelationFilter
-    ordersConfirmed?: OrderListRelationFilter
-    auditLogs?: AuditLogListRelationFilter
     activeSession?: XOR<ActiveSessionNullableRelationFilter, ActiveSessionWhereInput> | null
+    auditLogs?: AuditLogListRelationFilter
+    ordersConfirmed?: OrderListRelationFilter
+    ordersCreated?: OrderListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -14368,10 +14368,10 @@ export namespace Prisma {
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    ordersCreated?: OrderOrderByRelationAggregateInput
-    ordersConfirmed?: OrderOrderByRelationAggregateInput
-    auditLogs?: AuditLogOrderByRelationAggregateInput
     activeSession?: ActiveSessionOrderByWithRelationInput
+    auditLogs?: AuditLogOrderByRelationAggregateInput
+    ordersConfirmed?: OrderOrderByRelationAggregateInput
+    ordersCreated?: OrderOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -14386,10 +14386,10 @@ export namespace Prisma {
     isActive?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    ordersCreated?: OrderListRelationFilter
-    ordersConfirmed?: OrderListRelationFilter
-    auditLogs?: AuditLogListRelationFilter
     activeSession?: XOR<ActiveSessionNullableRelationFilter, ActiveSessionWhereInput> | null
+    auditLogs?: AuditLogListRelationFilter
+    ordersConfirmed?: OrderListRelationFilter
+    ordersCreated?: OrderListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -14506,8 +14506,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     confirmedAt?: DateTimeNullableFilter<"Order"> | Date | string | null
-    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     confirmedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
   export type OrderOrderByWithRelationInput = {
@@ -14528,8 +14528,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     confirmedAt?: SortOrderInput | SortOrder
-    createdBy?: UserOrderByWithRelationInput
     confirmedBy?: UserOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
   }
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<{
@@ -14553,8 +14553,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     confirmedAt?: DateTimeNullableFilter<"Order"> | Date | string | null
-    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     confirmedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id" | "ref">
 
   export type OrderOrderByWithAggregationInput = {
@@ -14753,43 +14753,43 @@ export namespace Prisma {
     NOT?: MenuItemWhereInput | MenuItemWhereInput[]
     id?: StringFilter<"MenuItem"> | string
     name?: StringFilter<"MenuItem"> | string
-    slug?: StringFilter<"MenuItem"> | string
     description?: StringNullableFilter<"MenuItem"> | string | null
     priceNGN?: FloatFilter<"MenuItem"> | number
-    publicId?: StringNullableFilter<"MenuItem"> | string | null
     imageUrl?: StringNullableFilter<"MenuItem"> | string | null
     isAvailable?: BoolFilter<"MenuItem"> | boolean
     isFeatured?: BoolFilter<"MenuItem"> | boolean
     isSpicy?: BoolFilter<"MenuItem"> | boolean
     tags?: StringNullableListFilter<"MenuItem">
-    sortOrder?: IntFilter<"MenuItem"> | number
-    categoryId?: StringFilter<"MenuItem"> | string
     createdAt?: DateTimeFilter<"MenuItem"> | Date | string
     updatedAt?: DateTimeFilter<"MenuItem"> | Date | string
-    category?: XOR<MenuCategoryRelationFilter, MenuCategoryWhereInput>
-    FoodPackOrderItem?: FoodPackOrderItemListRelationFilter
+    categoryId?: StringFilter<"MenuItem"> | string
+    slug?: StringFilter<"MenuItem"> | string
+    sortOrder?: IntFilter<"MenuItem"> | number
+    publicId?: StringNullableFilter<"MenuItem"> | string | null
     EventMenuSelection?: EventMenuSelectionListRelationFilter
+    FoodPackOrderItem?: FoodPackOrderItemListRelationFilter
+    category?: XOR<MenuCategoryRelationFilter, MenuCategoryWhereInput>
   }
 
   export type MenuItemOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    slug?: SortOrder
     description?: SortOrderInput | SortOrder
     priceNGN?: SortOrder
-    publicId?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
     isAvailable?: SortOrder
     isFeatured?: SortOrder
     isSpicy?: SortOrder
     tags?: SortOrder
-    sortOrder?: SortOrder
-    categoryId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    category?: MenuCategoryOrderByWithRelationInput
-    FoodPackOrderItem?: FoodPackOrderItemOrderByRelationAggregateInput
+    categoryId?: SortOrder
+    slug?: SortOrder
+    sortOrder?: SortOrder
+    publicId?: SortOrderInput | SortOrder
     EventMenuSelection?: EventMenuSelectionOrderByRelationAggregateInput
+    FoodPackOrderItem?: FoodPackOrderItemOrderByRelationAggregateInput
+    category?: MenuCategoryOrderByWithRelationInput
   }
 
   export type MenuItemWhereUniqueInput = Prisma.AtLeast<{
@@ -14799,40 +14799,40 @@ export namespace Prisma {
     OR?: MenuItemWhereInput[]
     NOT?: MenuItemWhereInput | MenuItemWhereInput[]
     name?: StringFilter<"MenuItem"> | string
-    slug?: StringFilter<"MenuItem"> | string
     description?: StringNullableFilter<"MenuItem"> | string | null
     priceNGN?: FloatFilter<"MenuItem"> | number
-    publicId?: StringNullableFilter<"MenuItem"> | string | null
     imageUrl?: StringNullableFilter<"MenuItem"> | string | null
     isAvailable?: BoolFilter<"MenuItem"> | boolean
     isFeatured?: BoolFilter<"MenuItem"> | boolean
     isSpicy?: BoolFilter<"MenuItem"> | boolean
     tags?: StringNullableListFilter<"MenuItem">
-    sortOrder?: IntFilter<"MenuItem"> | number
-    categoryId?: StringFilter<"MenuItem"> | string
     createdAt?: DateTimeFilter<"MenuItem"> | Date | string
     updatedAt?: DateTimeFilter<"MenuItem"> | Date | string
-    category?: XOR<MenuCategoryRelationFilter, MenuCategoryWhereInput>
-    FoodPackOrderItem?: FoodPackOrderItemListRelationFilter
+    categoryId?: StringFilter<"MenuItem"> | string
+    slug?: StringFilter<"MenuItem"> | string
+    sortOrder?: IntFilter<"MenuItem"> | number
+    publicId?: StringNullableFilter<"MenuItem"> | string | null
     EventMenuSelection?: EventMenuSelectionListRelationFilter
+    FoodPackOrderItem?: FoodPackOrderItemListRelationFilter
+    category?: XOR<MenuCategoryRelationFilter, MenuCategoryWhereInput>
   }, "id" | "slug_categoryId">
 
   export type MenuItemOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    slug?: SortOrder
     description?: SortOrderInput | SortOrder
     priceNGN?: SortOrder
-    publicId?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
     isAvailable?: SortOrder
     isFeatured?: SortOrder
     isSpicy?: SortOrder
     tags?: SortOrder
-    sortOrder?: SortOrder
-    categoryId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    categoryId?: SortOrder
+    slug?: SortOrder
+    sortOrder?: SortOrder
+    publicId?: SortOrderInput | SortOrder
     _count?: MenuItemCountOrderByAggregateInput
     _avg?: MenuItemAvgOrderByAggregateInput
     _max?: MenuItemMaxOrderByAggregateInput
@@ -14846,19 +14846,19 @@ export namespace Prisma {
     NOT?: MenuItemScalarWhereWithAggregatesInput | MenuItemScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MenuItem"> | string
     name?: StringWithAggregatesFilter<"MenuItem"> | string
-    slug?: StringWithAggregatesFilter<"MenuItem"> | string
     description?: StringNullableWithAggregatesFilter<"MenuItem"> | string | null
     priceNGN?: FloatWithAggregatesFilter<"MenuItem"> | number
-    publicId?: StringNullableWithAggregatesFilter<"MenuItem"> | string | null
     imageUrl?: StringNullableWithAggregatesFilter<"MenuItem"> | string | null
     isAvailable?: BoolWithAggregatesFilter<"MenuItem"> | boolean
     isFeatured?: BoolWithAggregatesFilter<"MenuItem"> | boolean
     isSpicy?: BoolWithAggregatesFilter<"MenuItem"> | boolean
     tags?: StringNullableListFilter<"MenuItem">
-    sortOrder?: IntWithAggregatesFilter<"MenuItem"> | number
-    categoryId?: StringWithAggregatesFilter<"MenuItem"> | string
     createdAt?: DateTimeWithAggregatesFilter<"MenuItem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"MenuItem"> | Date | string
+    categoryId?: StringWithAggregatesFilter<"MenuItem"> | string
+    slug?: StringWithAggregatesFilter<"MenuItem"> | string
+    sortOrder?: IntWithAggregatesFilter<"MenuItem"> | number
+    publicId?: StringNullableWithAggregatesFilter<"MenuItem"> | string | null
   }
 
   export type FoodPackOrderWhereInput = {
@@ -14973,8 +14973,8 @@ export namespace Prisma {
     totalPrice?: FloatFilter<"FoodPackOrderItem"> | number
     orderId?: StringFilter<"FoodPackOrderItem"> | string
     menuItemId?: StringFilter<"FoodPackOrderItem"> | string
-    order?: XOR<FoodPackOrderRelationFilter, FoodPackOrderWhereInput>
     menuItem?: XOR<MenuItemRelationFilter, MenuItemWhereInput>
+    order?: XOR<FoodPackOrderRelationFilter, FoodPackOrderWhereInput>
   }
 
   export type FoodPackOrderItemOrderByWithRelationInput = {
@@ -14984,8 +14984,8 @@ export namespace Prisma {
     totalPrice?: SortOrder
     orderId?: SortOrder
     menuItemId?: SortOrder
-    order?: FoodPackOrderOrderByWithRelationInput
     menuItem?: MenuItemOrderByWithRelationInput
+    order?: FoodPackOrderOrderByWithRelationInput
   }
 
   export type FoodPackOrderItemWhereUniqueInput = Prisma.AtLeast<{
@@ -14998,8 +14998,8 @@ export namespace Prisma {
     totalPrice?: FloatFilter<"FoodPackOrderItem"> | number
     orderId?: StringFilter<"FoodPackOrderItem"> | string
     menuItemId?: StringFilter<"FoodPackOrderItem"> | string
-    order?: XOR<FoodPackOrderRelationFilter, FoodPackOrderWhereInput>
     menuItem?: XOR<MenuItemRelationFilter, MenuItemWhereInput>
+    order?: XOR<FoodPackOrderRelationFilter, FoodPackOrderWhereInput>
   }, "id">
 
   export type FoodPackOrderItemOrderByWithAggregationInput = {
@@ -15394,10 +15394,10 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    ordersCreated?: OrderCreateNestedManyWithoutCreatedByInput
-    ordersConfirmed?: OrderCreateNestedManyWithoutConfirmedByInput
-    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     activeSession?: ActiveSessionCreateNestedOneWithoutUserInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    ordersConfirmed?: OrderCreateNestedManyWithoutConfirmedByInput
+    ordersCreated?: OrderCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -15409,10 +15409,10 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    ordersCreated?: OrderUncheckedCreateNestedManyWithoutCreatedByInput
-    ordersConfirmed?: OrderUncheckedCreateNestedManyWithoutConfirmedByInput
-    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     activeSession?: ActiveSessionUncheckedCreateNestedOneWithoutUserInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    ordersConfirmed?: OrderUncheckedCreateNestedManyWithoutConfirmedByInput
+    ordersCreated?: OrderUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUpdateInput = {
@@ -15424,10 +15424,10 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ordersCreated?: OrderUpdateManyWithoutCreatedByNestedInput
-    ordersConfirmed?: OrderUpdateManyWithoutConfirmedByNestedInput
-    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     activeSession?: ActiveSessionUpdateOneWithoutUserNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    ordersConfirmed?: OrderUpdateManyWithoutConfirmedByNestedInput
+    ordersCreated?: OrderUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -15439,10 +15439,10 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ordersCreated?: OrderUncheckedUpdateManyWithoutCreatedByNestedInput
-    ordersConfirmed?: OrderUncheckedUpdateManyWithoutConfirmedByNestedInput
-    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     activeSession?: ActiveSessionUncheckedUpdateOneWithoutUserNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    ordersConfirmed?: OrderUncheckedUpdateManyWithoutConfirmedByNestedInput
+    ordersCreated?: OrderUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -15563,8 +15563,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     confirmedAt?: Date | string | null
-    createdBy?: UserCreateNestedOneWithoutOrdersCreatedInput
     confirmedBy?: UserCreateNestedOneWithoutOrdersConfirmedInput
+    createdBy?: UserCreateNestedOneWithoutOrdersCreatedInput
   }
 
   export type OrderUncheckedCreateInput = {
@@ -15603,8 +15603,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdBy?: UserUpdateOneWithoutOrdersCreatedNestedInput
     confirmedBy?: UserUpdateOneWithoutOrdersConfirmedNestedInput
+    createdBy?: UserUpdateOneWithoutOrdersCreatedNestedInput
   }
 
   export type OrderUncheckedUpdateInput = {
@@ -15845,134 +15845,134 @@ export namespace Prisma {
   export type MenuItemCreateInput = {
     id?: string
     name: string
-    slug: string
     description?: string | null
     priceNGN: number
-    publicId?: string | null
     imageUrl?: string | null
     isAvailable?: boolean
     isFeatured?: boolean
     isSpicy?: boolean
     tags?: MenuItemCreatetagsInput | string[]
-    sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    category: MenuCategoryCreateNestedOneWithoutItemsInput
-    FoodPackOrderItem?: FoodPackOrderItemCreateNestedManyWithoutMenuItemInput
+    slug: string
+    sortOrder?: number
+    publicId?: string | null
     EventMenuSelection?: EventMenuSelectionCreateNestedManyWithoutMenuItemInput
+    FoodPackOrderItem?: FoodPackOrderItemCreateNestedManyWithoutMenuItemInput
+    category: MenuCategoryCreateNestedOneWithoutItemsInput
   }
 
   export type MenuItemUncheckedCreateInput = {
     id?: string
     name: string
-    slug: string
     description?: string | null
     priceNGN: number
-    publicId?: string | null
     imageUrl?: string | null
     isAvailable?: boolean
     isFeatured?: boolean
     isSpicy?: boolean
     tags?: MenuItemCreatetagsInput | string[]
-    sortOrder?: number
-    categoryId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    FoodPackOrderItem?: FoodPackOrderItemUncheckedCreateNestedManyWithoutMenuItemInput
+    categoryId: string
+    slug: string
+    sortOrder?: number
+    publicId?: string | null
     EventMenuSelection?: EventMenuSelectionUncheckedCreateNestedManyWithoutMenuItemInput
+    FoodPackOrderItem?: FoodPackOrderItemUncheckedCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     priceNGN?: FloatFieldUpdateOperationsInput | number
-    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
     isSpicy?: BoolFieldUpdateOperationsInput | boolean
     tags?: MenuItemUpdatetagsInput | string[]
-    sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: MenuCategoryUpdateOneRequiredWithoutItemsNestedInput
-    FoodPackOrderItem?: FoodPackOrderItemUpdateManyWithoutMenuItemNestedInput
+    slug?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     EventMenuSelection?: EventMenuSelectionUpdateManyWithoutMenuItemNestedInput
+    FoodPackOrderItem?: FoodPackOrderItemUpdateManyWithoutMenuItemNestedInput
+    category?: MenuCategoryUpdateOneRequiredWithoutItemsNestedInput
   }
 
   export type MenuItemUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     priceNGN?: FloatFieldUpdateOperationsInput | number
-    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
     isSpicy?: BoolFieldUpdateOperationsInput | boolean
     tags?: MenuItemUpdatetagsInput | string[]
-    sortOrder?: IntFieldUpdateOperationsInput | number
-    categoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    FoodPackOrderItem?: FoodPackOrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
+    categoryId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     EventMenuSelection?: EventMenuSelectionUncheckedUpdateManyWithoutMenuItemNestedInput
+    FoodPackOrderItem?: FoodPackOrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemCreateManyInput = {
     id?: string
     name: string
-    slug: string
     description?: string | null
     priceNGN: number
-    publicId?: string | null
     imageUrl?: string | null
     isAvailable?: boolean
     isFeatured?: boolean
     isSpicy?: boolean
     tags?: MenuItemCreatetagsInput | string[]
-    sortOrder?: number
-    categoryId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    categoryId: string
+    slug: string
+    sortOrder?: number
+    publicId?: string | null
   }
 
   export type MenuItemUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     priceNGN?: FloatFieldUpdateOperationsInput | number
-    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
     isSpicy?: BoolFieldUpdateOperationsInput | boolean
     tags?: MenuItemUpdatetagsInput | string[]
-    sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MenuItemUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     priceNGN?: FloatFieldUpdateOperationsInput | number
-    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
     isSpicy?: BoolFieldUpdateOperationsInput | boolean
     tags?: MenuItemUpdatetagsInput | string[]
-    sortOrder?: IntFieldUpdateOperationsInput | number
-    categoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FoodPackOrderCreateInput = {
@@ -16103,8 +16103,8 @@ export namespace Prisma {
     quantity: number
     unitPrice: number
     totalPrice: number
-    order: FoodPackOrderCreateNestedOneWithoutItemsInput
     menuItem: MenuItemCreateNestedOneWithoutFoodPackOrderItemInput
+    order: FoodPackOrderCreateNestedOneWithoutItemsInput
   }
 
   export type FoodPackOrderItemUncheckedCreateInput = {
@@ -16121,8 +16121,8 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     totalPrice?: FloatFieldUpdateOperationsInput | number
-    order?: FoodPackOrderUpdateOneRequiredWithoutItemsNestedInput
     menuItem?: MenuItemUpdateOneRequiredWithoutFoodPackOrderItemNestedInput
+    order?: FoodPackOrderUpdateOneRequiredWithoutItemsNestedInput
   }
 
   export type FoodPackOrderItemUncheckedUpdateInput = {
@@ -16622,10 +16622,9 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type OrderListRelationFilter = {
-    every?: OrderWhereInput
-    some?: OrderWhereInput
-    none?: OrderWhereInput
+  export type ActiveSessionNullableRelationFilter = {
+    is?: ActiveSessionWhereInput | null
+    isNot?: ActiveSessionWhereInput | null
   }
 
   export type AuditLogListRelationFilter = {
@@ -16634,16 +16633,17 @@ export namespace Prisma {
     none?: AuditLogWhereInput
   }
 
-  export type ActiveSessionNullableRelationFilter = {
-    is?: ActiveSessionWhereInput | null
-    isNot?: ActiveSessionWhereInput | null
-  }
-
-  export type OrderOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type OrderListRelationFilter = {
+    every?: OrderWhereInput
+    some?: OrderWhereInput
+    none?: OrderWhereInput
   }
 
   export type AuditLogOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OrderOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17207,9 +17207,10 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
-  export type MenuCategoryRelationFilter = {
-    is?: MenuCategoryWhereInput
-    isNot?: MenuCategoryWhereInput
+  export type EventMenuSelectionListRelationFilter = {
+    every?: EventMenuSelectionWhereInput
+    some?: EventMenuSelectionWhereInput
+    none?: EventMenuSelectionWhereInput
   }
 
   export type FoodPackOrderItemListRelationFilter = {
@@ -17218,17 +17219,16 @@ export namespace Prisma {
     none?: FoodPackOrderItemWhereInput
   }
 
-  export type EventMenuSelectionListRelationFilter = {
-    every?: EventMenuSelectionWhereInput
-    some?: EventMenuSelectionWhereInput
-    none?: EventMenuSelectionWhereInput
-  }
-
-  export type FoodPackOrderItemOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type MenuCategoryRelationFilter = {
+    is?: MenuCategoryWhereInput
+    isNot?: MenuCategoryWhereInput
   }
 
   export type EventMenuSelectionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FoodPackOrderItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17240,19 +17240,19 @@ export namespace Prisma {
   export type MenuItemCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    slug?: SortOrder
     description?: SortOrder
     priceNGN?: SortOrder
-    publicId?: SortOrder
     imageUrl?: SortOrder
     isAvailable?: SortOrder
     isFeatured?: SortOrder
     isSpicy?: SortOrder
     tags?: SortOrder
-    sortOrder?: SortOrder
-    categoryId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    categoryId?: SortOrder
+    slug?: SortOrder
+    sortOrder?: SortOrder
+    publicId?: SortOrder
   }
 
   export type MenuItemAvgOrderByAggregateInput = {
@@ -17263,35 +17263,35 @@ export namespace Prisma {
   export type MenuItemMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    slug?: SortOrder
     description?: SortOrder
     priceNGN?: SortOrder
-    publicId?: SortOrder
     imageUrl?: SortOrder
     isAvailable?: SortOrder
     isFeatured?: SortOrder
     isSpicy?: SortOrder
-    sortOrder?: SortOrder
-    categoryId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    categoryId?: SortOrder
+    slug?: SortOrder
+    sortOrder?: SortOrder
+    publicId?: SortOrder
   }
 
   export type MenuItemMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    slug?: SortOrder
     description?: SortOrder
     priceNGN?: SortOrder
-    publicId?: SortOrder
     imageUrl?: SortOrder
     isAvailable?: SortOrder
     isFeatured?: SortOrder
     isSpicy?: SortOrder
-    sortOrder?: SortOrder
-    categoryId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    categoryId?: SortOrder
+    slug?: SortOrder
+    sortOrder?: SortOrder
+    publicId?: SortOrder
   }
 
   export type MenuItemSumOrderByAggregateInput = {
@@ -17392,14 +17392,14 @@ export namespace Prisma {
     _max?: NestedEnumDeliveryMethodFilter<$PrismaModel>
   }
 
-  export type FoodPackOrderRelationFilter = {
-    is?: FoodPackOrderWhereInput
-    isNot?: FoodPackOrderWhereInput
-  }
-
   export type MenuItemRelationFilter = {
     is?: MenuItemWhereInput
     isNot?: MenuItemWhereInput
+  }
+
+  export type FoodPackOrderRelationFilter = {
+    is?: FoodPackOrderWhereInput
+    isNot?: FoodPackOrderWhereInput
   }
 
   export type FoodPackOrderItemCountOrderByAggregateInput = {
@@ -17773,18 +17773,10 @@ export namespace Prisma {
     amountNGN?: SortOrder
   }
 
-  export type OrderCreateNestedManyWithoutCreatedByInput = {
-    create?: XOR<OrderCreateWithoutCreatedByInput, OrderUncheckedCreateWithoutCreatedByInput> | OrderCreateWithoutCreatedByInput[] | OrderUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: OrderCreateOrConnectWithoutCreatedByInput | OrderCreateOrConnectWithoutCreatedByInput[]
-    createMany?: OrderCreateManyCreatedByInputEnvelope
-    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-  }
-
-  export type OrderCreateNestedManyWithoutConfirmedByInput = {
-    create?: XOR<OrderCreateWithoutConfirmedByInput, OrderUncheckedCreateWithoutConfirmedByInput> | OrderCreateWithoutConfirmedByInput[] | OrderUncheckedCreateWithoutConfirmedByInput[]
-    connectOrCreate?: OrderCreateOrConnectWithoutConfirmedByInput | OrderCreateOrConnectWithoutConfirmedByInput[]
-    createMany?: OrderCreateManyConfirmedByInputEnvelope
-    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+  export type ActiveSessionCreateNestedOneWithoutUserInput = {
+    create?: XOR<ActiveSessionCreateWithoutUserInput, ActiveSessionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ActiveSessionCreateOrConnectWithoutUserInput
+    connect?: ActiveSessionWhereUniqueInput
   }
 
   export type AuditLogCreateNestedManyWithoutUserInput = {
@@ -17794,24 +17786,24 @@ export namespace Prisma {
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
   }
 
-  export type ActiveSessionCreateNestedOneWithoutUserInput = {
-    create?: XOR<ActiveSessionCreateWithoutUserInput, ActiveSessionUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ActiveSessionCreateOrConnectWithoutUserInput
-    connect?: ActiveSessionWhereUniqueInput
+  export type OrderCreateNestedManyWithoutConfirmedByInput = {
+    create?: XOR<OrderCreateWithoutConfirmedByInput, OrderUncheckedCreateWithoutConfirmedByInput> | OrderCreateWithoutConfirmedByInput[] | OrderUncheckedCreateWithoutConfirmedByInput[]
+    connectOrCreate?: OrderCreateOrConnectWithoutConfirmedByInput | OrderCreateOrConnectWithoutConfirmedByInput[]
+    createMany?: OrderCreateManyConfirmedByInputEnvelope
+    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
   }
 
-  export type OrderUncheckedCreateNestedManyWithoutCreatedByInput = {
+  export type OrderCreateNestedManyWithoutCreatedByInput = {
     create?: XOR<OrderCreateWithoutCreatedByInput, OrderUncheckedCreateWithoutCreatedByInput> | OrderCreateWithoutCreatedByInput[] | OrderUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutCreatedByInput | OrderCreateOrConnectWithoutCreatedByInput[]
     createMany?: OrderCreateManyCreatedByInputEnvelope
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
   }
 
-  export type OrderUncheckedCreateNestedManyWithoutConfirmedByInput = {
-    create?: XOR<OrderCreateWithoutConfirmedByInput, OrderUncheckedCreateWithoutConfirmedByInput> | OrderCreateWithoutConfirmedByInput[] | OrderUncheckedCreateWithoutConfirmedByInput[]
-    connectOrCreate?: OrderCreateOrConnectWithoutConfirmedByInput | OrderCreateOrConnectWithoutConfirmedByInput[]
-    createMany?: OrderCreateManyConfirmedByInputEnvelope
-    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+  export type ActiveSessionUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<ActiveSessionCreateWithoutUserInput, ActiveSessionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ActiveSessionCreateOrConnectWithoutUserInput
+    connect?: ActiveSessionWhereUniqueInput
   }
 
   export type AuditLogUncheckedCreateNestedManyWithoutUserInput = {
@@ -17821,10 +17813,18 @@ export namespace Prisma {
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
   }
 
-  export type ActiveSessionUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<ActiveSessionCreateWithoutUserInput, ActiveSessionUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ActiveSessionCreateOrConnectWithoutUserInput
-    connect?: ActiveSessionWhereUniqueInput
+  export type OrderUncheckedCreateNestedManyWithoutConfirmedByInput = {
+    create?: XOR<OrderCreateWithoutConfirmedByInput, OrderUncheckedCreateWithoutConfirmedByInput> | OrderCreateWithoutConfirmedByInput[] | OrderUncheckedCreateWithoutConfirmedByInput[]
+    connectOrCreate?: OrderCreateOrConnectWithoutConfirmedByInput | OrderCreateOrConnectWithoutConfirmedByInput[]
+    createMany?: OrderCreateManyConfirmedByInputEnvelope
+    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+  }
+
+  export type OrderUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<OrderCreateWithoutCreatedByInput, OrderUncheckedCreateWithoutCreatedByInput> | OrderCreateWithoutCreatedByInput[] | OrderUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: OrderCreateOrConnectWithoutCreatedByInput | OrderCreateOrConnectWithoutCreatedByInput[]
+    createMany?: OrderCreateManyCreatedByInputEnvelope
+    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -17843,32 +17843,14 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type OrderUpdateManyWithoutCreatedByNestedInput = {
-    create?: XOR<OrderCreateWithoutCreatedByInput, OrderUncheckedCreateWithoutCreatedByInput> | OrderCreateWithoutCreatedByInput[] | OrderUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: OrderCreateOrConnectWithoutCreatedByInput | OrderCreateOrConnectWithoutCreatedByInput[]
-    upsert?: OrderUpsertWithWhereUniqueWithoutCreatedByInput | OrderUpsertWithWhereUniqueWithoutCreatedByInput[]
-    createMany?: OrderCreateManyCreatedByInputEnvelope
-    set?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    update?: OrderUpdateWithWhereUniqueWithoutCreatedByInput | OrderUpdateWithWhereUniqueWithoutCreatedByInput[]
-    updateMany?: OrderUpdateManyWithWhereWithoutCreatedByInput | OrderUpdateManyWithWhereWithoutCreatedByInput[]
-    deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
-  }
-
-  export type OrderUpdateManyWithoutConfirmedByNestedInput = {
-    create?: XOR<OrderCreateWithoutConfirmedByInput, OrderUncheckedCreateWithoutConfirmedByInput> | OrderCreateWithoutConfirmedByInput[] | OrderUncheckedCreateWithoutConfirmedByInput[]
-    connectOrCreate?: OrderCreateOrConnectWithoutConfirmedByInput | OrderCreateOrConnectWithoutConfirmedByInput[]
-    upsert?: OrderUpsertWithWhereUniqueWithoutConfirmedByInput | OrderUpsertWithWhereUniqueWithoutConfirmedByInput[]
-    createMany?: OrderCreateManyConfirmedByInputEnvelope
-    set?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    update?: OrderUpdateWithWhereUniqueWithoutConfirmedByInput | OrderUpdateWithWhereUniqueWithoutConfirmedByInput[]
-    updateMany?: OrderUpdateManyWithWhereWithoutConfirmedByInput | OrderUpdateManyWithWhereWithoutConfirmedByInput[]
-    deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
+  export type ActiveSessionUpdateOneWithoutUserNestedInput = {
+    create?: XOR<ActiveSessionCreateWithoutUserInput, ActiveSessionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ActiveSessionCreateOrConnectWithoutUserInput
+    upsert?: ActiveSessionUpsertWithoutUserInput
+    disconnect?: ActiveSessionWhereInput | boolean
+    delete?: ActiveSessionWhereInput | boolean
+    connect?: ActiveSessionWhereUniqueInput
+    update?: XOR<XOR<ActiveSessionUpdateToOneWithWhereWithoutUserInput, ActiveSessionUpdateWithoutUserInput>, ActiveSessionUncheckedUpdateWithoutUserInput>
   }
 
   export type AuditLogUpdateManyWithoutUserNestedInput = {
@@ -17885,17 +17867,21 @@ export namespace Prisma {
     deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[]
   }
 
-  export type ActiveSessionUpdateOneWithoutUserNestedInput = {
-    create?: XOR<ActiveSessionCreateWithoutUserInput, ActiveSessionUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ActiveSessionCreateOrConnectWithoutUserInput
-    upsert?: ActiveSessionUpsertWithoutUserInput
-    disconnect?: ActiveSessionWhereInput | boolean
-    delete?: ActiveSessionWhereInput | boolean
-    connect?: ActiveSessionWhereUniqueInput
-    update?: XOR<XOR<ActiveSessionUpdateToOneWithWhereWithoutUserInput, ActiveSessionUpdateWithoutUserInput>, ActiveSessionUncheckedUpdateWithoutUserInput>
+  export type OrderUpdateManyWithoutConfirmedByNestedInput = {
+    create?: XOR<OrderCreateWithoutConfirmedByInput, OrderUncheckedCreateWithoutConfirmedByInput> | OrderCreateWithoutConfirmedByInput[] | OrderUncheckedCreateWithoutConfirmedByInput[]
+    connectOrCreate?: OrderCreateOrConnectWithoutConfirmedByInput | OrderCreateOrConnectWithoutConfirmedByInput[]
+    upsert?: OrderUpsertWithWhereUniqueWithoutConfirmedByInput | OrderUpsertWithWhereUniqueWithoutConfirmedByInput[]
+    createMany?: OrderCreateManyConfirmedByInputEnvelope
+    set?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    update?: OrderUpdateWithWhereUniqueWithoutConfirmedByInput | OrderUpdateWithWhereUniqueWithoutConfirmedByInput[]
+    updateMany?: OrderUpdateManyWithWhereWithoutConfirmedByInput | OrderUpdateManyWithWhereWithoutConfirmedByInput[]
+    deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
-  export type OrderUncheckedUpdateManyWithoutCreatedByNestedInput = {
+  export type OrderUpdateManyWithoutCreatedByNestedInput = {
     create?: XOR<OrderCreateWithoutCreatedByInput, OrderUncheckedCreateWithoutCreatedByInput> | OrderCreateWithoutCreatedByInput[] | OrderUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutCreatedByInput | OrderCreateOrConnectWithoutCreatedByInput[]
     upsert?: OrderUpsertWithWhereUniqueWithoutCreatedByInput | OrderUpsertWithWhereUniqueWithoutCreatedByInput[]
@@ -17909,18 +17895,14 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
-  export type OrderUncheckedUpdateManyWithoutConfirmedByNestedInput = {
-    create?: XOR<OrderCreateWithoutConfirmedByInput, OrderUncheckedCreateWithoutConfirmedByInput> | OrderCreateWithoutConfirmedByInput[] | OrderUncheckedCreateWithoutConfirmedByInput[]
-    connectOrCreate?: OrderCreateOrConnectWithoutConfirmedByInput | OrderCreateOrConnectWithoutConfirmedByInput[]
-    upsert?: OrderUpsertWithWhereUniqueWithoutConfirmedByInput | OrderUpsertWithWhereUniqueWithoutConfirmedByInput[]
-    createMany?: OrderCreateManyConfirmedByInputEnvelope
-    set?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    update?: OrderUpdateWithWhereUniqueWithoutConfirmedByInput | OrderUpdateWithWhereUniqueWithoutConfirmedByInput[]
-    updateMany?: OrderUpdateManyWithWhereWithoutConfirmedByInput | OrderUpdateManyWithWhereWithoutConfirmedByInput[]
-    deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
+  export type ActiveSessionUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<ActiveSessionCreateWithoutUserInput, ActiveSessionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ActiveSessionCreateOrConnectWithoutUserInput
+    upsert?: ActiveSessionUpsertWithoutUserInput
+    disconnect?: ActiveSessionWhereInput | boolean
+    delete?: ActiveSessionWhereInput | boolean
+    connect?: ActiveSessionWhereUniqueInput
+    update?: XOR<XOR<ActiveSessionUpdateToOneWithWhereWithoutUserInput, ActiveSessionUpdateWithoutUserInput>, ActiveSessionUncheckedUpdateWithoutUserInput>
   }
 
   export type AuditLogUncheckedUpdateManyWithoutUserNestedInput = {
@@ -17937,14 +17919,32 @@ export namespace Prisma {
     deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[]
   }
 
-  export type ActiveSessionUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<ActiveSessionCreateWithoutUserInput, ActiveSessionUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ActiveSessionCreateOrConnectWithoutUserInput
-    upsert?: ActiveSessionUpsertWithoutUserInput
-    disconnect?: ActiveSessionWhereInput | boolean
-    delete?: ActiveSessionWhereInput | boolean
-    connect?: ActiveSessionWhereUniqueInput
-    update?: XOR<XOR<ActiveSessionUpdateToOneWithWhereWithoutUserInput, ActiveSessionUpdateWithoutUserInput>, ActiveSessionUncheckedUpdateWithoutUserInput>
+  export type OrderUncheckedUpdateManyWithoutConfirmedByNestedInput = {
+    create?: XOR<OrderCreateWithoutConfirmedByInput, OrderUncheckedCreateWithoutConfirmedByInput> | OrderCreateWithoutConfirmedByInput[] | OrderUncheckedCreateWithoutConfirmedByInput[]
+    connectOrCreate?: OrderCreateOrConnectWithoutConfirmedByInput | OrderCreateOrConnectWithoutConfirmedByInput[]
+    upsert?: OrderUpsertWithWhereUniqueWithoutConfirmedByInput | OrderUpsertWithWhereUniqueWithoutConfirmedByInput[]
+    createMany?: OrderCreateManyConfirmedByInputEnvelope
+    set?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    update?: OrderUpdateWithWhereUniqueWithoutConfirmedByInput | OrderUpdateWithWhereUniqueWithoutConfirmedByInput[]
+    updateMany?: OrderUpdateManyWithWhereWithoutConfirmedByInput | OrderUpdateManyWithWhereWithoutConfirmedByInput[]
+    deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
+  }
+
+  export type OrderUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<OrderCreateWithoutCreatedByInput, OrderUncheckedCreateWithoutCreatedByInput> | OrderCreateWithoutCreatedByInput[] | OrderUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: OrderCreateOrConnectWithoutCreatedByInput | OrderCreateOrConnectWithoutCreatedByInput[]
+    upsert?: OrderUpsertWithWhereUniqueWithoutCreatedByInput | OrderUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: OrderCreateManyCreatedByInputEnvelope
+    set?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    update?: OrderUpdateWithWhereUniqueWithoutCreatedByInput | OrderUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: OrderUpdateManyWithWhereWithoutCreatedByInput | OrderUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutActiveSessionInput = {
@@ -17965,15 +17965,15 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutActiveSessionInput, UserUpdateWithoutActiveSessionInput>, UserUncheckedUpdateWithoutActiveSessionInput>
   }
 
-  export type UserCreateNestedOneWithoutOrdersCreatedInput = {
-    create?: XOR<UserCreateWithoutOrdersCreatedInput, UserUncheckedCreateWithoutOrdersCreatedInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOrdersCreatedInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type UserCreateNestedOneWithoutOrdersConfirmedInput = {
     create?: XOR<UserCreateWithoutOrdersConfirmedInput, UserUncheckedCreateWithoutOrdersConfirmedInput>
     connectOrCreate?: UserCreateOrConnectWithoutOrdersConfirmedInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutOrdersCreatedInput = {
+    create?: XOR<UserCreateWithoutOrdersCreatedInput, UserUncheckedCreateWithoutOrdersCreatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOrdersCreatedInput
     connect?: UserWhereUniqueInput
   }
 
@@ -18005,16 +18005,6 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type UserUpdateOneWithoutOrdersCreatedNestedInput = {
-    create?: XOR<UserCreateWithoutOrdersCreatedInput, UserUncheckedCreateWithoutOrdersCreatedInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOrdersCreatedInput
-    upsert?: UserUpsertWithoutOrdersCreatedInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOrdersCreatedInput, UserUpdateWithoutOrdersCreatedInput>, UserUncheckedUpdateWithoutOrdersCreatedInput>
-  }
-
   export type UserUpdateOneWithoutOrdersConfirmedNestedInput = {
     create?: XOR<UserCreateWithoutOrdersConfirmedInput, UserUncheckedCreateWithoutOrdersConfirmedInput>
     connectOrCreate?: UserCreateOrConnectWithoutOrdersConfirmedInput
@@ -18023,6 +18013,16 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOrdersConfirmedInput, UserUpdateWithoutOrdersConfirmedInput>, UserUncheckedUpdateWithoutOrdersConfirmedInput>
+  }
+
+  export type UserUpdateOneWithoutOrdersCreatedNestedInput = {
+    create?: XOR<UserCreateWithoutOrdersCreatedInput, UserUncheckedCreateWithoutOrdersCreatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOrdersCreatedInput
+    upsert?: UserUpsertWithoutOrdersCreatedInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOrdersCreatedInput, UserUpdateWithoutOrdersCreatedInput>, UserUncheckedUpdateWithoutOrdersCreatedInput>
   }
 
   export type UserCreateNestedOneWithoutAuditLogsInput = {
@@ -18095,10 +18095,11 @@ export namespace Prisma {
     set: string[]
   }
 
-  export type MenuCategoryCreateNestedOneWithoutItemsInput = {
-    create?: XOR<MenuCategoryCreateWithoutItemsInput, MenuCategoryUncheckedCreateWithoutItemsInput>
-    connectOrCreate?: MenuCategoryCreateOrConnectWithoutItemsInput
-    connect?: MenuCategoryWhereUniqueInput
+  export type EventMenuSelectionCreateNestedManyWithoutMenuItemInput = {
+    create?: XOR<EventMenuSelectionCreateWithoutMenuItemInput, EventMenuSelectionUncheckedCreateWithoutMenuItemInput> | EventMenuSelectionCreateWithoutMenuItemInput[] | EventMenuSelectionUncheckedCreateWithoutMenuItemInput[]
+    connectOrCreate?: EventMenuSelectionCreateOrConnectWithoutMenuItemInput | EventMenuSelectionCreateOrConnectWithoutMenuItemInput[]
+    createMany?: EventMenuSelectionCreateManyMenuItemInputEnvelope
+    connect?: EventMenuSelectionWhereUniqueInput | EventMenuSelectionWhereUniqueInput[]
   }
 
   export type FoodPackOrderItemCreateNestedManyWithoutMenuItemInput = {
@@ -18108,7 +18109,13 @@ export namespace Prisma {
     connect?: FoodPackOrderItemWhereUniqueInput | FoodPackOrderItemWhereUniqueInput[]
   }
 
-  export type EventMenuSelectionCreateNestedManyWithoutMenuItemInput = {
+  export type MenuCategoryCreateNestedOneWithoutItemsInput = {
+    create?: XOR<MenuCategoryCreateWithoutItemsInput, MenuCategoryUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: MenuCategoryCreateOrConnectWithoutItemsInput
+    connect?: MenuCategoryWhereUniqueInput
+  }
+
+  export type EventMenuSelectionUncheckedCreateNestedManyWithoutMenuItemInput = {
     create?: XOR<EventMenuSelectionCreateWithoutMenuItemInput, EventMenuSelectionUncheckedCreateWithoutMenuItemInput> | EventMenuSelectionCreateWithoutMenuItemInput[] | EventMenuSelectionUncheckedCreateWithoutMenuItemInput[]
     connectOrCreate?: EventMenuSelectionCreateOrConnectWithoutMenuItemInput | EventMenuSelectionCreateOrConnectWithoutMenuItemInput[]
     createMany?: EventMenuSelectionCreateManyMenuItemInputEnvelope
@@ -18122,24 +18129,23 @@ export namespace Prisma {
     connect?: FoodPackOrderItemWhereUniqueInput | FoodPackOrderItemWhereUniqueInput[]
   }
 
-  export type EventMenuSelectionUncheckedCreateNestedManyWithoutMenuItemInput = {
-    create?: XOR<EventMenuSelectionCreateWithoutMenuItemInput, EventMenuSelectionUncheckedCreateWithoutMenuItemInput> | EventMenuSelectionCreateWithoutMenuItemInput[] | EventMenuSelectionUncheckedCreateWithoutMenuItemInput[]
-    connectOrCreate?: EventMenuSelectionCreateOrConnectWithoutMenuItemInput | EventMenuSelectionCreateOrConnectWithoutMenuItemInput[]
-    createMany?: EventMenuSelectionCreateManyMenuItemInputEnvelope
-    connect?: EventMenuSelectionWhereUniqueInput | EventMenuSelectionWhereUniqueInput[]
-  }
-
   export type MenuItemUpdatetagsInput = {
     set?: string[]
     push?: string | string[]
   }
 
-  export type MenuCategoryUpdateOneRequiredWithoutItemsNestedInput = {
-    create?: XOR<MenuCategoryCreateWithoutItemsInput, MenuCategoryUncheckedCreateWithoutItemsInput>
-    connectOrCreate?: MenuCategoryCreateOrConnectWithoutItemsInput
-    upsert?: MenuCategoryUpsertWithoutItemsInput
-    connect?: MenuCategoryWhereUniqueInput
-    update?: XOR<XOR<MenuCategoryUpdateToOneWithWhereWithoutItemsInput, MenuCategoryUpdateWithoutItemsInput>, MenuCategoryUncheckedUpdateWithoutItemsInput>
+  export type EventMenuSelectionUpdateManyWithoutMenuItemNestedInput = {
+    create?: XOR<EventMenuSelectionCreateWithoutMenuItemInput, EventMenuSelectionUncheckedCreateWithoutMenuItemInput> | EventMenuSelectionCreateWithoutMenuItemInput[] | EventMenuSelectionUncheckedCreateWithoutMenuItemInput[]
+    connectOrCreate?: EventMenuSelectionCreateOrConnectWithoutMenuItemInput | EventMenuSelectionCreateOrConnectWithoutMenuItemInput[]
+    upsert?: EventMenuSelectionUpsertWithWhereUniqueWithoutMenuItemInput | EventMenuSelectionUpsertWithWhereUniqueWithoutMenuItemInput[]
+    createMany?: EventMenuSelectionCreateManyMenuItemInputEnvelope
+    set?: EventMenuSelectionWhereUniqueInput | EventMenuSelectionWhereUniqueInput[]
+    disconnect?: EventMenuSelectionWhereUniqueInput | EventMenuSelectionWhereUniqueInput[]
+    delete?: EventMenuSelectionWhereUniqueInput | EventMenuSelectionWhereUniqueInput[]
+    connect?: EventMenuSelectionWhereUniqueInput | EventMenuSelectionWhereUniqueInput[]
+    update?: EventMenuSelectionUpdateWithWhereUniqueWithoutMenuItemInput | EventMenuSelectionUpdateWithWhereUniqueWithoutMenuItemInput[]
+    updateMany?: EventMenuSelectionUpdateManyWithWhereWithoutMenuItemInput | EventMenuSelectionUpdateManyWithWhereWithoutMenuItemInput[]
+    deleteMany?: EventMenuSelectionScalarWhereInput | EventMenuSelectionScalarWhereInput[]
   }
 
   export type FoodPackOrderItemUpdateManyWithoutMenuItemNestedInput = {
@@ -18156,7 +18162,15 @@ export namespace Prisma {
     deleteMany?: FoodPackOrderItemScalarWhereInput | FoodPackOrderItemScalarWhereInput[]
   }
 
-  export type EventMenuSelectionUpdateManyWithoutMenuItemNestedInput = {
+  export type MenuCategoryUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<MenuCategoryCreateWithoutItemsInput, MenuCategoryUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: MenuCategoryCreateOrConnectWithoutItemsInput
+    upsert?: MenuCategoryUpsertWithoutItemsInput
+    connect?: MenuCategoryWhereUniqueInput
+    update?: XOR<XOR<MenuCategoryUpdateToOneWithWhereWithoutItemsInput, MenuCategoryUpdateWithoutItemsInput>, MenuCategoryUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type EventMenuSelectionUncheckedUpdateManyWithoutMenuItemNestedInput = {
     create?: XOR<EventMenuSelectionCreateWithoutMenuItemInput, EventMenuSelectionUncheckedCreateWithoutMenuItemInput> | EventMenuSelectionCreateWithoutMenuItemInput[] | EventMenuSelectionUncheckedCreateWithoutMenuItemInput[]
     connectOrCreate?: EventMenuSelectionCreateOrConnectWithoutMenuItemInput | EventMenuSelectionCreateOrConnectWithoutMenuItemInput[]
     upsert?: EventMenuSelectionUpsertWithWhereUniqueWithoutMenuItemInput | EventMenuSelectionUpsertWithWhereUniqueWithoutMenuItemInput[]
@@ -18182,20 +18196,6 @@ export namespace Prisma {
     update?: FoodPackOrderItemUpdateWithWhereUniqueWithoutMenuItemInput | FoodPackOrderItemUpdateWithWhereUniqueWithoutMenuItemInput[]
     updateMany?: FoodPackOrderItemUpdateManyWithWhereWithoutMenuItemInput | FoodPackOrderItemUpdateManyWithWhereWithoutMenuItemInput[]
     deleteMany?: FoodPackOrderItemScalarWhereInput | FoodPackOrderItemScalarWhereInput[]
-  }
-
-  export type EventMenuSelectionUncheckedUpdateManyWithoutMenuItemNestedInput = {
-    create?: XOR<EventMenuSelectionCreateWithoutMenuItemInput, EventMenuSelectionUncheckedCreateWithoutMenuItemInput> | EventMenuSelectionCreateWithoutMenuItemInput[] | EventMenuSelectionUncheckedCreateWithoutMenuItemInput[]
-    connectOrCreate?: EventMenuSelectionCreateOrConnectWithoutMenuItemInput | EventMenuSelectionCreateOrConnectWithoutMenuItemInput[]
-    upsert?: EventMenuSelectionUpsertWithWhereUniqueWithoutMenuItemInput | EventMenuSelectionUpsertWithWhereUniqueWithoutMenuItemInput[]
-    createMany?: EventMenuSelectionCreateManyMenuItemInputEnvelope
-    set?: EventMenuSelectionWhereUniqueInput | EventMenuSelectionWhereUniqueInput[]
-    disconnect?: EventMenuSelectionWhereUniqueInput | EventMenuSelectionWhereUniqueInput[]
-    delete?: EventMenuSelectionWhereUniqueInput | EventMenuSelectionWhereUniqueInput[]
-    connect?: EventMenuSelectionWhereUniqueInput | EventMenuSelectionWhereUniqueInput[]
-    update?: EventMenuSelectionUpdateWithWhereUniqueWithoutMenuItemInput | EventMenuSelectionUpdateWithWhereUniqueWithoutMenuItemInput[]
-    updateMany?: EventMenuSelectionUpdateManyWithWhereWithoutMenuItemInput | EventMenuSelectionUpdateManyWithWhereWithoutMenuItemInput[]
-    deleteMany?: EventMenuSelectionScalarWhereInput | EventMenuSelectionScalarWhereInput[]
   }
 
   export type FoodPackOrderItemCreateNestedManyWithoutOrderInput = {
@@ -18248,24 +18248,16 @@ export namespace Prisma {
     deleteMany?: FoodPackOrderItemScalarWhereInput | FoodPackOrderItemScalarWhereInput[]
   }
 
-  export type FoodPackOrderCreateNestedOneWithoutItemsInput = {
-    create?: XOR<FoodPackOrderCreateWithoutItemsInput, FoodPackOrderUncheckedCreateWithoutItemsInput>
-    connectOrCreate?: FoodPackOrderCreateOrConnectWithoutItemsInput
-    connect?: FoodPackOrderWhereUniqueInput
-  }
-
   export type MenuItemCreateNestedOneWithoutFoodPackOrderItemInput = {
     create?: XOR<MenuItemCreateWithoutFoodPackOrderItemInput, MenuItemUncheckedCreateWithoutFoodPackOrderItemInput>
     connectOrCreate?: MenuItemCreateOrConnectWithoutFoodPackOrderItemInput
     connect?: MenuItemWhereUniqueInput
   }
 
-  export type FoodPackOrderUpdateOneRequiredWithoutItemsNestedInput = {
+  export type FoodPackOrderCreateNestedOneWithoutItemsInput = {
     create?: XOR<FoodPackOrderCreateWithoutItemsInput, FoodPackOrderUncheckedCreateWithoutItemsInput>
     connectOrCreate?: FoodPackOrderCreateOrConnectWithoutItemsInput
-    upsert?: FoodPackOrderUpsertWithoutItemsInput
     connect?: FoodPackOrderWhereUniqueInput
-    update?: XOR<XOR<FoodPackOrderUpdateToOneWithWhereWithoutItemsInput, FoodPackOrderUpdateWithoutItemsInput>, FoodPackOrderUncheckedUpdateWithoutItemsInput>
   }
 
   export type MenuItemUpdateOneRequiredWithoutFoodPackOrderItemNestedInput = {
@@ -18274,6 +18266,14 @@ export namespace Prisma {
     upsert?: MenuItemUpsertWithoutFoodPackOrderItemInput
     connect?: MenuItemWhereUniqueInput
     update?: XOR<XOR<MenuItemUpdateToOneWithWhereWithoutFoodPackOrderItemInput, MenuItemUpdateWithoutFoodPackOrderItemInput>, MenuItemUncheckedUpdateWithoutFoodPackOrderItemInput>
+  }
+
+  export type FoodPackOrderUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<FoodPackOrderCreateWithoutItemsInput, FoodPackOrderUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: FoodPackOrderCreateOrConnectWithoutItemsInput
+    upsert?: FoodPackOrderUpsertWithoutItemsInput
+    connect?: FoodPackOrderWhereUniqueInput
+    update?: XOR<XOR<FoodPackOrderUpdateToOneWithWhereWithoutItemsInput, FoodPackOrderUpdateWithoutItemsInput>, FoodPackOrderUncheckedUpdateWithoutItemsInput>
   }
 
   export type EventOrderCreateequipmentListInput = {
@@ -18883,51 +18883,60 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
-  export type OrderCreateWithoutCreatedByInput = {
+  export type ActiveSessionCreateWithoutUserInput = {
     id?: string
-    ref: string
-    customerName: string
-    customerPhone?: string | null
-    items: JsonNullValueInput | InputJsonValue
-    subtotal: number
-    total: number
-    status?: $Enums.OrderStatus
-    paymentMethod?: $Enums.PaymentMethod | null
-    paymentStatus?: $Enums.PaymentStatus
-    source?: $Enums.OrderSource
-    notes?: string | null
+    sessionId?: string
+    ip?: string | null
+    userAgent?: string | null
     createdAt?: Date | string
-    updatedAt?: Date | string
-    confirmedAt?: Date | string | null
-    confirmedBy?: UserCreateNestedOneWithoutOrdersConfirmedInput
+    expiresAt: Date | string
   }
 
-  export type OrderUncheckedCreateWithoutCreatedByInput = {
+  export type ActiveSessionUncheckedCreateWithoutUserInput = {
     id?: string
-    ref: string
-    customerName: string
-    customerPhone?: string | null
-    items: JsonNullValueInput | InputJsonValue
-    subtotal: number
-    total: number
-    status?: $Enums.OrderStatus
-    paymentMethod?: $Enums.PaymentMethod | null
-    paymentStatus?: $Enums.PaymentStatus
-    source?: $Enums.OrderSource
-    notes?: string | null
-    confirmedById?: string | null
+    sessionId?: string
+    ip?: string | null
+    userAgent?: string | null
     createdAt?: Date | string
-    updatedAt?: Date | string
-    confirmedAt?: Date | string | null
+    expiresAt: Date | string
   }
 
-  export type OrderCreateOrConnectWithoutCreatedByInput = {
-    where: OrderWhereUniqueInput
-    create: XOR<OrderCreateWithoutCreatedByInput, OrderUncheckedCreateWithoutCreatedByInput>
+  export type ActiveSessionCreateOrConnectWithoutUserInput = {
+    where: ActiveSessionWhereUniqueInput
+    create: XOR<ActiveSessionCreateWithoutUserInput, ActiveSessionUncheckedCreateWithoutUserInput>
   }
 
-  export type OrderCreateManyCreatedByInputEnvelope = {
-    data: OrderCreateManyCreatedByInput | OrderCreateManyCreatedByInput[]
+  export type AuditLogCreateWithoutUserInput = {
+    id?: string
+    userName?: string | null
+    action: string
+    entity: string
+    entityId?: string | null
+    meta?: NullableJsonNullValueInput | InputJsonValue
+    ip?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+  }
+
+  export type AuditLogUncheckedCreateWithoutUserInput = {
+    id?: string
+    userName?: string | null
+    action: string
+    entity: string
+    entityId?: string | null
+    meta?: NullableJsonNullValueInput | InputJsonValue
+    ip?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+  }
+
+  export type AuditLogCreateOrConnectWithoutUserInput = {
+    where: AuditLogWhereUniqueInput
+    create: XOR<AuditLogCreateWithoutUserInput, AuditLogUncheckedCreateWithoutUserInput>
+  }
+
+  export type AuditLogCreateManyUserInputEnvelope = {
+    data: AuditLogCreateManyUserInput | AuditLogCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -18979,116 +18988,81 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type AuditLogCreateWithoutUserInput = {
+  export type OrderCreateWithoutCreatedByInput = {
     id?: string
-    userName?: string | null
-    action: string
-    entity: string
-    entityId?: string | null
-    meta?: NullableJsonNullValueInput | InputJsonValue
-    ip?: string | null
-    userAgent?: string | null
+    ref: string
+    customerName: string
+    customerPhone?: string | null
+    items: JsonNullValueInput | InputJsonValue
+    subtotal: number
+    total: number
+    status?: $Enums.OrderStatus
+    paymentMethod?: $Enums.PaymentMethod | null
+    paymentStatus?: $Enums.PaymentStatus
+    source?: $Enums.OrderSource
+    notes?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
+    confirmedAt?: Date | string | null
+    confirmedBy?: UserCreateNestedOneWithoutOrdersConfirmedInput
   }
 
-  export type AuditLogUncheckedCreateWithoutUserInput = {
+  export type OrderUncheckedCreateWithoutCreatedByInput = {
     id?: string
-    userName?: string | null
-    action: string
-    entity: string
-    entityId?: string | null
-    meta?: NullableJsonNullValueInput | InputJsonValue
-    ip?: string | null
-    userAgent?: string | null
+    ref: string
+    customerName: string
+    customerPhone?: string | null
+    items: JsonNullValueInput | InputJsonValue
+    subtotal: number
+    total: number
+    status?: $Enums.OrderStatus
+    paymentMethod?: $Enums.PaymentMethod | null
+    paymentStatus?: $Enums.PaymentStatus
+    source?: $Enums.OrderSource
+    notes?: string | null
+    confirmedById?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
+    confirmedAt?: Date | string | null
   }
 
-  export type AuditLogCreateOrConnectWithoutUserInput = {
-    where: AuditLogWhereUniqueInput
-    create: XOR<AuditLogCreateWithoutUserInput, AuditLogUncheckedCreateWithoutUserInput>
-  }
-
-  export type AuditLogCreateManyUserInputEnvelope = {
-    data: AuditLogCreateManyUserInput | AuditLogCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ActiveSessionCreateWithoutUserInput = {
-    id?: string
-    sessionId?: string
-    ip?: string | null
-    userAgent?: string | null
-    createdAt?: Date | string
-    expiresAt: Date | string
-  }
-
-  export type ActiveSessionUncheckedCreateWithoutUserInput = {
-    id?: string
-    sessionId?: string
-    ip?: string | null
-    userAgent?: string | null
-    createdAt?: Date | string
-    expiresAt: Date | string
-  }
-
-  export type ActiveSessionCreateOrConnectWithoutUserInput = {
-    where: ActiveSessionWhereUniqueInput
-    create: XOR<ActiveSessionCreateWithoutUserInput, ActiveSessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type OrderUpsertWithWhereUniqueWithoutCreatedByInput = {
+  export type OrderCreateOrConnectWithoutCreatedByInput = {
     where: OrderWhereUniqueInput
-    update: XOR<OrderUpdateWithoutCreatedByInput, OrderUncheckedUpdateWithoutCreatedByInput>
     create: XOR<OrderCreateWithoutCreatedByInput, OrderUncheckedCreateWithoutCreatedByInput>
   }
 
-  export type OrderUpdateWithWhereUniqueWithoutCreatedByInput = {
-    where: OrderWhereUniqueInput
-    data: XOR<OrderUpdateWithoutCreatedByInput, OrderUncheckedUpdateWithoutCreatedByInput>
+  export type OrderCreateManyCreatedByInputEnvelope = {
+    data: OrderCreateManyCreatedByInput | OrderCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
   }
 
-  export type OrderUpdateManyWithWhereWithoutCreatedByInput = {
-    where: OrderScalarWhereInput
-    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutCreatedByInput>
+  export type ActiveSessionUpsertWithoutUserInput = {
+    update: XOR<ActiveSessionUpdateWithoutUserInput, ActiveSessionUncheckedUpdateWithoutUserInput>
+    create: XOR<ActiveSessionCreateWithoutUserInput, ActiveSessionUncheckedCreateWithoutUserInput>
+    where?: ActiveSessionWhereInput
   }
 
-  export type OrderScalarWhereInput = {
-    AND?: OrderScalarWhereInput | OrderScalarWhereInput[]
-    OR?: OrderScalarWhereInput[]
-    NOT?: OrderScalarWhereInput | OrderScalarWhereInput[]
-    id?: StringFilter<"Order"> | string
-    ref?: StringFilter<"Order"> | string
-    customerName?: StringFilter<"Order"> | string
-    customerPhone?: StringNullableFilter<"Order"> | string | null
-    items?: JsonFilter<"Order">
-    subtotal?: FloatFilter<"Order"> | number
-    total?: FloatFilter<"Order"> | number
-    status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
-    paymentMethod?: EnumPaymentMethodNullableFilter<"Order"> | $Enums.PaymentMethod | null
-    paymentStatus?: EnumPaymentStatusFilter<"Order"> | $Enums.PaymentStatus
-    source?: EnumOrderSourceFilter<"Order"> | $Enums.OrderSource
-    notes?: StringNullableFilter<"Order"> | string | null
-    createdById?: StringNullableFilter<"Order"> | string | null
-    confirmedById?: StringNullableFilter<"Order"> | string | null
-    createdAt?: DateTimeFilter<"Order"> | Date | string
-    updatedAt?: DateTimeFilter<"Order"> | Date | string
-    confirmedAt?: DateTimeNullableFilter<"Order"> | Date | string | null
+  export type ActiveSessionUpdateToOneWithWhereWithoutUserInput = {
+    where?: ActiveSessionWhereInput
+    data: XOR<ActiveSessionUpdateWithoutUserInput, ActiveSessionUncheckedUpdateWithoutUserInput>
   }
 
-  export type OrderUpsertWithWhereUniqueWithoutConfirmedByInput = {
-    where: OrderWhereUniqueInput
-    update: XOR<OrderUpdateWithoutConfirmedByInput, OrderUncheckedUpdateWithoutConfirmedByInput>
-    create: XOR<OrderCreateWithoutConfirmedByInput, OrderUncheckedCreateWithoutConfirmedByInput>
+  export type ActiveSessionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sessionId?: StringFieldUpdateOperationsInput | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OrderUpdateWithWhereUniqueWithoutConfirmedByInput = {
-    where: OrderWhereUniqueInput
-    data: XOR<OrderUpdateWithoutConfirmedByInput, OrderUncheckedUpdateWithoutConfirmedByInput>
-  }
-
-  export type OrderUpdateManyWithWhereWithoutConfirmedByInput = {
-    where: OrderScalarWhereInput
-    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutConfirmedByInput>
+  export type ActiveSessionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sessionId?: StringFieldUpdateOperationsInput | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AuditLogUpsertWithWhereUniqueWithoutUserInput = {
@@ -19123,33 +19097,59 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"AuditLog"> | Date | string
   }
 
-  export type ActiveSessionUpsertWithoutUserInput = {
-    update: XOR<ActiveSessionUpdateWithoutUserInput, ActiveSessionUncheckedUpdateWithoutUserInput>
-    create: XOR<ActiveSessionCreateWithoutUserInput, ActiveSessionUncheckedCreateWithoutUserInput>
-    where?: ActiveSessionWhereInput
+  export type OrderUpsertWithWhereUniqueWithoutConfirmedByInput = {
+    where: OrderWhereUniqueInput
+    update: XOR<OrderUpdateWithoutConfirmedByInput, OrderUncheckedUpdateWithoutConfirmedByInput>
+    create: XOR<OrderCreateWithoutConfirmedByInput, OrderUncheckedCreateWithoutConfirmedByInput>
   }
 
-  export type ActiveSessionUpdateToOneWithWhereWithoutUserInput = {
-    where?: ActiveSessionWhereInput
-    data: XOR<ActiveSessionUpdateWithoutUserInput, ActiveSessionUncheckedUpdateWithoutUserInput>
+  export type OrderUpdateWithWhereUniqueWithoutConfirmedByInput = {
+    where: OrderWhereUniqueInput
+    data: XOR<OrderUpdateWithoutConfirmedByInput, OrderUncheckedUpdateWithoutConfirmedByInput>
   }
 
-  export type ActiveSessionUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionId?: StringFieldUpdateOperationsInput | string
-    ip?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type OrderUpdateManyWithWhereWithoutConfirmedByInput = {
+    where: OrderScalarWhereInput
+    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutConfirmedByInput>
   }
 
-  export type ActiveSessionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionId?: StringFieldUpdateOperationsInput | string
-    ip?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type OrderScalarWhereInput = {
+    AND?: OrderScalarWhereInput | OrderScalarWhereInput[]
+    OR?: OrderScalarWhereInput[]
+    NOT?: OrderScalarWhereInput | OrderScalarWhereInput[]
+    id?: StringFilter<"Order"> | string
+    ref?: StringFilter<"Order"> | string
+    customerName?: StringFilter<"Order"> | string
+    customerPhone?: StringNullableFilter<"Order"> | string | null
+    items?: JsonFilter<"Order">
+    subtotal?: FloatFilter<"Order"> | number
+    total?: FloatFilter<"Order"> | number
+    status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+    paymentMethod?: EnumPaymentMethodNullableFilter<"Order"> | $Enums.PaymentMethod | null
+    paymentStatus?: EnumPaymentStatusFilter<"Order"> | $Enums.PaymentStatus
+    source?: EnumOrderSourceFilter<"Order"> | $Enums.OrderSource
+    notes?: StringNullableFilter<"Order"> | string | null
+    createdById?: StringNullableFilter<"Order"> | string | null
+    confirmedById?: StringNullableFilter<"Order"> | string | null
+    createdAt?: DateTimeFilter<"Order"> | Date | string
+    updatedAt?: DateTimeFilter<"Order"> | Date | string
+    confirmedAt?: DateTimeNullableFilter<"Order"> | Date | string | null
+  }
+
+  export type OrderUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: OrderWhereUniqueInput
+    update: XOR<OrderUpdateWithoutCreatedByInput, OrderUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<OrderCreateWithoutCreatedByInput, OrderUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type OrderUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: OrderWhereUniqueInput
+    data: XOR<OrderUpdateWithoutCreatedByInput, OrderUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type OrderUpdateManyWithWhereWithoutCreatedByInput = {
+    where: OrderScalarWhereInput
+    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutCreatedByInput>
   }
 
   export type UserCreateWithoutActiveSessionInput = {
@@ -19161,9 +19161,9 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    ordersCreated?: OrderCreateNestedManyWithoutCreatedByInput
-    ordersConfirmed?: OrderCreateNestedManyWithoutConfirmedByInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    ordersConfirmed?: OrderCreateNestedManyWithoutConfirmedByInput
+    ordersCreated?: OrderCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutActiveSessionInput = {
@@ -19175,9 +19175,9 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    ordersCreated?: OrderUncheckedCreateNestedManyWithoutCreatedByInput
-    ordersConfirmed?: OrderUncheckedCreateNestedManyWithoutConfirmedByInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    ordersConfirmed?: OrderUncheckedCreateNestedManyWithoutConfirmedByInput
+    ordersCreated?: OrderUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutActiveSessionInput = {
@@ -19205,9 +19205,9 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ordersCreated?: OrderUpdateManyWithoutCreatedByNestedInput
-    ordersConfirmed?: OrderUpdateManyWithoutConfirmedByNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    ordersConfirmed?: OrderUpdateManyWithoutConfirmedByNestedInput
+    ordersCreated?: OrderUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutActiveSessionInput = {
@@ -19219,42 +19219,9 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ordersCreated?: OrderUncheckedUpdateManyWithoutCreatedByNestedInput
-    ordersConfirmed?: OrderUncheckedUpdateManyWithoutConfirmedByNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserCreateWithoutOrdersCreatedInput = {
-    id?: string
-    name: string
-    email: string
-    passwordHash: string
-    role?: $Enums.Role
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ordersConfirmed?: OrderCreateNestedManyWithoutConfirmedByInput
-    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
-    activeSession?: ActiveSessionCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutOrdersCreatedInput = {
-    id?: string
-    name: string
-    email: string
-    passwordHash: string
-    role?: $Enums.Role
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ordersConfirmed?: OrderUncheckedCreateNestedManyWithoutConfirmedByInput
-    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
-    activeSession?: ActiveSessionUncheckedCreateNestedOneWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutOrdersCreatedInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutOrdersCreatedInput, UserUncheckedCreateWithoutOrdersCreatedInput>
+    ordersConfirmed?: OrderUncheckedUpdateManyWithoutConfirmedByNestedInput
+    ordersCreated?: OrderUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserCreateWithoutOrdersConfirmedInput = {
@@ -19266,9 +19233,9 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    ordersCreated?: OrderCreateNestedManyWithoutCreatedByInput
-    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     activeSession?: ActiveSessionCreateNestedOneWithoutUserInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    ordersCreated?: OrderCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutOrdersConfirmedInput = {
@@ -19280,9 +19247,9 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    ordersCreated?: OrderUncheckedCreateNestedManyWithoutCreatedByInput
-    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     activeSession?: ActiveSessionUncheckedCreateNestedOneWithoutUserInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    ordersCreated?: OrderUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutOrdersConfirmedInput = {
@@ -19290,43 +19257,37 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutOrdersConfirmedInput, UserUncheckedCreateWithoutOrdersConfirmedInput>
   }
 
-  export type UserUpsertWithoutOrdersCreatedInput = {
-    update: XOR<UserUpdateWithoutOrdersCreatedInput, UserUncheckedUpdateWithoutOrdersCreatedInput>
+  export type UserCreateWithoutOrdersCreatedInput = {
+    id?: string
+    name: string
+    email: string
+    passwordHash: string
+    role?: $Enums.Role
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activeSession?: ActiveSessionCreateNestedOneWithoutUserInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    ordersConfirmed?: OrderCreateNestedManyWithoutConfirmedByInput
+  }
+
+  export type UserUncheckedCreateWithoutOrdersCreatedInput = {
+    id?: string
+    name: string
+    email: string
+    passwordHash: string
+    role?: $Enums.Role
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activeSession?: ActiveSessionUncheckedCreateNestedOneWithoutUserInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    ordersConfirmed?: OrderUncheckedCreateNestedManyWithoutConfirmedByInput
+  }
+
+  export type UserCreateOrConnectWithoutOrdersCreatedInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutOrdersCreatedInput, UserUncheckedCreateWithoutOrdersCreatedInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutOrdersCreatedInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutOrdersCreatedInput, UserUncheckedUpdateWithoutOrdersCreatedInput>
-  }
-
-  export type UserUpdateWithoutOrdersCreatedInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ordersConfirmed?: OrderUpdateManyWithoutConfirmedByNestedInput
-    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
-    activeSession?: ActiveSessionUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutOrdersCreatedInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ordersConfirmed?: OrderUncheckedUpdateManyWithoutConfirmedByNestedInput
-    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
-    activeSession?: ActiveSessionUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutOrdersConfirmedInput = {
@@ -19349,9 +19310,9 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ordersCreated?: OrderUpdateManyWithoutCreatedByNestedInput
-    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     activeSession?: ActiveSessionUpdateOneWithoutUserNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    ordersCreated?: OrderUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrdersConfirmedInput = {
@@ -19363,9 +19324,48 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ordersCreated?: OrderUncheckedUpdateManyWithoutCreatedByNestedInput
-    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     activeSession?: ActiveSessionUncheckedUpdateOneWithoutUserNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    ordersCreated?: OrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type UserUpsertWithoutOrdersCreatedInput = {
+    update: XOR<UserUpdateWithoutOrdersCreatedInput, UserUncheckedUpdateWithoutOrdersCreatedInput>
+    create: XOR<UserCreateWithoutOrdersCreatedInput, UserUncheckedCreateWithoutOrdersCreatedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutOrdersCreatedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutOrdersCreatedInput, UserUncheckedUpdateWithoutOrdersCreatedInput>
+  }
+
+  export type UserUpdateWithoutOrdersCreatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activeSession?: ActiveSessionUpdateOneWithoutUserNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    ordersConfirmed?: OrderUpdateManyWithoutConfirmedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOrdersCreatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activeSession?: ActiveSessionUncheckedUpdateOneWithoutUserNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    ordersConfirmed?: OrderUncheckedUpdateManyWithoutConfirmedByNestedInput
   }
 
   export type UserCreateWithoutAuditLogsInput = {
@@ -19377,9 +19377,9 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    ordersCreated?: OrderCreateNestedManyWithoutCreatedByInput
-    ordersConfirmed?: OrderCreateNestedManyWithoutConfirmedByInput
     activeSession?: ActiveSessionCreateNestedOneWithoutUserInput
+    ordersConfirmed?: OrderCreateNestedManyWithoutConfirmedByInput
+    ordersCreated?: OrderCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutAuditLogsInput = {
@@ -19391,9 +19391,9 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    ordersCreated?: OrderUncheckedCreateNestedManyWithoutCreatedByInput
-    ordersConfirmed?: OrderUncheckedCreateNestedManyWithoutConfirmedByInput
     activeSession?: ActiveSessionUncheckedCreateNestedOneWithoutUserInput
+    ordersConfirmed?: OrderUncheckedCreateNestedManyWithoutConfirmedByInput
+    ordersCreated?: OrderUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -19421,9 +19421,9 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ordersCreated?: OrderUpdateManyWithoutCreatedByNestedInput
-    ordersConfirmed?: OrderUpdateManyWithoutConfirmedByNestedInput
     activeSession?: ActiveSessionUpdateOneWithoutUserNestedInput
+    ordersConfirmed?: OrderUpdateManyWithoutConfirmedByNestedInput
+    ordersCreated?: OrderUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -19435,47 +19435,47 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ordersCreated?: OrderUncheckedUpdateManyWithoutCreatedByNestedInput
-    ordersConfirmed?: OrderUncheckedUpdateManyWithoutConfirmedByNestedInput
     activeSession?: ActiveSessionUncheckedUpdateOneWithoutUserNestedInput
+    ordersConfirmed?: OrderUncheckedUpdateManyWithoutConfirmedByNestedInput
+    ordersCreated?: OrderUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type MenuItemCreateWithoutCategoryInput = {
     id?: string
     name: string
-    slug: string
     description?: string | null
     priceNGN: number
-    publicId?: string | null
     imageUrl?: string | null
     isAvailable?: boolean
     isFeatured?: boolean
     isSpicy?: boolean
     tags?: MenuItemCreatetagsInput | string[]
-    sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    FoodPackOrderItem?: FoodPackOrderItemCreateNestedManyWithoutMenuItemInput
+    slug: string
+    sortOrder?: number
+    publicId?: string | null
     EventMenuSelection?: EventMenuSelectionCreateNestedManyWithoutMenuItemInput
+    FoodPackOrderItem?: FoodPackOrderItemCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUncheckedCreateWithoutCategoryInput = {
     id?: string
     name: string
-    slug: string
     description?: string | null
     priceNGN: number
-    publicId?: string | null
     imageUrl?: string | null
     isAvailable?: boolean
     isFeatured?: boolean
     isSpicy?: boolean
     tags?: MenuItemCreatetagsInput | string[]
-    sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    FoodPackOrderItem?: FoodPackOrderItemUncheckedCreateNestedManyWithoutMenuItemInput
+    slug: string
+    sortOrder?: number
+    publicId?: string | null
     EventMenuSelection?: EventMenuSelectionUncheckedCreateNestedManyWithoutMenuItemInput
+    FoodPackOrderItem?: FoodPackOrderItemUncheckedCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemCreateOrConnectWithoutCategoryInput = {
@@ -19510,68 +19510,19 @@ export namespace Prisma {
     NOT?: MenuItemScalarWhereInput | MenuItemScalarWhereInput[]
     id?: StringFilter<"MenuItem"> | string
     name?: StringFilter<"MenuItem"> | string
-    slug?: StringFilter<"MenuItem"> | string
     description?: StringNullableFilter<"MenuItem"> | string | null
     priceNGN?: FloatFilter<"MenuItem"> | number
-    publicId?: StringNullableFilter<"MenuItem"> | string | null
     imageUrl?: StringNullableFilter<"MenuItem"> | string | null
     isAvailable?: BoolFilter<"MenuItem"> | boolean
     isFeatured?: BoolFilter<"MenuItem"> | boolean
     isSpicy?: BoolFilter<"MenuItem"> | boolean
     tags?: StringNullableListFilter<"MenuItem">
-    sortOrder?: IntFilter<"MenuItem"> | number
-    categoryId?: StringFilter<"MenuItem"> | string
     createdAt?: DateTimeFilter<"MenuItem"> | Date | string
     updatedAt?: DateTimeFilter<"MenuItem"> | Date | string
-  }
-
-  export type MenuCategoryCreateWithoutItemsInput = {
-    id?: string
-    name: string
-    slug: string
-    sortOrder?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type MenuCategoryUncheckedCreateWithoutItemsInput = {
-    id?: string
-    name: string
-    slug: string
-    sortOrder?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type MenuCategoryCreateOrConnectWithoutItemsInput = {
-    where: MenuCategoryWhereUniqueInput
-    create: XOR<MenuCategoryCreateWithoutItemsInput, MenuCategoryUncheckedCreateWithoutItemsInput>
-  }
-
-  export type FoodPackOrderItemCreateWithoutMenuItemInput = {
-    id?: string
-    quantity: number
-    unitPrice: number
-    totalPrice: number
-    order: FoodPackOrderCreateNestedOneWithoutItemsInput
-  }
-
-  export type FoodPackOrderItemUncheckedCreateWithoutMenuItemInput = {
-    id?: string
-    quantity: number
-    unitPrice: number
-    totalPrice: number
-    orderId: string
-  }
-
-  export type FoodPackOrderItemCreateOrConnectWithoutMenuItemInput = {
-    where: FoodPackOrderItemWhereUniqueInput
-    create: XOR<FoodPackOrderItemCreateWithoutMenuItemInput, FoodPackOrderItemUncheckedCreateWithoutMenuItemInput>
-  }
-
-  export type FoodPackOrderItemCreateManyMenuItemInputEnvelope = {
-    data: FoodPackOrderItemCreateManyMenuItemInput | FoodPackOrderItemCreateManyMenuItemInput[]
-    skipDuplicates?: boolean
+    categoryId?: StringFilter<"MenuItem"> | string
+    slug?: StringFilter<"MenuItem"> | string
+    sortOrder?: IntFilter<"MenuItem"> | number
+    publicId?: StringNullableFilter<"MenuItem"> | string | null
   }
 
   export type EventMenuSelectionCreateWithoutMenuItemInput = {
@@ -19602,33 +19553,82 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type MenuCategoryUpsertWithoutItemsInput = {
-    update: XOR<MenuCategoryUpdateWithoutItemsInput, MenuCategoryUncheckedUpdateWithoutItemsInput>
+  export type FoodPackOrderItemCreateWithoutMenuItemInput = {
+    id?: string
+    quantity: number
+    unitPrice: number
+    totalPrice: number
+    order: FoodPackOrderCreateNestedOneWithoutItemsInput
+  }
+
+  export type FoodPackOrderItemUncheckedCreateWithoutMenuItemInput = {
+    id?: string
+    quantity: number
+    unitPrice: number
+    totalPrice: number
+    orderId: string
+  }
+
+  export type FoodPackOrderItemCreateOrConnectWithoutMenuItemInput = {
+    where: FoodPackOrderItemWhereUniqueInput
+    create: XOR<FoodPackOrderItemCreateWithoutMenuItemInput, FoodPackOrderItemUncheckedCreateWithoutMenuItemInput>
+  }
+
+  export type FoodPackOrderItemCreateManyMenuItemInputEnvelope = {
+    data: FoodPackOrderItemCreateManyMenuItemInput | FoodPackOrderItemCreateManyMenuItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MenuCategoryCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    slug: string
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MenuCategoryUncheckedCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    slug: string
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MenuCategoryCreateOrConnectWithoutItemsInput = {
+    where: MenuCategoryWhereUniqueInput
     create: XOR<MenuCategoryCreateWithoutItemsInput, MenuCategoryUncheckedCreateWithoutItemsInput>
-    where?: MenuCategoryWhereInput
   }
 
-  export type MenuCategoryUpdateToOneWithWhereWithoutItemsInput = {
-    where?: MenuCategoryWhereInput
-    data: XOR<MenuCategoryUpdateWithoutItemsInput, MenuCategoryUncheckedUpdateWithoutItemsInput>
+  export type EventMenuSelectionUpsertWithWhereUniqueWithoutMenuItemInput = {
+    where: EventMenuSelectionWhereUniqueInput
+    update: XOR<EventMenuSelectionUpdateWithoutMenuItemInput, EventMenuSelectionUncheckedUpdateWithoutMenuItemInput>
+    create: XOR<EventMenuSelectionCreateWithoutMenuItemInput, EventMenuSelectionUncheckedCreateWithoutMenuItemInput>
   }
 
-  export type MenuCategoryUpdateWithoutItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    sortOrder?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type EventMenuSelectionUpdateWithWhereUniqueWithoutMenuItemInput = {
+    where: EventMenuSelectionWhereUniqueInput
+    data: XOR<EventMenuSelectionUpdateWithoutMenuItemInput, EventMenuSelectionUncheckedUpdateWithoutMenuItemInput>
   }
 
-  export type MenuCategoryUncheckedUpdateWithoutItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    sortOrder?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type EventMenuSelectionUpdateManyWithWhereWithoutMenuItemInput = {
+    where: EventMenuSelectionScalarWhereInput
+    data: XOR<EventMenuSelectionUpdateManyMutationInput, EventMenuSelectionUncheckedUpdateManyWithoutMenuItemInput>
+  }
+
+  export type EventMenuSelectionScalarWhereInput = {
+    AND?: EventMenuSelectionScalarWhereInput | EventMenuSelectionScalarWhereInput[]
+    OR?: EventMenuSelectionScalarWhereInput[]
+    NOT?: EventMenuSelectionScalarWhereInput | EventMenuSelectionScalarWhereInput[]
+    id?: StringFilter<"EventMenuSelection"> | string
+    quantityPerHead?: FloatFilter<"EventMenuSelection"> | number
+    totalQuantity?: FloatFilter<"EventMenuSelection"> | number
+    unit?: StringFilter<"EventMenuSelection"> | string
+    notes?: StringNullableFilter<"EventMenuSelection"> | string | null
+    eventOrderId?: StringFilter<"EventMenuSelection"> | string
+    menuItemId?: StringFilter<"EventMenuSelection"> | string
   }
 
   export type FoodPackOrderItemUpsertWithWhereUniqueWithoutMenuItemInput = {
@@ -19659,33 +19659,33 @@ export namespace Prisma {
     menuItemId?: StringFilter<"FoodPackOrderItem"> | string
   }
 
-  export type EventMenuSelectionUpsertWithWhereUniqueWithoutMenuItemInput = {
-    where: EventMenuSelectionWhereUniqueInput
-    update: XOR<EventMenuSelectionUpdateWithoutMenuItemInput, EventMenuSelectionUncheckedUpdateWithoutMenuItemInput>
-    create: XOR<EventMenuSelectionCreateWithoutMenuItemInput, EventMenuSelectionUncheckedCreateWithoutMenuItemInput>
+  export type MenuCategoryUpsertWithoutItemsInput = {
+    update: XOR<MenuCategoryUpdateWithoutItemsInput, MenuCategoryUncheckedUpdateWithoutItemsInput>
+    create: XOR<MenuCategoryCreateWithoutItemsInput, MenuCategoryUncheckedCreateWithoutItemsInput>
+    where?: MenuCategoryWhereInput
   }
 
-  export type EventMenuSelectionUpdateWithWhereUniqueWithoutMenuItemInput = {
-    where: EventMenuSelectionWhereUniqueInput
-    data: XOR<EventMenuSelectionUpdateWithoutMenuItemInput, EventMenuSelectionUncheckedUpdateWithoutMenuItemInput>
+  export type MenuCategoryUpdateToOneWithWhereWithoutItemsInput = {
+    where?: MenuCategoryWhereInput
+    data: XOR<MenuCategoryUpdateWithoutItemsInput, MenuCategoryUncheckedUpdateWithoutItemsInput>
   }
 
-  export type EventMenuSelectionUpdateManyWithWhereWithoutMenuItemInput = {
-    where: EventMenuSelectionScalarWhereInput
-    data: XOR<EventMenuSelectionUpdateManyMutationInput, EventMenuSelectionUncheckedUpdateManyWithoutMenuItemInput>
+  export type MenuCategoryUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EventMenuSelectionScalarWhereInput = {
-    AND?: EventMenuSelectionScalarWhereInput | EventMenuSelectionScalarWhereInput[]
-    OR?: EventMenuSelectionScalarWhereInput[]
-    NOT?: EventMenuSelectionScalarWhereInput | EventMenuSelectionScalarWhereInput[]
-    id?: StringFilter<"EventMenuSelection"> | string
-    quantityPerHead?: FloatFilter<"EventMenuSelection"> | number
-    totalQuantity?: FloatFilter<"EventMenuSelection"> | number
-    unit?: StringFilter<"EventMenuSelection"> | string
-    notes?: StringNullableFilter<"EventMenuSelection"> | string | null
-    eventOrderId?: StringFilter<"EventMenuSelection"> | string
-    menuItemId?: StringFilter<"EventMenuSelection"> | string
+  export type MenuCategoryUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FoodPackOrderItemCreateWithoutOrderInput = {
@@ -19730,6 +19730,49 @@ export namespace Prisma {
     data: XOR<FoodPackOrderItemUpdateManyMutationInput, FoodPackOrderItemUncheckedUpdateManyWithoutOrderInput>
   }
 
+  export type MenuItemCreateWithoutFoodPackOrderItemInput = {
+    id?: string
+    name: string
+    description?: string | null
+    priceNGN: number
+    imageUrl?: string | null
+    isAvailable?: boolean
+    isFeatured?: boolean
+    isSpicy?: boolean
+    tags?: MenuItemCreatetagsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    slug: string
+    sortOrder?: number
+    publicId?: string | null
+    EventMenuSelection?: EventMenuSelectionCreateNestedManyWithoutMenuItemInput
+    category: MenuCategoryCreateNestedOneWithoutItemsInput
+  }
+
+  export type MenuItemUncheckedCreateWithoutFoodPackOrderItemInput = {
+    id?: string
+    name: string
+    description?: string | null
+    priceNGN: number
+    imageUrl?: string | null
+    isAvailable?: boolean
+    isFeatured?: boolean
+    isSpicy?: boolean
+    tags?: MenuItemCreatetagsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    categoryId: string
+    slug: string
+    sortOrder?: number
+    publicId?: string | null
+    EventMenuSelection?: EventMenuSelectionUncheckedCreateNestedManyWithoutMenuItemInput
+  }
+
+  export type MenuItemCreateOrConnectWithoutFoodPackOrderItemInput = {
+    where: MenuItemWhereUniqueInput
+    create: XOR<MenuItemCreateWithoutFoodPackOrderItemInput, MenuItemUncheckedCreateWithoutFoodPackOrderItemInput>
+  }
+
   export type FoodPackOrderCreateWithoutItemsInput = {
     id?: string
     orderNumber?: string
@@ -19769,47 +19812,53 @@ export namespace Prisma {
     create: XOR<FoodPackOrderCreateWithoutItemsInput, FoodPackOrderUncheckedCreateWithoutItemsInput>
   }
 
-  export type MenuItemCreateWithoutFoodPackOrderItemInput = {
-    id?: string
-    name: string
-    slug: string
-    description?: string | null
-    priceNGN: number
-    publicId?: string | null
-    imageUrl?: string | null
-    isAvailable?: boolean
-    isFeatured?: boolean
-    isSpicy?: boolean
-    tags?: MenuItemCreatetagsInput | string[]
-    sortOrder?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    category: MenuCategoryCreateNestedOneWithoutItemsInput
-    EventMenuSelection?: EventMenuSelectionCreateNestedManyWithoutMenuItemInput
-  }
-
-  export type MenuItemUncheckedCreateWithoutFoodPackOrderItemInput = {
-    id?: string
-    name: string
-    slug: string
-    description?: string | null
-    priceNGN: number
-    publicId?: string | null
-    imageUrl?: string | null
-    isAvailable?: boolean
-    isFeatured?: boolean
-    isSpicy?: boolean
-    tags?: MenuItemCreatetagsInput | string[]
-    sortOrder?: number
-    categoryId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    EventMenuSelection?: EventMenuSelectionUncheckedCreateNestedManyWithoutMenuItemInput
-  }
-
-  export type MenuItemCreateOrConnectWithoutFoodPackOrderItemInput = {
-    where: MenuItemWhereUniqueInput
+  export type MenuItemUpsertWithoutFoodPackOrderItemInput = {
+    update: XOR<MenuItemUpdateWithoutFoodPackOrderItemInput, MenuItemUncheckedUpdateWithoutFoodPackOrderItemInput>
     create: XOR<MenuItemCreateWithoutFoodPackOrderItemInput, MenuItemUncheckedCreateWithoutFoodPackOrderItemInput>
+    where?: MenuItemWhereInput
+  }
+
+  export type MenuItemUpdateToOneWithWhereWithoutFoodPackOrderItemInput = {
+    where?: MenuItemWhereInput
+    data: XOR<MenuItemUpdateWithoutFoodPackOrderItemInput, MenuItemUncheckedUpdateWithoutFoodPackOrderItemInput>
+  }
+
+  export type MenuItemUpdateWithoutFoodPackOrderItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    priceNGN?: FloatFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isSpicy?: BoolFieldUpdateOperationsInput | boolean
+    tags?: MenuItemUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
+    EventMenuSelection?: EventMenuSelectionUpdateManyWithoutMenuItemNestedInput
+    category?: MenuCategoryUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type MenuItemUncheckedUpdateWithoutFoodPackOrderItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    priceNGN?: FloatFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isSpicy?: BoolFieldUpdateOperationsInput | boolean
+    tags?: MenuItemUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
+    EventMenuSelection?: EventMenuSelectionUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
   export type FoodPackOrderUpsertWithoutItemsInput = {
@@ -19855,55 +19904,6 @@ export namespace Prisma {
     isPaid?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MenuItemUpsertWithoutFoodPackOrderItemInput = {
-    update: XOR<MenuItemUpdateWithoutFoodPackOrderItemInput, MenuItemUncheckedUpdateWithoutFoodPackOrderItemInput>
-    create: XOR<MenuItemCreateWithoutFoodPackOrderItemInput, MenuItemUncheckedCreateWithoutFoodPackOrderItemInput>
-    where?: MenuItemWhereInput
-  }
-
-  export type MenuItemUpdateToOneWithWhereWithoutFoodPackOrderItemInput = {
-    where?: MenuItemWhereInput
-    data: XOR<MenuItemUpdateWithoutFoodPackOrderItemInput, MenuItemUncheckedUpdateWithoutFoodPackOrderItemInput>
-  }
-
-  export type MenuItemUpdateWithoutFoodPackOrderItemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    priceNGN?: FloatFieldUpdateOperationsInput | number
-    publicId?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    isFeatured?: BoolFieldUpdateOperationsInput | boolean
-    isSpicy?: BoolFieldUpdateOperationsInput | boolean
-    tags?: MenuItemUpdatetagsInput | string[]
-    sortOrder?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: MenuCategoryUpdateOneRequiredWithoutItemsNestedInput
-    EventMenuSelection?: EventMenuSelectionUpdateManyWithoutMenuItemNestedInput
-  }
-
-  export type MenuItemUncheckedUpdateWithoutFoodPackOrderItemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    priceNGN?: FloatFieldUpdateOperationsInput | number
-    publicId?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    isFeatured?: BoolFieldUpdateOperationsInput | boolean
-    isSpicy?: BoolFieldUpdateOperationsInput | boolean
-    tags?: MenuItemUpdatetagsInput | string[]
-    sortOrder?: IntFieldUpdateOperationsInput | number
-    categoryId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    EventMenuSelection?: EventMenuSelectionUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
   export type EventMenuSelectionCreateWithoutEventOrderInput = {
@@ -20097,38 +20097,38 @@ export namespace Prisma {
   export type MenuItemCreateWithoutEventMenuSelectionInput = {
     id?: string
     name: string
-    slug: string
     description?: string | null
     priceNGN: number
-    publicId?: string | null
     imageUrl?: string | null
     isAvailable?: boolean
     isFeatured?: boolean
     isSpicy?: boolean
     tags?: MenuItemCreatetagsInput | string[]
-    sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    category: MenuCategoryCreateNestedOneWithoutItemsInput
+    slug: string
+    sortOrder?: number
+    publicId?: string | null
     FoodPackOrderItem?: FoodPackOrderItemCreateNestedManyWithoutMenuItemInput
+    category: MenuCategoryCreateNestedOneWithoutItemsInput
   }
 
   export type MenuItemUncheckedCreateWithoutEventMenuSelectionInput = {
     id?: string
     name: string
-    slug: string
     description?: string | null
     priceNGN: number
-    publicId?: string | null
     imageUrl?: string | null
     isAvailable?: boolean
     isFeatured?: boolean
     isSpicy?: boolean
     tags?: MenuItemCreatetagsInput | string[]
-    sortOrder?: number
-    categoryId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    categoryId: string
+    slug: string
+    sortOrder?: number
+    publicId?: string | null
     FoodPackOrderItem?: FoodPackOrderItemUncheckedCreateNestedManyWithoutMenuItemInput
   }
 
@@ -20244,38 +20244,38 @@ export namespace Prisma {
   export type MenuItemUpdateWithoutEventMenuSelectionInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     priceNGN?: FloatFieldUpdateOperationsInput | number
-    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
     isSpicy?: BoolFieldUpdateOperationsInput | boolean
     tags?: MenuItemUpdatetagsInput | string[]
-    sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: MenuCategoryUpdateOneRequiredWithoutItemsNestedInput
+    slug?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     FoodPackOrderItem?: FoodPackOrderItemUpdateManyWithoutMenuItemNestedInput
+    category?: MenuCategoryUpdateOneRequiredWithoutItemsNestedInput
   }
 
   export type MenuItemUncheckedUpdateWithoutEventMenuSelectionInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     priceNGN?: FloatFieldUpdateOperationsInput | number
-    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
     isSpicy?: BoolFieldUpdateOperationsInput | boolean
     tags?: MenuItemUpdatetagsInput | string[]
-    sortOrder?: IntFieldUpdateOperationsInput | number
-    categoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     FoodPackOrderItem?: FoodPackOrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
@@ -20459,23 +20459,16 @@ export namespace Prisma {
     menuSelections?: EventMenuSelectionUncheckedUpdateManyWithoutEventOrderNestedInput
   }
 
-  export type OrderCreateManyCreatedByInput = {
+  export type AuditLogCreateManyUserInput = {
     id?: string
-    ref: string
-    customerName: string
-    customerPhone?: string | null
-    items: JsonNullValueInput | InputJsonValue
-    subtotal: number
-    total: number
-    status?: $Enums.OrderStatus
-    paymentMethod?: $Enums.PaymentMethod | null
-    paymentStatus?: $Enums.PaymentStatus
-    source?: $Enums.OrderSource
-    notes?: string | null
-    confirmedById?: string | null
+    userName?: string | null
+    action: string
+    entity: string
+    entityId?: string | null
+    meta?: NullableJsonNullValueInput | InputJsonValue
+    ip?: string | null
+    userAgent?: string | null
     createdAt?: Date | string
-    updatedAt?: Date | string
-    confirmedAt?: Date | string | null
   }
 
   export type OrderCreateManyConfirmedByInput = {
@@ -20497,73 +20490,59 @@ export namespace Prisma {
     confirmedAt?: Date | string | null
   }
 
-  export type AuditLogCreateManyUserInput = {
+  export type OrderCreateManyCreatedByInput = {
     id?: string
-    userName?: string | null
-    action: string
-    entity: string
-    entityId?: string | null
-    meta?: NullableJsonNullValueInput | InputJsonValue
-    ip?: string | null
-    userAgent?: string | null
+    ref: string
+    customerName: string
+    customerPhone?: string | null
+    items: JsonNullValueInput | InputJsonValue
+    subtotal: number
+    total: number
+    status?: $Enums.OrderStatus
+    paymentMethod?: $Enums.PaymentMethod | null
+    paymentStatus?: $Enums.PaymentStatus
+    source?: $Enums.OrderSource
+    notes?: string | null
+    confirmedById?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
+    confirmedAt?: Date | string | null
   }
 
-  export type OrderUpdateWithoutCreatedByInput = {
+  export type AuditLogUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ref?: StringFieldUpdateOperationsInput | string
-    customerName?: StringFieldUpdateOperationsInput | string
-    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
-    items?: JsonNullValueInput | InputJsonValue
-    subtotal?: FloatFieldUpdateOperationsInput | number
-    total?: FloatFieldUpdateOperationsInput | number
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    paymentMethod?: NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-    source?: EnumOrderSourceFieldUpdateOperationsInput | $Enums.OrderSource
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    action?: StringFieldUpdateOperationsInput | string
+    entity?: StringFieldUpdateOperationsInput | string
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    meta?: NullableJsonNullValueInput | InputJsonValue
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    confirmedBy?: UserUpdateOneWithoutOrdersConfirmedNestedInput
   }
 
-  export type OrderUncheckedUpdateWithoutCreatedByInput = {
+  export type AuditLogUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ref?: StringFieldUpdateOperationsInput | string
-    customerName?: StringFieldUpdateOperationsInput | string
-    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
-    items?: JsonNullValueInput | InputJsonValue
-    subtotal?: FloatFieldUpdateOperationsInput | number
-    total?: FloatFieldUpdateOperationsInput | number
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    paymentMethod?: NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-    source?: EnumOrderSourceFieldUpdateOperationsInput | $Enums.OrderSource
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    confirmedById?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    action?: StringFieldUpdateOperationsInput | string
+    entity?: StringFieldUpdateOperationsInput | string
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    meta?: NullableJsonNullValueInput | InputJsonValue
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type OrderUncheckedUpdateManyWithoutCreatedByInput = {
+  export type AuditLogUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ref?: StringFieldUpdateOperationsInput | string
-    customerName?: StringFieldUpdateOperationsInput | string
-    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
-    items?: JsonNullValueInput | InputJsonValue
-    subtotal?: FloatFieldUpdateOperationsInput | number
-    total?: FloatFieldUpdateOperationsInput | number
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    paymentMethod?: NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-    source?: EnumOrderSourceFieldUpdateOperationsInput | $Enums.OrderSource
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    confirmedById?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    action?: StringFieldUpdateOperationsInput | string
+    entity?: StringFieldUpdateOperationsInput | string
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    meta?: NullableJsonNullValueInput | InputJsonValue
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OrderUpdateWithoutConfirmedByInput = {
@@ -20623,120 +20602,133 @@ export namespace Prisma {
     confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type AuditLogUpdateWithoutUserInput = {
+  export type OrderUpdateWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userName?: NullableStringFieldUpdateOperationsInput | string | null
-    action?: StringFieldUpdateOperationsInput | string
-    entity?: StringFieldUpdateOperationsInput | string
-    entityId?: NullableStringFieldUpdateOperationsInput | string | null
-    meta?: NullableJsonNullValueInput | InputJsonValue
-    ip?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ref?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    items?: JsonNullValueInput | InputJsonValue
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    paymentMethod?: NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    source?: EnumOrderSourceFieldUpdateOperationsInput | $Enums.OrderSource
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    confirmedBy?: UserUpdateOneWithoutOrdersConfirmedNestedInput
   }
 
-  export type AuditLogUncheckedUpdateWithoutUserInput = {
+  export type OrderUncheckedUpdateWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userName?: NullableStringFieldUpdateOperationsInput | string | null
-    action?: StringFieldUpdateOperationsInput | string
-    entity?: StringFieldUpdateOperationsInput | string
-    entityId?: NullableStringFieldUpdateOperationsInput | string | null
-    meta?: NullableJsonNullValueInput | InputJsonValue
-    ip?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ref?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    items?: JsonNullValueInput | InputJsonValue
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    paymentMethod?: NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    source?: EnumOrderSourceFieldUpdateOperationsInput | $Enums.OrderSource
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    confirmedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type AuditLogUncheckedUpdateManyWithoutUserInput = {
+  export type OrderUncheckedUpdateManyWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userName?: NullableStringFieldUpdateOperationsInput | string | null
-    action?: StringFieldUpdateOperationsInput | string
-    entity?: StringFieldUpdateOperationsInput | string
-    entityId?: NullableStringFieldUpdateOperationsInput | string | null
-    meta?: NullableJsonNullValueInput | InputJsonValue
-    ip?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ref?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    items?: JsonNullValueInput | InputJsonValue
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    paymentMethod?: NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    source?: EnumOrderSourceFieldUpdateOperationsInput | $Enums.OrderSource
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    confirmedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type MenuItemCreateManyCategoryInput = {
     id?: string
     name: string
-    slug: string
     description?: string | null
     priceNGN: number
-    publicId?: string | null
     imageUrl?: string | null
     isAvailable?: boolean
     isFeatured?: boolean
     isSpicy?: boolean
     tags?: MenuItemCreatetagsInput | string[]
-    sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    slug: string
+    sortOrder?: number
+    publicId?: string | null
   }
 
   export type MenuItemUpdateWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     priceNGN?: FloatFieldUpdateOperationsInput | number
-    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
     isSpicy?: BoolFieldUpdateOperationsInput | boolean
     tags?: MenuItemUpdatetagsInput | string[]
-    sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    FoodPackOrderItem?: FoodPackOrderItemUpdateManyWithoutMenuItemNestedInput
+    slug?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     EventMenuSelection?: EventMenuSelectionUpdateManyWithoutMenuItemNestedInput
+    FoodPackOrderItem?: FoodPackOrderItemUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemUncheckedUpdateWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     priceNGN?: FloatFieldUpdateOperationsInput | number
-    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
     isSpicy?: BoolFieldUpdateOperationsInput | boolean
     tags?: MenuItemUpdatetagsInput | string[]
-    sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    FoodPackOrderItem?: FoodPackOrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
+    slug?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     EventMenuSelection?: EventMenuSelectionUncheckedUpdateManyWithoutMenuItemNestedInput
+    FoodPackOrderItem?: FoodPackOrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemUncheckedUpdateManyWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     priceNGN?: FloatFieldUpdateOperationsInput | number
-    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
     isSpicy?: BoolFieldUpdateOperationsInput | boolean
     tags?: MenuItemUpdatetagsInput | string[]
-    sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type FoodPackOrderItemCreateManyMenuItemInput = {
-    id?: string
-    quantity: number
-    unitPrice: number
-    totalPrice: number
-    orderId: string
+    slug?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EventMenuSelectionCreateManyMenuItemInput = {
@@ -20748,28 +20740,12 @@ export namespace Prisma {
     eventOrderId: string
   }
 
-  export type FoodPackOrderItemUpdateWithoutMenuItemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    totalPrice?: FloatFieldUpdateOperationsInput | number
-    order?: FoodPackOrderUpdateOneRequiredWithoutItemsNestedInput
-  }
-
-  export type FoodPackOrderItemUncheckedUpdateWithoutMenuItemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    totalPrice?: FloatFieldUpdateOperationsInput | number
-    orderId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type FoodPackOrderItemUncheckedUpdateManyWithoutMenuItemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    totalPrice?: FloatFieldUpdateOperationsInput | number
-    orderId?: StringFieldUpdateOperationsInput | string
+  export type FoodPackOrderItemCreateManyMenuItemInput = {
+    id?: string
+    quantity: number
+    unitPrice: number
+    totalPrice: number
+    orderId: string
   }
 
   export type EventMenuSelectionUpdateWithoutMenuItemInput = {
@@ -20797,6 +20773,30 @@ export namespace Prisma {
     unit?: StringFieldUpdateOperationsInput | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     eventOrderId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type FoodPackOrderItemUpdateWithoutMenuItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: FoodPackOrderUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type FoodPackOrderItemUncheckedUpdateWithoutMenuItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    orderId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type FoodPackOrderItemUncheckedUpdateManyWithoutMenuItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    orderId?: StringFieldUpdateOperationsInput | string
   }
 
   export type FoodPackOrderItemCreateManyOrderInput = {
