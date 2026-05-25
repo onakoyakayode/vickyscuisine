@@ -19,6 +19,13 @@ const nextConfig = {
       },
     ],
   },
+  staticPageGenerationTimeout: 120,
+  serverExternalPackages: ["@prisma/client", "prisma"],
+
+  // Ensure environment variables are available
+  env: {
+    DATABASE_URL: process.env.DATABASE_URL,
+  },
 };
 
 module.exports = nextConfig;
