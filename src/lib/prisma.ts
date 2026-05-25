@@ -53,9 +53,12 @@ const globalForPrisma = globalThis as unknown as {
 // Temporary workaround for Vercel
 const getDbUrl = () => {
   const url = process.env.DATABASE_URL;
+  // if (!url) {
+  //   // Fallback - replace with your actual URL (temporary only!)
+  //   return "postgresql://neondb_owner:npg_r9u7qXBzcywI@ep-billowing-dew-am90xpaq-pooler.c-5.us-east-1.aws.neon.tech/neondb?sslmode=require";
+  // }
   if (!url) {
-    // Fallback - replace with your actual URL (temporary only!)
-    return "postgresql://neondb_owner:npg_r9u7qXBzcywI@ep-billowing-dew-am90xpaq-pooler.c-5.us-east-1.aws.neon.tech/neondb?sslmode=require";
+    throw new Error("DATABASE_URL is not defined in environment variables");
   }
   return url;
 };
