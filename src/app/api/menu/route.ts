@@ -1,6 +1,6 @@
 // src/app/api/menu/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic"; // always fresh, no static caching issues
 
@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
     const available = searchParams.get("available"); // "false" = include unavailable
 
     // ── Check DB connection first ────────────────────────────
-    const count = await db.menuCategory.count();
+    const count = await prisma.menuCategory.count();
 
     // If DB is empty, return helpful message instead of silent error
     if (count === 0) {
@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
     }
 
     // ── Fetch categories + items ─────────────────────────────
-    const categories = await db.menuCategory.findMany({
+    const categories = await prisma.menuCategory.findMany({
       where: {
         ...(categorySlug ? { slug: categorySlug } : {}),
       },
@@ -57,7 +57,7 @@ export async function GET(req: NextRequest) {
     });
 
     // Timestamp of most recently updated item (for cache headers / ETag)
-    const latest = await db.menuItem.findFirst({
+    const latest = await prisma.menuItem.findFirst({
       orderBy: { updatedAt: "desc" },
       select: { updatedAt: true },
     });
