@@ -193,33 +193,69 @@ model EventOrder {
   updatedAt         DateTime             @updatedAt
   menuSelections    EventMenuSelection[]
   payments          EventPayment[]
+  serviceFeeNGN     Float                @default(0)
+  transportFeeNGN   Float                @default(0)
 
   @@map("event_orders")
 }
 
 model EventMenuSelection {
-  id              String     @id @default(cuid())
-  quantityPerHead Float      @default(1)
-  totalQuantity   Float
-  unit            String
-  notes           String?
-  eventOrderId    String
-  menuItemId      String
-  eventOrder      EventOrder @relation(fields: [eventOrderId], references: [id], onDelete: Cascade)
-  menuItem        MenuItem   @relation(fields: [menuItemId], references: [id])
+  id           String     @id @default(cuid())
+  menuItemId   String
+  quantity     Int        @default(1) // number of plates for this dish
+  unitPrice    Int // price per plate in NGN
+  totalPrice   Int        @default(0) // quantity * unitPrice
+  notes        String?
+  eventOrderId String
+  eventOrder   EventOrder @relation(fields: [eventOrderId], references: [id], onDelete: Cascade)
+  menuItem     MenuItem   @relation(fields: [menuItemId], references: [id])
 
+  @@unique([eventOrderId, menuItemId])
   @@map("event_menu_selections")
 }
 
+model EventMenuCategory {
+  id          String            @id @default(cuid())
+  name        String
+  description String?
+  required    Boolean           @default(false)
+  minChoices  Int               @default(0)
+  maxChoices  Int               @default(1)
+  sortOrder   Int               @default(0)
+  isActive    Boolean           @default(true)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  options     EventMenuOption[]
+
+  @@map("event_menu_categories")
+}
+
+model EventMenuOption {
+  id             String            @id @default(cuid())
+  name           String
+  description    String?
+  pricePerPlate  Float // Admin sets this
+  includedInBase Boolean           @default(true)
+  isActive       Boolean           @default(true)
+  sortOrder      Int               @default(0)
+  categoryId     String
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  category       EventMenuCategory @relation(fields: [categoryId], references: [id])
+
+  @@map("event_menu_options")
+}
+
 model EventPayment {
-  id            String     @id @default(cuid())
+  id            String        @id @default(cuid())
   amountNGN     Float
   paymentMethod String
+  status        PaymentStatus @default(UNPAID)
   reference     String?
-  paidAt        DateTime   @default(now())
+  paidAt        DateTime      @default(now())
   note          String?
   eventOrderId  String
-  eventOrder    EventOrder @relation(fields: [eventOrderId], references: [id], onDelete: Cascade)
+  eventOrder    EventOrder    @relation(fields: [eventOrderId], references: [id], onDelete: Cascade)
 
   @@map("event_payments")
 }
@@ -248,6 +284,11 @@ enum PaymentStatus {
   DEPOSIT_PAID
   FULLY_PAID
   REFUNDED
+}
+
+enum PaymentRecordStatus {
+  PENDING
+  CONFIRMED
 }
 
 enum OrderSource {

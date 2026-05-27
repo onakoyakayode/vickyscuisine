@@ -64,6 +64,16 @@ export type EventOrder = $Result.DefaultSelection<Prisma.$EventOrderPayload>
  */
 export type EventMenuSelection = $Result.DefaultSelection<Prisma.$EventMenuSelectionPayload>
 /**
+ * Model EventMenuCategory
+ * 
+ */
+export type EventMenuCategory = $Result.DefaultSelection<Prisma.$EventMenuCategoryPayload>
+/**
+ * Model EventMenuOption
+ * 
+ */
+export type EventMenuOption = $Result.DefaultSelection<Prisma.$EventMenuOptionPayload>
+/**
  * Model EventPayment
  * 
  */
@@ -458,6 +468,26 @@ export class PrismaClient<
     * ```
     */
   get eventMenuSelection(): Prisma.EventMenuSelectionDelegate<ExtArgs>;
+
+  /**
+   * `prisma.eventMenuCategory`: Exposes CRUD operations for the **EventMenuCategory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EventMenuCategories
+    * const eventMenuCategories = await prisma.eventMenuCategory.findMany()
+    * ```
+    */
+  get eventMenuCategory(): Prisma.EventMenuCategoryDelegate<ExtArgs>;
+
+  /**
+   * `prisma.eventMenuOption`: Exposes CRUD operations for the **EventMenuOption** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EventMenuOptions
+    * const eventMenuOptions = await prisma.eventMenuOption.findMany()
+    * ```
+    */
+  get eventMenuOption(): Prisma.EventMenuOptionDelegate<ExtArgs>;
 
   /**
    * `prisma.eventPayment`: Exposes CRUD operations for the **EventPayment** model.
@@ -919,6 +949,8 @@ export namespace Prisma {
     FoodPackOrderItem: 'FoodPackOrderItem',
     EventOrder: 'EventOrder',
     EventMenuSelection: 'EventMenuSelection',
+    EventMenuCategory: 'EventMenuCategory',
+    EventMenuOption: 'EventMenuOption',
     EventPayment: 'EventPayment'
   };
 
@@ -935,7 +967,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "activeSession" | "order" | "auditLog" | "menuCategory" | "menuItem" | "foodPackOrder" | "foodPackOrderItem" | "eventOrder" | "eventMenuSelection" | "eventPayment"
+      modelProps: "user" | "activeSession" | "order" | "auditLog" | "menuCategory" | "menuItem" | "foodPackOrder" | "foodPackOrderItem" | "eventOrder" | "eventMenuSelection" | "eventMenuCategory" | "eventMenuOption" | "eventPayment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1639,6 +1671,146 @@ export namespace Prisma {
           }
         }
       }
+      EventMenuCategory: {
+        payload: Prisma.$EventMenuCategoryPayload<ExtArgs>
+        fields: Prisma.EventMenuCategoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EventMenuCategoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuCategoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EventMenuCategoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuCategoryPayload>
+          }
+          findFirst: {
+            args: Prisma.EventMenuCategoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuCategoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EventMenuCategoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuCategoryPayload>
+          }
+          findMany: {
+            args: Prisma.EventMenuCategoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuCategoryPayload>[]
+          }
+          create: {
+            args: Prisma.EventMenuCategoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuCategoryPayload>
+          }
+          createMany: {
+            args: Prisma.EventMenuCategoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EventMenuCategoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuCategoryPayload>[]
+          }
+          delete: {
+            args: Prisma.EventMenuCategoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuCategoryPayload>
+          }
+          update: {
+            args: Prisma.EventMenuCategoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuCategoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.EventMenuCategoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EventMenuCategoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.EventMenuCategoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuCategoryPayload>
+          }
+          aggregate: {
+            args: Prisma.EventMenuCategoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEventMenuCategory>
+          }
+          groupBy: {
+            args: Prisma.EventMenuCategoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EventMenuCategoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EventMenuCategoryCountArgs<ExtArgs>
+            result: $Utils.Optional<EventMenuCategoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      EventMenuOption: {
+        payload: Prisma.$EventMenuOptionPayload<ExtArgs>
+        fields: Prisma.EventMenuOptionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EventMenuOptionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuOptionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EventMenuOptionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuOptionPayload>
+          }
+          findFirst: {
+            args: Prisma.EventMenuOptionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuOptionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EventMenuOptionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuOptionPayload>
+          }
+          findMany: {
+            args: Prisma.EventMenuOptionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuOptionPayload>[]
+          }
+          create: {
+            args: Prisma.EventMenuOptionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuOptionPayload>
+          }
+          createMany: {
+            args: Prisma.EventMenuOptionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EventMenuOptionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuOptionPayload>[]
+          }
+          delete: {
+            args: Prisma.EventMenuOptionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuOptionPayload>
+          }
+          update: {
+            args: Prisma.EventMenuOptionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuOptionPayload>
+          }
+          deleteMany: {
+            args: Prisma.EventMenuOptionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EventMenuOptionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.EventMenuOptionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventMenuOptionPayload>
+          }
+          aggregate: {
+            args: Prisma.EventMenuOptionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEventMenuOption>
+          }
+          groupBy: {
+            args: Prisma.EventMenuOptionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EventMenuOptionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EventMenuOptionCountArgs<ExtArgs>
+            result: $Utils.Optional<EventMenuOptionCountAggregateOutputType> | number
+          }
+        }
+      }
       EventPayment: {
         payload: Prisma.$EventPaymentPayload<ExtArgs>
         fields: Prisma.EventPaymentFieldRefs
@@ -2053,6 +2225,37 @@ export namespace Prisma {
    */
   export type EventOrderCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EventPaymentWhereInput
+  }
+
+
+  /**
+   * Count Type EventMenuCategoryCountOutputType
+   */
+
+  export type EventMenuCategoryCountOutputType = {
+    options: number
+  }
+
+  export type EventMenuCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    options?: boolean | EventMenuCategoryCountOutputTypeCountOptionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EventMenuCategoryCountOutputType without action
+   */
+  export type EventMenuCategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuCategoryCountOutputType
+     */
+    select?: EventMenuCategoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EventMenuCategoryCountOutputType without action
+   */
+  export type EventMenuCategoryCountOutputTypeCountOptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventMenuOptionWhereInput
   }
 
 
@@ -10456,6 +10659,8 @@ export namespace Prisma {
     depositAmtNGN: number | null
     balanceDueNGN: number | null
     servingStaffCount: number | null
+    serviceFeeNGN: number | null
+    transportFeeNGN: number | null
   }
 
   export type EventOrderSumAggregateOutputType = {
@@ -10469,6 +10674,8 @@ export namespace Prisma {
     depositAmtNGN: number | null
     balanceDueNGN: number | null
     servingStaffCount: number | null
+    serviceFeeNGN: number | null
+    transportFeeNGN: number | null
   }
 
   export type EventOrderMinAggregateOutputType = {
@@ -10508,6 +10715,8 @@ export namespace Prisma {
     confirmedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    serviceFeeNGN: number | null
+    transportFeeNGN: number | null
   }
 
   export type EventOrderMaxAggregateOutputType = {
@@ -10547,6 +10756,8 @@ export namespace Prisma {
     confirmedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    serviceFeeNGN: number | null
+    transportFeeNGN: number | null
   }
 
   export type EventOrderCountAggregateOutputType = {
@@ -10587,6 +10798,8 @@ export namespace Prisma {
     confirmedAt: number
     createdAt: number
     updatedAt: number
+    serviceFeeNGN: number
+    transportFeeNGN: number
     _all: number
   }
 
@@ -10602,6 +10815,8 @@ export namespace Prisma {
     depositAmtNGN?: true
     balanceDueNGN?: true
     servingStaffCount?: true
+    serviceFeeNGN?: true
+    transportFeeNGN?: true
   }
 
   export type EventOrderSumAggregateInputType = {
@@ -10615,6 +10830,8 @@ export namespace Prisma {
     depositAmtNGN?: true
     balanceDueNGN?: true
     servingStaffCount?: true
+    serviceFeeNGN?: true
+    transportFeeNGN?: true
   }
 
   export type EventOrderMinAggregateInputType = {
@@ -10654,6 +10871,8 @@ export namespace Prisma {
     confirmedAt?: true
     createdAt?: true
     updatedAt?: true
+    serviceFeeNGN?: true
+    transportFeeNGN?: true
   }
 
   export type EventOrderMaxAggregateInputType = {
@@ -10693,6 +10912,8 @@ export namespace Prisma {
     confirmedAt?: true
     createdAt?: true
     updatedAt?: true
+    serviceFeeNGN?: true
+    transportFeeNGN?: true
   }
 
   export type EventOrderCountAggregateInputType = {
@@ -10733,6 +10954,8 @@ export namespace Prisma {
     confirmedAt?: true
     createdAt?: true
     updatedAt?: true
+    serviceFeeNGN?: true
+    transportFeeNGN?: true
     _all?: true
   }
 
@@ -10860,6 +11083,8 @@ export namespace Prisma {
     confirmedAt: Date | null
     createdAt: Date
     updatedAt: Date
+    serviceFeeNGN: number
+    transportFeeNGN: number
     _count: EventOrderCountAggregateOutputType | null
     _avg: EventOrderAvgAggregateOutputType | null
     _sum: EventOrderSumAggregateOutputType | null
@@ -10919,6 +11144,8 @@ export namespace Prisma {
     confirmedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    serviceFeeNGN?: boolean
+    transportFeeNGN?: boolean
     menuSelections?: boolean | EventOrder$menuSelectionsArgs<ExtArgs>
     payments?: boolean | EventOrder$paymentsArgs<ExtArgs>
     _count?: boolean | EventOrderCountOutputTypeDefaultArgs<ExtArgs>
@@ -10962,6 +11189,8 @@ export namespace Prisma {
     confirmedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    serviceFeeNGN?: boolean
+    transportFeeNGN?: boolean
   }, ExtArgs["result"]["eventOrder"]>
 
   export type EventOrderSelectScalar = {
@@ -11002,6 +11231,8 @@ export namespace Prisma {
     confirmedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    serviceFeeNGN?: boolean
+    transportFeeNGN?: boolean
   }
 
   export type EventOrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11055,6 +11286,8 @@ export namespace Prisma {
       confirmedAt: Date | null
       createdAt: Date
       updatedAt: Date
+      serviceFeeNGN: number
+      transportFeeNGN: number
     }, ExtArgs["result"]["eventOrder"]>
     composites: {}
   }
@@ -11487,6 +11720,8 @@ export namespace Prisma {
     readonly confirmedAt: FieldRef<"EventOrder", 'DateTime'>
     readonly createdAt: FieldRef<"EventOrder", 'DateTime'>
     readonly updatedAt: FieldRef<"EventOrder", 'DateTime'>
+    readonly serviceFeeNGN: FieldRef<"EventOrder", 'Float'>
+    readonly transportFeeNGN: FieldRef<"EventOrder", 'Float'>
   }
     
 
@@ -11868,85 +12103,89 @@ export namespace Prisma {
   }
 
   export type EventMenuSelectionAvgAggregateOutputType = {
-    quantityPerHead: number | null
-    totalQuantity: number | null
+    quantity: number | null
+    unitPrice: number | null
+    totalPrice: number | null
   }
 
   export type EventMenuSelectionSumAggregateOutputType = {
-    quantityPerHead: number | null
-    totalQuantity: number | null
+    quantity: number | null
+    unitPrice: number | null
+    totalPrice: number | null
   }
 
   export type EventMenuSelectionMinAggregateOutputType = {
     id: string | null
-    quantityPerHead: number | null
-    totalQuantity: number | null
-    unit: string | null
+    menuItemId: string | null
+    quantity: number | null
+    unitPrice: number | null
+    totalPrice: number | null
     notes: string | null
     eventOrderId: string | null
-    menuItemId: string | null
   }
 
   export type EventMenuSelectionMaxAggregateOutputType = {
     id: string | null
-    quantityPerHead: number | null
-    totalQuantity: number | null
-    unit: string | null
+    menuItemId: string | null
+    quantity: number | null
+    unitPrice: number | null
+    totalPrice: number | null
     notes: string | null
     eventOrderId: string | null
-    menuItemId: string | null
   }
 
   export type EventMenuSelectionCountAggregateOutputType = {
     id: number
-    quantityPerHead: number
-    totalQuantity: number
-    unit: number
+    menuItemId: number
+    quantity: number
+    unitPrice: number
+    totalPrice: number
     notes: number
     eventOrderId: number
-    menuItemId: number
     _all: number
   }
 
 
   export type EventMenuSelectionAvgAggregateInputType = {
-    quantityPerHead?: true
-    totalQuantity?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
   }
 
   export type EventMenuSelectionSumAggregateInputType = {
-    quantityPerHead?: true
-    totalQuantity?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
   }
 
   export type EventMenuSelectionMinAggregateInputType = {
     id?: true
-    quantityPerHead?: true
-    totalQuantity?: true
-    unit?: true
+    menuItemId?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
     notes?: true
     eventOrderId?: true
-    menuItemId?: true
   }
 
   export type EventMenuSelectionMaxAggregateInputType = {
     id?: true
-    quantityPerHead?: true
-    totalQuantity?: true
-    unit?: true
+    menuItemId?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
     notes?: true
     eventOrderId?: true
-    menuItemId?: true
   }
 
   export type EventMenuSelectionCountAggregateInputType = {
     id?: true
-    quantityPerHead?: true
-    totalQuantity?: true
-    unit?: true
+    menuItemId?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
     notes?: true
     eventOrderId?: true
-    menuItemId?: true
     _all?: true
   }
 
@@ -12038,12 +12277,12 @@ export namespace Prisma {
 
   export type EventMenuSelectionGroupByOutputType = {
     id: string
-    quantityPerHead: number
-    totalQuantity: number
-    unit: string
+    menuItemId: string
+    quantity: number
+    unitPrice: number
+    totalPrice: number
     notes: string | null
     eventOrderId: string
-    menuItemId: string
     _count: EventMenuSelectionCountAggregateOutputType | null
     _avg: EventMenuSelectionAvgAggregateOutputType | null
     _sum: EventMenuSelectionSumAggregateOutputType | null
@@ -12067,36 +12306,36 @@ export namespace Prisma {
 
   export type EventMenuSelectionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    quantityPerHead?: boolean
-    totalQuantity?: boolean
-    unit?: boolean
+    menuItemId?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
     notes?: boolean
     eventOrderId?: boolean
-    menuItemId?: boolean
     eventOrder?: boolean | EventOrderDefaultArgs<ExtArgs>
     menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["eventMenuSelection"]>
 
   export type EventMenuSelectionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    quantityPerHead?: boolean
-    totalQuantity?: boolean
-    unit?: boolean
+    menuItemId?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
     notes?: boolean
     eventOrderId?: boolean
-    menuItemId?: boolean
     eventOrder?: boolean | EventOrderDefaultArgs<ExtArgs>
     menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["eventMenuSelection"]>
 
   export type EventMenuSelectionSelectScalar = {
     id?: boolean
-    quantityPerHead?: boolean
-    totalQuantity?: boolean
-    unit?: boolean
+    menuItemId?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
     notes?: boolean
     eventOrderId?: boolean
-    menuItemId?: boolean
   }
 
   export type EventMenuSelectionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12116,12 +12355,12 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      quantityPerHead: number
-      totalQuantity: number
-      unit: string
+      menuItemId: string
+      quantity: number
+      unitPrice: number
+      totalPrice: number
       notes: string | null
       eventOrderId: string
-      menuItemId: string
     }, ExtArgs["result"]["eventMenuSelection"]>
     composites: {}
   }
@@ -12518,12 +12757,12 @@ export namespace Prisma {
    */ 
   interface EventMenuSelectionFieldRefs {
     readonly id: FieldRef<"EventMenuSelection", 'String'>
-    readonly quantityPerHead: FieldRef<"EventMenuSelection", 'Float'>
-    readonly totalQuantity: FieldRef<"EventMenuSelection", 'Float'>
-    readonly unit: FieldRef<"EventMenuSelection", 'String'>
+    readonly menuItemId: FieldRef<"EventMenuSelection", 'String'>
+    readonly quantity: FieldRef<"EventMenuSelection", 'Int'>
+    readonly unitPrice: FieldRef<"EventMenuSelection", 'Int'>
+    readonly totalPrice: FieldRef<"EventMenuSelection", 'Int'>
     readonly notes: FieldRef<"EventMenuSelection", 'String'>
     readonly eventOrderId: FieldRef<"EventMenuSelection", 'String'>
-    readonly menuItemId: FieldRef<"EventMenuSelection", 'String'>
   }
     
 
@@ -12857,6 +13096,2087 @@ export namespace Prisma {
 
 
   /**
+   * Model EventMenuCategory
+   */
+
+  export type AggregateEventMenuCategory = {
+    _count: EventMenuCategoryCountAggregateOutputType | null
+    _avg: EventMenuCategoryAvgAggregateOutputType | null
+    _sum: EventMenuCategorySumAggregateOutputType | null
+    _min: EventMenuCategoryMinAggregateOutputType | null
+    _max: EventMenuCategoryMaxAggregateOutputType | null
+  }
+
+  export type EventMenuCategoryAvgAggregateOutputType = {
+    minChoices: number | null
+    maxChoices: number | null
+    sortOrder: number | null
+  }
+
+  export type EventMenuCategorySumAggregateOutputType = {
+    minChoices: number | null
+    maxChoices: number | null
+    sortOrder: number | null
+  }
+
+  export type EventMenuCategoryMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    required: boolean | null
+    minChoices: number | null
+    maxChoices: number | null
+    sortOrder: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EventMenuCategoryMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    required: boolean | null
+    minChoices: number | null
+    maxChoices: number | null
+    sortOrder: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EventMenuCategoryCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    required: number
+    minChoices: number
+    maxChoices: number
+    sortOrder: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EventMenuCategoryAvgAggregateInputType = {
+    minChoices?: true
+    maxChoices?: true
+    sortOrder?: true
+  }
+
+  export type EventMenuCategorySumAggregateInputType = {
+    minChoices?: true
+    maxChoices?: true
+    sortOrder?: true
+  }
+
+  export type EventMenuCategoryMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    required?: true
+    minChoices?: true
+    maxChoices?: true
+    sortOrder?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EventMenuCategoryMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    required?: true
+    minChoices?: true
+    maxChoices?: true
+    sortOrder?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EventMenuCategoryCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    required?: true
+    minChoices?: true
+    maxChoices?: true
+    sortOrder?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EventMenuCategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventMenuCategory to aggregate.
+     */
+    where?: EventMenuCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventMenuCategories to fetch.
+     */
+    orderBy?: EventMenuCategoryOrderByWithRelationInput | EventMenuCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EventMenuCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventMenuCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventMenuCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EventMenuCategories
+    **/
+    _count?: true | EventMenuCategoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EventMenuCategoryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EventMenuCategorySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EventMenuCategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EventMenuCategoryMaxAggregateInputType
+  }
+
+  export type GetEventMenuCategoryAggregateType<T extends EventMenuCategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateEventMenuCategory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEventMenuCategory[P]>
+      : GetScalarType<T[P], AggregateEventMenuCategory[P]>
+  }
+
+
+
+
+  export type EventMenuCategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventMenuCategoryWhereInput
+    orderBy?: EventMenuCategoryOrderByWithAggregationInput | EventMenuCategoryOrderByWithAggregationInput[]
+    by: EventMenuCategoryScalarFieldEnum[] | EventMenuCategoryScalarFieldEnum
+    having?: EventMenuCategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EventMenuCategoryCountAggregateInputType | true
+    _avg?: EventMenuCategoryAvgAggregateInputType
+    _sum?: EventMenuCategorySumAggregateInputType
+    _min?: EventMenuCategoryMinAggregateInputType
+    _max?: EventMenuCategoryMaxAggregateInputType
+  }
+
+  export type EventMenuCategoryGroupByOutputType = {
+    id: string
+    name: string
+    description: string | null
+    required: boolean
+    minChoices: number
+    maxChoices: number
+    sortOrder: number
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: EventMenuCategoryCountAggregateOutputType | null
+    _avg: EventMenuCategoryAvgAggregateOutputType | null
+    _sum: EventMenuCategorySumAggregateOutputType | null
+    _min: EventMenuCategoryMinAggregateOutputType | null
+    _max: EventMenuCategoryMaxAggregateOutputType | null
+  }
+
+  type GetEventMenuCategoryGroupByPayload<T extends EventMenuCategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EventMenuCategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EventMenuCategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EventMenuCategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], EventMenuCategoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EventMenuCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    required?: boolean
+    minChoices?: boolean
+    maxChoices?: boolean
+    sortOrder?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    options?: boolean | EventMenuCategory$optionsArgs<ExtArgs>
+    _count?: boolean | EventMenuCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventMenuCategory"]>
+
+  export type EventMenuCategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    required?: boolean
+    minChoices?: boolean
+    maxChoices?: boolean
+    sortOrder?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["eventMenuCategory"]>
+
+  export type EventMenuCategorySelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    required?: boolean
+    minChoices?: boolean
+    maxChoices?: boolean
+    sortOrder?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EventMenuCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    options?: boolean | EventMenuCategory$optionsArgs<ExtArgs>
+    _count?: boolean | EventMenuCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EventMenuCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $EventMenuCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EventMenuCategory"
+    objects: {
+      options: Prisma.$EventMenuOptionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string | null
+      required: boolean
+      minChoices: number
+      maxChoices: number
+      sortOrder: number
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["eventMenuCategory"]>
+    composites: {}
+  }
+
+  type EventMenuCategoryGetPayload<S extends boolean | null | undefined | EventMenuCategoryDefaultArgs> = $Result.GetResult<Prisma.$EventMenuCategoryPayload, S>
+
+  type EventMenuCategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<EventMenuCategoryFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: EventMenuCategoryCountAggregateInputType | true
+    }
+
+  export interface EventMenuCategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EventMenuCategory'], meta: { name: 'EventMenuCategory' } }
+    /**
+     * Find zero or one EventMenuCategory that matches the filter.
+     * @param {EventMenuCategoryFindUniqueArgs} args - Arguments to find a EventMenuCategory
+     * @example
+     * // Get one EventMenuCategory
+     * const eventMenuCategory = await prisma.eventMenuCategory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EventMenuCategoryFindUniqueArgs>(args: SelectSubset<T, EventMenuCategoryFindUniqueArgs<ExtArgs>>): Prisma__EventMenuCategoryClient<$Result.GetResult<Prisma.$EventMenuCategoryPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one EventMenuCategory that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {EventMenuCategoryFindUniqueOrThrowArgs} args - Arguments to find a EventMenuCategory
+     * @example
+     * // Get one EventMenuCategory
+     * const eventMenuCategory = await prisma.eventMenuCategory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EventMenuCategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, EventMenuCategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EventMenuCategoryClient<$Result.GetResult<Prisma.$EventMenuCategoryPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first EventMenuCategory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuCategoryFindFirstArgs} args - Arguments to find a EventMenuCategory
+     * @example
+     * // Get one EventMenuCategory
+     * const eventMenuCategory = await prisma.eventMenuCategory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EventMenuCategoryFindFirstArgs>(args?: SelectSubset<T, EventMenuCategoryFindFirstArgs<ExtArgs>>): Prisma__EventMenuCategoryClient<$Result.GetResult<Prisma.$EventMenuCategoryPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first EventMenuCategory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuCategoryFindFirstOrThrowArgs} args - Arguments to find a EventMenuCategory
+     * @example
+     * // Get one EventMenuCategory
+     * const eventMenuCategory = await prisma.eventMenuCategory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EventMenuCategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, EventMenuCategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__EventMenuCategoryClient<$Result.GetResult<Prisma.$EventMenuCategoryPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more EventMenuCategories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuCategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EventMenuCategories
+     * const eventMenuCategories = await prisma.eventMenuCategory.findMany()
+     * 
+     * // Get first 10 EventMenuCategories
+     * const eventMenuCategories = await prisma.eventMenuCategory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const eventMenuCategoryWithIdOnly = await prisma.eventMenuCategory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EventMenuCategoryFindManyArgs>(args?: SelectSubset<T, EventMenuCategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventMenuCategoryPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a EventMenuCategory.
+     * @param {EventMenuCategoryCreateArgs} args - Arguments to create a EventMenuCategory.
+     * @example
+     * // Create one EventMenuCategory
+     * const EventMenuCategory = await prisma.eventMenuCategory.create({
+     *   data: {
+     *     // ... data to create a EventMenuCategory
+     *   }
+     * })
+     * 
+     */
+    create<T extends EventMenuCategoryCreateArgs>(args: SelectSubset<T, EventMenuCategoryCreateArgs<ExtArgs>>): Prisma__EventMenuCategoryClient<$Result.GetResult<Prisma.$EventMenuCategoryPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many EventMenuCategories.
+     * @param {EventMenuCategoryCreateManyArgs} args - Arguments to create many EventMenuCategories.
+     * @example
+     * // Create many EventMenuCategories
+     * const eventMenuCategory = await prisma.eventMenuCategory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EventMenuCategoryCreateManyArgs>(args?: SelectSubset<T, EventMenuCategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EventMenuCategories and returns the data saved in the database.
+     * @param {EventMenuCategoryCreateManyAndReturnArgs} args - Arguments to create many EventMenuCategories.
+     * @example
+     * // Create many EventMenuCategories
+     * const eventMenuCategory = await prisma.eventMenuCategory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EventMenuCategories and only return the `id`
+     * const eventMenuCategoryWithIdOnly = await prisma.eventMenuCategory.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EventMenuCategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, EventMenuCategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventMenuCategoryPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a EventMenuCategory.
+     * @param {EventMenuCategoryDeleteArgs} args - Arguments to delete one EventMenuCategory.
+     * @example
+     * // Delete one EventMenuCategory
+     * const EventMenuCategory = await prisma.eventMenuCategory.delete({
+     *   where: {
+     *     // ... filter to delete one EventMenuCategory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EventMenuCategoryDeleteArgs>(args: SelectSubset<T, EventMenuCategoryDeleteArgs<ExtArgs>>): Prisma__EventMenuCategoryClient<$Result.GetResult<Prisma.$EventMenuCategoryPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one EventMenuCategory.
+     * @param {EventMenuCategoryUpdateArgs} args - Arguments to update one EventMenuCategory.
+     * @example
+     * // Update one EventMenuCategory
+     * const eventMenuCategory = await prisma.eventMenuCategory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EventMenuCategoryUpdateArgs>(args: SelectSubset<T, EventMenuCategoryUpdateArgs<ExtArgs>>): Prisma__EventMenuCategoryClient<$Result.GetResult<Prisma.$EventMenuCategoryPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more EventMenuCategories.
+     * @param {EventMenuCategoryDeleteManyArgs} args - Arguments to filter EventMenuCategories to delete.
+     * @example
+     * // Delete a few EventMenuCategories
+     * const { count } = await prisma.eventMenuCategory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EventMenuCategoryDeleteManyArgs>(args?: SelectSubset<T, EventMenuCategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventMenuCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuCategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EventMenuCategories
+     * const eventMenuCategory = await prisma.eventMenuCategory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EventMenuCategoryUpdateManyArgs>(args: SelectSubset<T, EventMenuCategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one EventMenuCategory.
+     * @param {EventMenuCategoryUpsertArgs} args - Arguments to update or create a EventMenuCategory.
+     * @example
+     * // Update or create a EventMenuCategory
+     * const eventMenuCategory = await prisma.eventMenuCategory.upsert({
+     *   create: {
+     *     // ... data to create a EventMenuCategory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EventMenuCategory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EventMenuCategoryUpsertArgs>(args: SelectSubset<T, EventMenuCategoryUpsertArgs<ExtArgs>>): Prisma__EventMenuCategoryClient<$Result.GetResult<Prisma.$EventMenuCategoryPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of EventMenuCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuCategoryCountArgs} args - Arguments to filter EventMenuCategories to count.
+     * @example
+     * // Count the number of EventMenuCategories
+     * const count = await prisma.eventMenuCategory.count({
+     *   where: {
+     *     // ... the filter for the EventMenuCategories we want to count
+     *   }
+     * })
+    **/
+    count<T extends EventMenuCategoryCountArgs>(
+      args?: Subset<T, EventMenuCategoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EventMenuCategoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EventMenuCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuCategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EventMenuCategoryAggregateArgs>(args: Subset<T, EventMenuCategoryAggregateArgs>): Prisma.PrismaPromise<GetEventMenuCategoryAggregateType<T>>
+
+    /**
+     * Group by EventMenuCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuCategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EventMenuCategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EventMenuCategoryGroupByArgs['orderBy'] }
+        : { orderBy?: EventMenuCategoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EventMenuCategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEventMenuCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EventMenuCategory model
+   */
+  readonly fields: EventMenuCategoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EventMenuCategory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EventMenuCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    options<T extends EventMenuCategory$optionsArgs<ExtArgs> = {}>(args?: Subset<T, EventMenuCategory$optionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventMenuOptionPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EventMenuCategory model
+   */ 
+  interface EventMenuCategoryFieldRefs {
+    readonly id: FieldRef<"EventMenuCategory", 'String'>
+    readonly name: FieldRef<"EventMenuCategory", 'String'>
+    readonly description: FieldRef<"EventMenuCategory", 'String'>
+    readonly required: FieldRef<"EventMenuCategory", 'Boolean'>
+    readonly minChoices: FieldRef<"EventMenuCategory", 'Int'>
+    readonly maxChoices: FieldRef<"EventMenuCategory", 'Int'>
+    readonly sortOrder: FieldRef<"EventMenuCategory", 'Int'>
+    readonly isActive: FieldRef<"EventMenuCategory", 'Boolean'>
+    readonly createdAt: FieldRef<"EventMenuCategory", 'DateTime'>
+    readonly updatedAt: FieldRef<"EventMenuCategory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EventMenuCategory findUnique
+   */
+  export type EventMenuCategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuCategory
+     */
+    select?: EventMenuCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which EventMenuCategory to fetch.
+     */
+    where: EventMenuCategoryWhereUniqueInput
+  }
+
+  /**
+   * EventMenuCategory findUniqueOrThrow
+   */
+  export type EventMenuCategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuCategory
+     */
+    select?: EventMenuCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which EventMenuCategory to fetch.
+     */
+    where: EventMenuCategoryWhereUniqueInput
+  }
+
+  /**
+   * EventMenuCategory findFirst
+   */
+  export type EventMenuCategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuCategory
+     */
+    select?: EventMenuCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which EventMenuCategory to fetch.
+     */
+    where?: EventMenuCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventMenuCategories to fetch.
+     */
+    orderBy?: EventMenuCategoryOrderByWithRelationInput | EventMenuCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventMenuCategories.
+     */
+    cursor?: EventMenuCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventMenuCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventMenuCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventMenuCategories.
+     */
+    distinct?: EventMenuCategoryScalarFieldEnum | EventMenuCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * EventMenuCategory findFirstOrThrow
+   */
+  export type EventMenuCategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuCategory
+     */
+    select?: EventMenuCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which EventMenuCategory to fetch.
+     */
+    where?: EventMenuCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventMenuCategories to fetch.
+     */
+    orderBy?: EventMenuCategoryOrderByWithRelationInput | EventMenuCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventMenuCategories.
+     */
+    cursor?: EventMenuCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventMenuCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventMenuCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventMenuCategories.
+     */
+    distinct?: EventMenuCategoryScalarFieldEnum | EventMenuCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * EventMenuCategory findMany
+   */
+  export type EventMenuCategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuCategory
+     */
+    select?: EventMenuCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which EventMenuCategories to fetch.
+     */
+    where?: EventMenuCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventMenuCategories to fetch.
+     */
+    orderBy?: EventMenuCategoryOrderByWithRelationInput | EventMenuCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EventMenuCategories.
+     */
+    cursor?: EventMenuCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventMenuCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventMenuCategories.
+     */
+    skip?: number
+    distinct?: EventMenuCategoryScalarFieldEnum | EventMenuCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * EventMenuCategory create
+   */
+  export type EventMenuCategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuCategory
+     */
+    select?: EventMenuCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EventMenuCategory.
+     */
+    data: XOR<EventMenuCategoryCreateInput, EventMenuCategoryUncheckedCreateInput>
+  }
+
+  /**
+   * EventMenuCategory createMany
+   */
+  export type EventMenuCategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EventMenuCategories.
+     */
+    data: EventMenuCategoryCreateManyInput | EventMenuCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EventMenuCategory createManyAndReturn
+   */
+  export type EventMenuCategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuCategory
+     */
+    select?: EventMenuCategorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many EventMenuCategories.
+     */
+    data: EventMenuCategoryCreateManyInput | EventMenuCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EventMenuCategory update
+   */
+  export type EventMenuCategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuCategory
+     */
+    select?: EventMenuCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EventMenuCategory.
+     */
+    data: XOR<EventMenuCategoryUpdateInput, EventMenuCategoryUncheckedUpdateInput>
+    /**
+     * Choose, which EventMenuCategory to update.
+     */
+    where: EventMenuCategoryWhereUniqueInput
+  }
+
+  /**
+   * EventMenuCategory updateMany
+   */
+  export type EventMenuCategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EventMenuCategories.
+     */
+    data: XOR<EventMenuCategoryUpdateManyMutationInput, EventMenuCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which EventMenuCategories to update
+     */
+    where?: EventMenuCategoryWhereInput
+  }
+
+  /**
+   * EventMenuCategory upsert
+   */
+  export type EventMenuCategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuCategory
+     */
+    select?: EventMenuCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuCategoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EventMenuCategory to update in case it exists.
+     */
+    where: EventMenuCategoryWhereUniqueInput
+    /**
+     * In case the EventMenuCategory found by the `where` argument doesn't exist, create a new EventMenuCategory with this data.
+     */
+    create: XOR<EventMenuCategoryCreateInput, EventMenuCategoryUncheckedCreateInput>
+    /**
+     * In case the EventMenuCategory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EventMenuCategoryUpdateInput, EventMenuCategoryUncheckedUpdateInput>
+  }
+
+  /**
+   * EventMenuCategory delete
+   */
+  export type EventMenuCategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuCategory
+     */
+    select?: EventMenuCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuCategoryInclude<ExtArgs> | null
+    /**
+     * Filter which EventMenuCategory to delete.
+     */
+    where: EventMenuCategoryWhereUniqueInput
+  }
+
+  /**
+   * EventMenuCategory deleteMany
+   */
+  export type EventMenuCategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventMenuCategories to delete
+     */
+    where?: EventMenuCategoryWhereInput
+  }
+
+  /**
+   * EventMenuCategory.options
+   */
+  export type EventMenuCategory$optionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuOption
+     */
+    select?: EventMenuOptionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuOptionInclude<ExtArgs> | null
+    where?: EventMenuOptionWhereInput
+    orderBy?: EventMenuOptionOrderByWithRelationInput | EventMenuOptionOrderByWithRelationInput[]
+    cursor?: EventMenuOptionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventMenuOptionScalarFieldEnum | EventMenuOptionScalarFieldEnum[]
+  }
+
+  /**
+   * EventMenuCategory without action
+   */
+  export type EventMenuCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuCategory
+     */
+    select?: EventMenuCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuCategoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EventMenuOption
+   */
+
+  export type AggregateEventMenuOption = {
+    _count: EventMenuOptionCountAggregateOutputType | null
+    _avg: EventMenuOptionAvgAggregateOutputType | null
+    _sum: EventMenuOptionSumAggregateOutputType | null
+    _min: EventMenuOptionMinAggregateOutputType | null
+    _max: EventMenuOptionMaxAggregateOutputType | null
+  }
+
+  export type EventMenuOptionAvgAggregateOutputType = {
+    pricePerPlate: number | null
+    sortOrder: number | null
+  }
+
+  export type EventMenuOptionSumAggregateOutputType = {
+    pricePerPlate: number | null
+    sortOrder: number | null
+  }
+
+  export type EventMenuOptionMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    pricePerPlate: number | null
+    includedInBase: boolean | null
+    isActive: boolean | null
+    sortOrder: number | null
+    categoryId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EventMenuOptionMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    pricePerPlate: number | null
+    includedInBase: boolean | null
+    isActive: boolean | null
+    sortOrder: number | null
+    categoryId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EventMenuOptionCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    pricePerPlate: number
+    includedInBase: number
+    isActive: number
+    sortOrder: number
+    categoryId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EventMenuOptionAvgAggregateInputType = {
+    pricePerPlate?: true
+    sortOrder?: true
+  }
+
+  export type EventMenuOptionSumAggregateInputType = {
+    pricePerPlate?: true
+    sortOrder?: true
+  }
+
+  export type EventMenuOptionMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    pricePerPlate?: true
+    includedInBase?: true
+    isActive?: true
+    sortOrder?: true
+    categoryId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EventMenuOptionMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    pricePerPlate?: true
+    includedInBase?: true
+    isActive?: true
+    sortOrder?: true
+    categoryId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EventMenuOptionCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    pricePerPlate?: true
+    includedInBase?: true
+    isActive?: true
+    sortOrder?: true
+    categoryId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EventMenuOptionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventMenuOption to aggregate.
+     */
+    where?: EventMenuOptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventMenuOptions to fetch.
+     */
+    orderBy?: EventMenuOptionOrderByWithRelationInput | EventMenuOptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EventMenuOptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventMenuOptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventMenuOptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EventMenuOptions
+    **/
+    _count?: true | EventMenuOptionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EventMenuOptionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EventMenuOptionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EventMenuOptionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EventMenuOptionMaxAggregateInputType
+  }
+
+  export type GetEventMenuOptionAggregateType<T extends EventMenuOptionAggregateArgs> = {
+        [P in keyof T & keyof AggregateEventMenuOption]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEventMenuOption[P]>
+      : GetScalarType<T[P], AggregateEventMenuOption[P]>
+  }
+
+
+
+
+  export type EventMenuOptionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventMenuOptionWhereInput
+    orderBy?: EventMenuOptionOrderByWithAggregationInput | EventMenuOptionOrderByWithAggregationInput[]
+    by: EventMenuOptionScalarFieldEnum[] | EventMenuOptionScalarFieldEnum
+    having?: EventMenuOptionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EventMenuOptionCountAggregateInputType | true
+    _avg?: EventMenuOptionAvgAggregateInputType
+    _sum?: EventMenuOptionSumAggregateInputType
+    _min?: EventMenuOptionMinAggregateInputType
+    _max?: EventMenuOptionMaxAggregateInputType
+  }
+
+  export type EventMenuOptionGroupByOutputType = {
+    id: string
+    name: string
+    description: string | null
+    pricePerPlate: number
+    includedInBase: boolean
+    isActive: boolean
+    sortOrder: number
+    categoryId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: EventMenuOptionCountAggregateOutputType | null
+    _avg: EventMenuOptionAvgAggregateOutputType | null
+    _sum: EventMenuOptionSumAggregateOutputType | null
+    _min: EventMenuOptionMinAggregateOutputType | null
+    _max: EventMenuOptionMaxAggregateOutputType | null
+  }
+
+  type GetEventMenuOptionGroupByPayload<T extends EventMenuOptionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EventMenuOptionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EventMenuOptionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EventMenuOptionGroupByOutputType[P]>
+            : GetScalarType<T[P], EventMenuOptionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EventMenuOptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    pricePerPlate?: boolean
+    includedInBase?: boolean
+    isActive?: boolean
+    sortOrder?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    category?: boolean | EventMenuCategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventMenuOption"]>
+
+  export type EventMenuOptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    pricePerPlate?: boolean
+    includedInBase?: boolean
+    isActive?: boolean
+    sortOrder?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    category?: boolean | EventMenuCategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventMenuOption"]>
+
+  export type EventMenuOptionSelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    pricePerPlate?: boolean
+    includedInBase?: boolean
+    isActive?: boolean
+    sortOrder?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EventMenuOptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | EventMenuCategoryDefaultArgs<ExtArgs>
+  }
+  export type EventMenuOptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | EventMenuCategoryDefaultArgs<ExtArgs>
+  }
+
+  export type $EventMenuOptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EventMenuOption"
+    objects: {
+      category: Prisma.$EventMenuCategoryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string | null
+      pricePerPlate: number
+      includedInBase: boolean
+      isActive: boolean
+      sortOrder: number
+      categoryId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["eventMenuOption"]>
+    composites: {}
+  }
+
+  type EventMenuOptionGetPayload<S extends boolean | null | undefined | EventMenuOptionDefaultArgs> = $Result.GetResult<Prisma.$EventMenuOptionPayload, S>
+
+  type EventMenuOptionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<EventMenuOptionFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: EventMenuOptionCountAggregateInputType | true
+    }
+
+  export interface EventMenuOptionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EventMenuOption'], meta: { name: 'EventMenuOption' } }
+    /**
+     * Find zero or one EventMenuOption that matches the filter.
+     * @param {EventMenuOptionFindUniqueArgs} args - Arguments to find a EventMenuOption
+     * @example
+     * // Get one EventMenuOption
+     * const eventMenuOption = await prisma.eventMenuOption.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EventMenuOptionFindUniqueArgs>(args: SelectSubset<T, EventMenuOptionFindUniqueArgs<ExtArgs>>): Prisma__EventMenuOptionClient<$Result.GetResult<Prisma.$EventMenuOptionPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one EventMenuOption that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {EventMenuOptionFindUniqueOrThrowArgs} args - Arguments to find a EventMenuOption
+     * @example
+     * // Get one EventMenuOption
+     * const eventMenuOption = await prisma.eventMenuOption.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EventMenuOptionFindUniqueOrThrowArgs>(args: SelectSubset<T, EventMenuOptionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EventMenuOptionClient<$Result.GetResult<Prisma.$EventMenuOptionPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first EventMenuOption that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuOptionFindFirstArgs} args - Arguments to find a EventMenuOption
+     * @example
+     * // Get one EventMenuOption
+     * const eventMenuOption = await prisma.eventMenuOption.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EventMenuOptionFindFirstArgs>(args?: SelectSubset<T, EventMenuOptionFindFirstArgs<ExtArgs>>): Prisma__EventMenuOptionClient<$Result.GetResult<Prisma.$EventMenuOptionPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first EventMenuOption that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuOptionFindFirstOrThrowArgs} args - Arguments to find a EventMenuOption
+     * @example
+     * // Get one EventMenuOption
+     * const eventMenuOption = await prisma.eventMenuOption.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EventMenuOptionFindFirstOrThrowArgs>(args?: SelectSubset<T, EventMenuOptionFindFirstOrThrowArgs<ExtArgs>>): Prisma__EventMenuOptionClient<$Result.GetResult<Prisma.$EventMenuOptionPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more EventMenuOptions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuOptionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EventMenuOptions
+     * const eventMenuOptions = await prisma.eventMenuOption.findMany()
+     * 
+     * // Get first 10 EventMenuOptions
+     * const eventMenuOptions = await prisma.eventMenuOption.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const eventMenuOptionWithIdOnly = await prisma.eventMenuOption.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EventMenuOptionFindManyArgs>(args?: SelectSubset<T, EventMenuOptionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventMenuOptionPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a EventMenuOption.
+     * @param {EventMenuOptionCreateArgs} args - Arguments to create a EventMenuOption.
+     * @example
+     * // Create one EventMenuOption
+     * const EventMenuOption = await prisma.eventMenuOption.create({
+     *   data: {
+     *     // ... data to create a EventMenuOption
+     *   }
+     * })
+     * 
+     */
+    create<T extends EventMenuOptionCreateArgs>(args: SelectSubset<T, EventMenuOptionCreateArgs<ExtArgs>>): Prisma__EventMenuOptionClient<$Result.GetResult<Prisma.$EventMenuOptionPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many EventMenuOptions.
+     * @param {EventMenuOptionCreateManyArgs} args - Arguments to create many EventMenuOptions.
+     * @example
+     * // Create many EventMenuOptions
+     * const eventMenuOption = await prisma.eventMenuOption.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EventMenuOptionCreateManyArgs>(args?: SelectSubset<T, EventMenuOptionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EventMenuOptions and returns the data saved in the database.
+     * @param {EventMenuOptionCreateManyAndReturnArgs} args - Arguments to create many EventMenuOptions.
+     * @example
+     * // Create many EventMenuOptions
+     * const eventMenuOption = await prisma.eventMenuOption.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EventMenuOptions and only return the `id`
+     * const eventMenuOptionWithIdOnly = await prisma.eventMenuOption.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EventMenuOptionCreateManyAndReturnArgs>(args?: SelectSubset<T, EventMenuOptionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventMenuOptionPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a EventMenuOption.
+     * @param {EventMenuOptionDeleteArgs} args - Arguments to delete one EventMenuOption.
+     * @example
+     * // Delete one EventMenuOption
+     * const EventMenuOption = await prisma.eventMenuOption.delete({
+     *   where: {
+     *     // ... filter to delete one EventMenuOption
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EventMenuOptionDeleteArgs>(args: SelectSubset<T, EventMenuOptionDeleteArgs<ExtArgs>>): Prisma__EventMenuOptionClient<$Result.GetResult<Prisma.$EventMenuOptionPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one EventMenuOption.
+     * @param {EventMenuOptionUpdateArgs} args - Arguments to update one EventMenuOption.
+     * @example
+     * // Update one EventMenuOption
+     * const eventMenuOption = await prisma.eventMenuOption.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EventMenuOptionUpdateArgs>(args: SelectSubset<T, EventMenuOptionUpdateArgs<ExtArgs>>): Prisma__EventMenuOptionClient<$Result.GetResult<Prisma.$EventMenuOptionPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more EventMenuOptions.
+     * @param {EventMenuOptionDeleteManyArgs} args - Arguments to filter EventMenuOptions to delete.
+     * @example
+     * // Delete a few EventMenuOptions
+     * const { count } = await prisma.eventMenuOption.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EventMenuOptionDeleteManyArgs>(args?: SelectSubset<T, EventMenuOptionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventMenuOptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuOptionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EventMenuOptions
+     * const eventMenuOption = await prisma.eventMenuOption.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EventMenuOptionUpdateManyArgs>(args: SelectSubset<T, EventMenuOptionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one EventMenuOption.
+     * @param {EventMenuOptionUpsertArgs} args - Arguments to update or create a EventMenuOption.
+     * @example
+     * // Update or create a EventMenuOption
+     * const eventMenuOption = await prisma.eventMenuOption.upsert({
+     *   create: {
+     *     // ... data to create a EventMenuOption
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EventMenuOption we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EventMenuOptionUpsertArgs>(args: SelectSubset<T, EventMenuOptionUpsertArgs<ExtArgs>>): Prisma__EventMenuOptionClient<$Result.GetResult<Prisma.$EventMenuOptionPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of EventMenuOptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuOptionCountArgs} args - Arguments to filter EventMenuOptions to count.
+     * @example
+     * // Count the number of EventMenuOptions
+     * const count = await prisma.eventMenuOption.count({
+     *   where: {
+     *     // ... the filter for the EventMenuOptions we want to count
+     *   }
+     * })
+    **/
+    count<T extends EventMenuOptionCountArgs>(
+      args?: Subset<T, EventMenuOptionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EventMenuOptionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EventMenuOption.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuOptionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EventMenuOptionAggregateArgs>(args: Subset<T, EventMenuOptionAggregateArgs>): Prisma.PrismaPromise<GetEventMenuOptionAggregateType<T>>
+
+    /**
+     * Group by EventMenuOption.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventMenuOptionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EventMenuOptionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EventMenuOptionGroupByArgs['orderBy'] }
+        : { orderBy?: EventMenuOptionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EventMenuOptionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEventMenuOptionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EventMenuOption model
+   */
+  readonly fields: EventMenuOptionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EventMenuOption.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EventMenuOptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    category<T extends EventMenuCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventMenuCategoryDefaultArgs<ExtArgs>>): Prisma__EventMenuCategoryClient<$Result.GetResult<Prisma.$EventMenuCategoryPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EventMenuOption model
+   */ 
+  interface EventMenuOptionFieldRefs {
+    readonly id: FieldRef<"EventMenuOption", 'String'>
+    readonly name: FieldRef<"EventMenuOption", 'String'>
+    readonly description: FieldRef<"EventMenuOption", 'String'>
+    readonly pricePerPlate: FieldRef<"EventMenuOption", 'Float'>
+    readonly includedInBase: FieldRef<"EventMenuOption", 'Boolean'>
+    readonly isActive: FieldRef<"EventMenuOption", 'Boolean'>
+    readonly sortOrder: FieldRef<"EventMenuOption", 'Int'>
+    readonly categoryId: FieldRef<"EventMenuOption", 'String'>
+    readonly createdAt: FieldRef<"EventMenuOption", 'DateTime'>
+    readonly updatedAt: FieldRef<"EventMenuOption", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EventMenuOption findUnique
+   */
+  export type EventMenuOptionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuOption
+     */
+    select?: EventMenuOptionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuOptionInclude<ExtArgs> | null
+    /**
+     * Filter, which EventMenuOption to fetch.
+     */
+    where: EventMenuOptionWhereUniqueInput
+  }
+
+  /**
+   * EventMenuOption findUniqueOrThrow
+   */
+  export type EventMenuOptionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuOption
+     */
+    select?: EventMenuOptionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuOptionInclude<ExtArgs> | null
+    /**
+     * Filter, which EventMenuOption to fetch.
+     */
+    where: EventMenuOptionWhereUniqueInput
+  }
+
+  /**
+   * EventMenuOption findFirst
+   */
+  export type EventMenuOptionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuOption
+     */
+    select?: EventMenuOptionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuOptionInclude<ExtArgs> | null
+    /**
+     * Filter, which EventMenuOption to fetch.
+     */
+    where?: EventMenuOptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventMenuOptions to fetch.
+     */
+    orderBy?: EventMenuOptionOrderByWithRelationInput | EventMenuOptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventMenuOptions.
+     */
+    cursor?: EventMenuOptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventMenuOptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventMenuOptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventMenuOptions.
+     */
+    distinct?: EventMenuOptionScalarFieldEnum | EventMenuOptionScalarFieldEnum[]
+  }
+
+  /**
+   * EventMenuOption findFirstOrThrow
+   */
+  export type EventMenuOptionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuOption
+     */
+    select?: EventMenuOptionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuOptionInclude<ExtArgs> | null
+    /**
+     * Filter, which EventMenuOption to fetch.
+     */
+    where?: EventMenuOptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventMenuOptions to fetch.
+     */
+    orderBy?: EventMenuOptionOrderByWithRelationInput | EventMenuOptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventMenuOptions.
+     */
+    cursor?: EventMenuOptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventMenuOptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventMenuOptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventMenuOptions.
+     */
+    distinct?: EventMenuOptionScalarFieldEnum | EventMenuOptionScalarFieldEnum[]
+  }
+
+  /**
+   * EventMenuOption findMany
+   */
+  export type EventMenuOptionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuOption
+     */
+    select?: EventMenuOptionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuOptionInclude<ExtArgs> | null
+    /**
+     * Filter, which EventMenuOptions to fetch.
+     */
+    where?: EventMenuOptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventMenuOptions to fetch.
+     */
+    orderBy?: EventMenuOptionOrderByWithRelationInput | EventMenuOptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EventMenuOptions.
+     */
+    cursor?: EventMenuOptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventMenuOptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventMenuOptions.
+     */
+    skip?: number
+    distinct?: EventMenuOptionScalarFieldEnum | EventMenuOptionScalarFieldEnum[]
+  }
+
+  /**
+   * EventMenuOption create
+   */
+  export type EventMenuOptionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuOption
+     */
+    select?: EventMenuOptionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuOptionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EventMenuOption.
+     */
+    data: XOR<EventMenuOptionCreateInput, EventMenuOptionUncheckedCreateInput>
+  }
+
+  /**
+   * EventMenuOption createMany
+   */
+  export type EventMenuOptionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EventMenuOptions.
+     */
+    data: EventMenuOptionCreateManyInput | EventMenuOptionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EventMenuOption createManyAndReturn
+   */
+  export type EventMenuOptionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuOption
+     */
+    select?: EventMenuOptionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many EventMenuOptions.
+     */
+    data: EventMenuOptionCreateManyInput | EventMenuOptionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuOptionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EventMenuOption update
+   */
+  export type EventMenuOptionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuOption
+     */
+    select?: EventMenuOptionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuOptionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EventMenuOption.
+     */
+    data: XOR<EventMenuOptionUpdateInput, EventMenuOptionUncheckedUpdateInput>
+    /**
+     * Choose, which EventMenuOption to update.
+     */
+    where: EventMenuOptionWhereUniqueInput
+  }
+
+  /**
+   * EventMenuOption updateMany
+   */
+  export type EventMenuOptionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EventMenuOptions.
+     */
+    data: XOR<EventMenuOptionUpdateManyMutationInput, EventMenuOptionUncheckedUpdateManyInput>
+    /**
+     * Filter which EventMenuOptions to update
+     */
+    where?: EventMenuOptionWhereInput
+  }
+
+  /**
+   * EventMenuOption upsert
+   */
+  export type EventMenuOptionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuOption
+     */
+    select?: EventMenuOptionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuOptionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EventMenuOption to update in case it exists.
+     */
+    where: EventMenuOptionWhereUniqueInput
+    /**
+     * In case the EventMenuOption found by the `where` argument doesn't exist, create a new EventMenuOption with this data.
+     */
+    create: XOR<EventMenuOptionCreateInput, EventMenuOptionUncheckedCreateInput>
+    /**
+     * In case the EventMenuOption was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EventMenuOptionUpdateInput, EventMenuOptionUncheckedUpdateInput>
+  }
+
+  /**
+   * EventMenuOption delete
+   */
+  export type EventMenuOptionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuOption
+     */
+    select?: EventMenuOptionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuOptionInclude<ExtArgs> | null
+    /**
+     * Filter which EventMenuOption to delete.
+     */
+    where: EventMenuOptionWhereUniqueInput
+  }
+
+  /**
+   * EventMenuOption deleteMany
+   */
+  export type EventMenuOptionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventMenuOptions to delete
+     */
+    where?: EventMenuOptionWhereInput
+  }
+
+  /**
+   * EventMenuOption without action
+   */
+  export type EventMenuOptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventMenuOption
+     */
+    select?: EventMenuOptionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventMenuOptionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model EventPayment
    */
 
@@ -12880,6 +15200,7 @@ export namespace Prisma {
     id: string | null
     amountNGN: number | null
     paymentMethod: string | null
+    status: $Enums.PaymentStatus | null
     reference: string | null
     paidAt: Date | null
     note: string | null
@@ -12890,6 +15211,7 @@ export namespace Prisma {
     id: string | null
     amountNGN: number | null
     paymentMethod: string | null
+    status: $Enums.PaymentStatus | null
     reference: string | null
     paidAt: Date | null
     note: string | null
@@ -12900,6 +15222,7 @@ export namespace Prisma {
     id: number
     amountNGN: number
     paymentMethod: number
+    status: number
     reference: number
     paidAt: number
     note: number
@@ -12920,6 +15243,7 @@ export namespace Prisma {
     id?: true
     amountNGN?: true
     paymentMethod?: true
+    status?: true
     reference?: true
     paidAt?: true
     note?: true
@@ -12930,6 +15254,7 @@ export namespace Prisma {
     id?: true
     amountNGN?: true
     paymentMethod?: true
+    status?: true
     reference?: true
     paidAt?: true
     note?: true
@@ -12940,6 +15265,7 @@ export namespace Prisma {
     id?: true
     amountNGN?: true
     paymentMethod?: true
+    status?: true
     reference?: true
     paidAt?: true
     note?: true
@@ -13037,6 +15363,7 @@ export namespace Prisma {
     id: string
     amountNGN: number
     paymentMethod: string
+    status: $Enums.PaymentStatus
     reference: string | null
     paidAt: Date
     note: string | null
@@ -13066,6 +15393,7 @@ export namespace Prisma {
     id?: boolean
     amountNGN?: boolean
     paymentMethod?: boolean
+    status?: boolean
     reference?: boolean
     paidAt?: boolean
     note?: boolean
@@ -13077,6 +15405,7 @@ export namespace Prisma {
     id?: boolean
     amountNGN?: boolean
     paymentMethod?: boolean
+    status?: boolean
     reference?: boolean
     paidAt?: boolean
     note?: boolean
@@ -13088,6 +15417,7 @@ export namespace Prisma {
     id?: boolean
     amountNGN?: boolean
     paymentMethod?: boolean
+    status?: boolean
     reference?: boolean
     paidAt?: boolean
     note?: boolean
@@ -13110,6 +15440,7 @@ export namespace Prisma {
       id: string
       amountNGN: number
       paymentMethod: string
+      status: $Enums.PaymentStatus
       reference: string | null
       paidAt: Date
       note: string | null
@@ -13511,6 +15842,7 @@ export namespace Prisma {
     readonly id: FieldRef<"EventPayment", 'String'>
     readonly amountNGN: FieldRef<"EventPayment", 'Float'>
     readonly paymentMethod: FieldRef<"EventPayment", 'String'>
+    readonly status: FieldRef<"EventPayment", 'PaymentStatus'>
     readonly reference: FieldRef<"EventPayment", 'String'>
     readonly paidAt: FieldRef<"EventPayment", 'DateTime'>
     readonly note: FieldRef<"EventPayment", 'String'>
@@ -14029,7 +16361,9 @@ export namespace Prisma {
     quoteSentAt: 'quoteSentAt',
     confirmedAt: 'confirmedAt',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    serviceFeeNGN: 'serviceFeeNGN',
+    transportFeeNGN: 'transportFeeNGN'
   };
 
   export type EventOrderScalarFieldEnum = (typeof EventOrderScalarFieldEnum)[keyof typeof EventOrderScalarFieldEnum]
@@ -14037,21 +16371,54 @@ export namespace Prisma {
 
   export const EventMenuSelectionScalarFieldEnum: {
     id: 'id',
-    quantityPerHead: 'quantityPerHead',
-    totalQuantity: 'totalQuantity',
-    unit: 'unit',
+    menuItemId: 'menuItemId',
+    quantity: 'quantity',
+    unitPrice: 'unitPrice',
+    totalPrice: 'totalPrice',
     notes: 'notes',
-    eventOrderId: 'eventOrderId',
-    menuItemId: 'menuItemId'
+    eventOrderId: 'eventOrderId'
   };
 
   export type EventMenuSelectionScalarFieldEnum = (typeof EventMenuSelectionScalarFieldEnum)[keyof typeof EventMenuSelectionScalarFieldEnum]
+
+
+  export const EventMenuCategoryScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    required: 'required',
+    minChoices: 'minChoices',
+    maxChoices: 'maxChoices',
+    sortOrder: 'sortOrder',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EventMenuCategoryScalarFieldEnum = (typeof EventMenuCategoryScalarFieldEnum)[keyof typeof EventMenuCategoryScalarFieldEnum]
+
+
+  export const EventMenuOptionScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    pricePerPlate: 'pricePerPlate',
+    includedInBase: 'includedInBase',
+    isActive: 'isActive',
+    sortOrder: 'sortOrder',
+    categoryId: 'categoryId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EventMenuOptionScalarFieldEnum = (typeof EventMenuOptionScalarFieldEnum)[keyof typeof EventMenuOptionScalarFieldEnum]
 
 
   export const EventPaymentScalarFieldEnum: {
     id: 'id',
     amountNGN: 'amountNGN',
     paymentMethod: 'paymentMethod',
+    status: 'status',
     reference: 'reference',
     paidAt: 'paidAt',
     note: 'note',
@@ -15069,6 +17436,8 @@ export namespace Prisma {
     confirmedAt?: DateTimeNullableFilter<"EventOrder"> | Date | string | null
     createdAt?: DateTimeFilter<"EventOrder"> | Date | string
     updatedAt?: DateTimeFilter<"EventOrder"> | Date | string
+    serviceFeeNGN?: FloatFilter<"EventOrder"> | number
+    transportFeeNGN?: FloatFilter<"EventOrder"> | number
     menuSelections?: EventMenuSelectionListRelationFilter
     payments?: EventPaymentListRelationFilter
   }
@@ -15111,6 +17480,8 @@ export namespace Prisma {
     confirmedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    serviceFeeNGN?: SortOrder
+    transportFeeNGN?: SortOrder
     menuSelections?: EventMenuSelectionOrderByRelationAggregateInput
     payments?: EventPaymentOrderByRelationAggregateInput
   }
@@ -15156,6 +17527,8 @@ export namespace Prisma {
     confirmedAt?: DateTimeNullableFilter<"EventOrder"> | Date | string | null
     createdAt?: DateTimeFilter<"EventOrder"> | Date | string
     updatedAt?: DateTimeFilter<"EventOrder"> | Date | string
+    serviceFeeNGN?: FloatFilter<"EventOrder"> | number
+    transportFeeNGN?: FloatFilter<"EventOrder"> | number
     menuSelections?: EventMenuSelectionListRelationFilter
     payments?: EventPaymentListRelationFilter
   }, "id" | "orderRef">
@@ -15198,6 +17571,8 @@ export namespace Prisma {
     confirmedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    serviceFeeNGN?: SortOrder
+    transportFeeNGN?: SortOrder
     _count?: EventOrderCountOrderByAggregateInput
     _avg?: EventOrderAvgOrderByAggregateInput
     _max?: EventOrderMaxOrderByAggregateInput
@@ -15246,6 +17621,8 @@ export namespace Prisma {
     confirmedAt?: DateTimeNullableWithAggregatesFilter<"EventOrder"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"EventOrder"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"EventOrder"> | Date | string
+    serviceFeeNGN?: FloatWithAggregatesFilter<"EventOrder"> | number
+    transportFeeNGN?: FloatWithAggregatesFilter<"EventOrder"> | number
   }
 
   export type EventMenuSelectionWhereInput = {
@@ -15253,51 +17630,52 @@ export namespace Prisma {
     OR?: EventMenuSelectionWhereInput[]
     NOT?: EventMenuSelectionWhereInput | EventMenuSelectionWhereInput[]
     id?: StringFilter<"EventMenuSelection"> | string
-    quantityPerHead?: FloatFilter<"EventMenuSelection"> | number
-    totalQuantity?: FloatFilter<"EventMenuSelection"> | number
-    unit?: StringFilter<"EventMenuSelection"> | string
+    menuItemId?: StringFilter<"EventMenuSelection"> | string
+    quantity?: IntFilter<"EventMenuSelection"> | number
+    unitPrice?: IntFilter<"EventMenuSelection"> | number
+    totalPrice?: IntFilter<"EventMenuSelection"> | number
     notes?: StringNullableFilter<"EventMenuSelection"> | string | null
     eventOrderId?: StringFilter<"EventMenuSelection"> | string
-    menuItemId?: StringFilter<"EventMenuSelection"> | string
     eventOrder?: XOR<EventOrderRelationFilter, EventOrderWhereInput>
     menuItem?: XOR<MenuItemRelationFilter, MenuItemWhereInput>
   }
 
   export type EventMenuSelectionOrderByWithRelationInput = {
     id?: SortOrder
-    quantityPerHead?: SortOrder
-    totalQuantity?: SortOrder
-    unit?: SortOrder
+    menuItemId?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
     notes?: SortOrderInput | SortOrder
     eventOrderId?: SortOrder
-    menuItemId?: SortOrder
     eventOrder?: EventOrderOrderByWithRelationInput
     menuItem?: MenuItemOrderByWithRelationInput
   }
 
   export type EventMenuSelectionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    eventOrderId_menuItemId?: EventMenuSelectionEventOrderIdMenuItemIdCompoundUniqueInput
     AND?: EventMenuSelectionWhereInput | EventMenuSelectionWhereInput[]
     OR?: EventMenuSelectionWhereInput[]
     NOT?: EventMenuSelectionWhereInput | EventMenuSelectionWhereInput[]
-    quantityPerHead?: FloatFilter<"EventMenuSelection"> | number
-    totalQuantity?: FloatFilter<"EventMenuSelection"> | number
-    unit?: StringFilter<"EventMenuSelection"> | string
+    menuItemId?: StringFilter<"EventMenuSelection"> | string
+    quantity?: IntFilter<"EventMenuSelection"> | number
+    unitPrice?: IntFilter<"EventMenuSelection"> | number
+    totalPrice?: IntFilter<"EventMenuSelection"> | number
     notes?: StringNullableFilter<"EventMenuSelection"> | string | null
     eventOrderId?: StringFilter<"EventMenuSelection"> | string
-    menuItemId?: StringFilter<"EventMenuSelection"> | string
     eventOrder?: XOR<EventOrderRelationFilter, EventOrderWhereInput>
     menuItem?: XOR<MenuItemRelationFilter, MenuItemWhereInput>
-  }, "id">
+  }, "id" | "eventOrderId_menuItemId">
 
   export type EventMenuSelectionOrderByWithAggregationInput = {
     id?: SortOrder
-    quantityPerHead?: SortOrder
-    totalQuantity?: SortOrder
-    unit?: SortOrder
+    menuItemId?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
     notes?: SortOrderInput | SortOrder
     eventOrderId?: SortOrder
-    menuItemId?: SortOrder
     _count?: EventMenuSelectionCountOrderByAggregateInput
     _avg?: EventMenuSelectionAvgOrderByAggregateInput
     _max?: EventMenuSelectionMaxOrderByAggregateInput
@@ -15310,12 +17688,176 @@ export namespace Prisma {
     OR?: EventMenuSelectionScalarWhereWithAggregatesInput[]
     NOT?: EventMenuSelectionScalarWhereWithAggregatesInput | EventMenuSelectionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"EventMenuSelection"> | string
-    quantityPerHead?: FloatWithAggregatesFilter<"EventMenuSelection"> | number
-    totalQuantity?: FloatWithAggregatesFilter<"EventMenuSelection"> | number
-    unit?: StringWithAggregatesFilter<"EventMenuSelection"> | string
+    menuItemId?: StringWithAggregatesFilter<"EventMenuSelection"> | string
+    quantity?: IntWithAggregatesFilter<"EventMenuSelection"> | number
+    unitPrice?: IntWithAggregatesFilter<"EventMenuSelection"> | number
+    totalPrice?: IntWithAggregatesFilter<"EventMenuSelection"> | number
     notes?: StringNullableWithAggregatesFilter<"EventMenuSelection"> | string | null
     eventOrderId?: StringWithAggregatesFilter<"EventMenuSelection"> | string
-    menuItemId?: StringWithAggregatesFilter<"EventMenuSelection"> | string
+  }
+
+  export type EventMenuCategoryWhereInput = {
+    AND?: EventMenuCategoryWhereInput | EventMenuCategoryWhereInput[]
+    OR?: EventMenuCategoryWhereInput[]
+    NOT?: EventMenuCategoryWhereInput | EventMenuCategoryWhereInput[]
+    id?: StringFilter<"EventMenuCategory"> | string
+    name?: StringFilter<"EventMenuCategory"> | string
+    description?: StringNullableFilter<"EventMenuCategory"> | string | null
+    required?: BoolFilter<"EventMenuCategory"> | boolean
+    minChoices?: IntFilter<"EventMenuCategory"> | number
+    maxChoices?: IntFilter<"EventMenuCategory"> | number
+    sortOrder?: IntFilter<"EventMenuCategory"> | number
+    isActive?: BoolFilter<"EventMenuCategory"> | boolean
+    createdAt?: DateTimeFilter<"EventMenuCategory"> | Date | string
+    updatedAt?: DateTimeFilter<"EventMenuCategory"> | Date | string
+    options?: EventMenuOptionListRelationFilter
+  }
+
+  export type EventMenuCategoryOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    required?: SortOrder
+    minChoices?: SortOrder
+    maxChoices?: SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    options?: EventMenuOptionOrderByRelationAggregateInput
+  }
+
+  export type EventMenuCategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EventMenuCategoryWhereInput | EventMenuCategoryWhereInput[]
+    OR?: EventMenuCategoryWhereInput[]
+    NOT?: EventMenuCategoryWhereInput | EventMenuCategoryWhereInput[]
+    name?: StringFilter<"EventMenuCategory"> | string
+    description?: StringNullableFilter<"EventMenuCategory"> | string | null
+    required?: BoolFilter<"EventMenuCategory"> | boolean
+    minChoices?: IntFilter<"EventMenuCategory"> | number
+    maxChoices?: IntFilter<"EventMenuCategory"> | number
+    sortOrder?: IntFilter<"EventMenuCategory"> | number
+    isActive?: BoolFilter<"EventMenuCategory"> | boolean
+    createdAt?: DateTimeFilter<"EventMenuCategory"> | Date | string
+    updatedAt?: DateTimeFilter<"EventMenuCategory"> | Date | string
+    options?: EventMenuOptionListRelationFilter
+  }, "id">
+
+  export type EventMenuCategoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    required?: SortOrder
+    minChoices?: SortOrder
+    maxChoices?: SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EventMenuCategoryCountOrderByAggregateInput
+    _avg?: EventMenuCategoryAvgOrderByAggregateInput
+    _max?: EventMenuCategoryMaxOrderByAggregateInput
+    _min?: EventMenuCategoryMinOrderByAggregateInput
+    _sum?: EventMenuCategorySumOrderByAggregateInput
+  }
+
+  export type EventMenuCategoryScalarWhereWithAggregatesInput = {
+    AND?: EventMenuCategoryScalarWhereWithAggregatesInput | EventMenuCategoryScalarWhereWithAggregatesInput[]
+    OR?: EventMenuCategoryScalarWhereWithAggregatesInput[]
+    NOT?: EventMenuCategoryScalarWhereWithAggregatesInput | EventMenuCategoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EventMenuCategory"> | string
+    name?: StringWithAggregatesFilter<"EventMenuCategory"> | string
+    description?: StringNullableWithAggregatesFilter<"EventMenuCategory"> | string | null
+    required?: BoolWithAggregatesFilter<"EventMenuCategory"> | boolean
+    minChoices?: IntWithAggregatesFilter<"EventMenuCategory"> | number
+    maxChoices?: IntWithAggregatesFilter<"EventMenuCategory"> | number
+    sortOrder?: IntWithAggregatesFilter<"EventMenuCategory"> | number
+    isActive?: BoolWithAggregatesFilter<"EventMenuCategory"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"EventMenuCategory"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EventMenuCategory"> | Date | string
+  }
+
+  export type EventMenuOptionWhereInput = {
+    AND?: EventMenuOptionWhereInput | EventMenuOptionWhereInput[]
+    OR?: EventMenuOptionWhereInput[]
+    NOT?: EventMenuOptionWhereInput | EventMenuOptionWhereInput[]
+    id?: StringFilter<"EventMenuOption"> | string
+    name?: StringFilter<"EventMenuOption"> | string
+    description?: StringNullableFilter<"EventMenuOption"> | string | null
+    pricePerPlate?: FloatFilter<"EventMenuOption"> | number
+    includedInBase?: BoolFilter<"EventMenuOption"> | boolean
+    isActive?: BoolFilter<"EventMenuOption"> | boolean
+    sortOrder?: IntFilter<"EventMenuOption"> | number
+    categoryId?: StringFilter<"EventMenuOption"> | string
+    createdAt?: DateTimeFilter<"EventMenuOption"> | Date | string
+    updatedAt?: DateTimeFilter<"EventMenuOption"> | Date | string
+    category?: XOR<EventMenuCategoryRelationFilter, EventMenuCategoryWhereInput>
+  }
+
+  export type EventMenuOptionOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    pricePerPlate?: SortOrder
+    includedInBase?: SortOrder
+    isActive?: SortOrder
+    sortOrder?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    category?: EventMenuCategoryOrderByWithRelationInput
+  }
+
+  export type EventMenuOptionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EventMenuOptionWhereInput | EventMenuOptionWhereInput[]
+    OR?: EventMenuOptionWhereInput[]
+    NOT?: EventMenuOptionWhereInput | EventMenuOptionWhereInput[]
+    name?: StringFilter<"EventMenuOption"> | string
+    description?: StringNullableFilter<"EventMenuOption"> | string | null
+    pricePerPlate?: FloatFilter<"EventMenuOption"> | number
+    includedInBase?: BoolFilter<"EventMenuOption"> | boolean
+    isActive?: BoolFilter<"EventMenuOption"> | boolean
+    sortOrder?: IntFilter<"EventMenuOption"> | number
+    categoryId?: StringFilter<"EventMenuOption"> | string
+    createdAt?: DateTimeFilter<"EventMenuOption"> | Date | string
+    updatedAt?: DateTimeFilter<"EventMenuOption"> | Date | string
+    category?: XOR<EventMenuCategoryRelationFilter, EventMenuCategoryWhereInput>
+  }, "id">
+
+  export type EventMenuOptionOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    pricePerPlate?: SortOrder
+    includedInBase?: SortOrder
+    isActive?: SortOrder
+    sortOrder?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EventMenuOptionCountOrderByAggregateInput
+    _avg?: EventMenuOptionAvgOrderByAggregateInput
+    _max?: EventMenuOptionMaxOrderByAggregateInput
+    _min?: EventMenuOptionMinOrderByAggregateInput
+    _sum?: EventMenuOptionSumOrderByAggregateInput
+  }
+
+  export type EventMenuOptionScalarWhereWithAggregatesInput = {
+    AND?: EventMenuOptionScalarWhereWithAggregatesInput | EventMenuOptionScalarWhereWithAggregatesInput[]
+    OR?: EventMenuOptionScalarWhereWithAggregatesInput[]
+    NOT?: EventMenuOptionScalarWhereWithAggregatesInput | EventMenuOptionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EventMenuOption"> | string
+    name?: StringWithAggregatesFilter<"EventMenuOption"> | string
+    description?: StringNullableWithAggregatesFilter<"EventMenuOption"> | string | null
+    pricePerPlate?: FloatWithAggregatesFilter<"EventMenuOption"> | number
+    includedInBase?: BoolWithAggregatesFilter<"EventMenuOption"> | boolean
+    isActive?: BoolWithAggregatesFilter<"EventMenuOption"> | boolean
+    sortOrder?: IntWithAggregatesFilter<"EventMenuOption"> | number
+    categoryId?: StringWithAggregatesFilter<"EventMenuOption"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"EventMenuOption"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EventMenuOption"> | Date | string
   }
 
   export type EventPaymentWhereInput = {
@@ -15325,6 +17867,7 @@ export namespace Prisma {
     id?: StringFilter<"EventPayment"> | string
     amountNGN?: FloatFilter<"EventPayment"> | number
     paymentMethod?: StringFilter<"EventPayment"> | string
+    status?: EnumPaymentStatusFilter<"EventPayment"> | $Enums.PaymentStatus
     reference?: StringNullableFilter<"EventPayment"> | string | null
     paidAt?: DateTimeFilter<"EventPayment"> | Date | string
     note?: StringNullableFilter<"EventPayment"> | string | null
@@ -15336,6 +17879,7 @@ export namespace Prisma {
     id?: SortOrder
     amountNGN?: SortOrder
     paymentMethod?: SortOrder
+    status?: SortOrder
     reference?: SortOrderInput | SortOrder
     paidAt?: SortOrder
     note?: SortOrderInput | SortOrder
@@ -15350,6 +17894,7 @@ export namespace Prisma {
     NOT?: EventPaymentWhereInput | EventPaymentWhereInput[]
     amountNGN?: FloatFilter<"EventPayment"> | number
     paymentMethod?: StringFilter<"EventPayment"> | string
+    status?: EnumPaymentStatusFilter<"EventPayment"> | $Enums.PaymentStatus
     reference?: StringNullableFilter<"EventPayment"> | string | null
     paidAt?: DateTimeFilter<"EventPayment"> | Date | string
     note?: StringNullableFilter<"EventPayment"> | string | null
@@ -15361,6 +17906,7 @@ export namespace Prisma {
     id?: SortOrder
     amountNGN?: SortOrder
     paymentMethod?: SortOrder
+    status?: SortOrder
     reference?: SortOrderInput | SortOrder
     paidAt?: SortOrder
     note?: SortOrderInput | SortOrder
@@ -15379,6 +17925,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"EventPayment"> | string
     amountNGN?: FloatWithAggregatesFilter<"EventPayment"> | number
     paymentMethod?: StringWithAggregatesFilter<"EventPayment"> | string
+    status?: EnumPaymentStatusWithAggregatesFilter<"EventPayment"> | $Enums.PaymentStatus
     reference?: StringNullableWithAggregatesFilter<"EventPayment"> | string | null
     paidAt?: DateTimeWithAggregatesFilter<"EventPayment"> | Date | string
     note?: StringNullableWithAggregatesFilter<"EventPayment"> | string | null
@@ -16197,6 +18744,8 @@ export namespace Prisma {
     confirmedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    serviceFeeNGN?: number
+    transportFeeNGN?: number
     menuSelections?: EventMenuSelectionCreateNestedManyWithoutEventOrderInput
     payments?: EventPaymentCreateNestedManyWithoutEventOrderInput
   }
@@ -16239,6 +18788,8 @@ export namespace Prisma {
     confirmedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    serviceFeeNGN?: number
+    transportFeeNGN?: number
     menuSelections?: EventMenuSelectionUncheckedCreateNestedManyWithoutEventOrderInput
     payments?: EventPaymentUncheckedCreateNestedManyWithoutEventOrderInput
   }
@@ -16281,6 +18832,8 @@ export namespace Prisma {
     confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    serviceFeeNGN?: FloatFieldUpdateOperationsInput | number
+    transportFeeNGN?: FloatFieldUpdateOperationsInput | number
     menuSelections?: EventMenuSelectionUpdateManyWithoutEventOrderNestedInput
     payments?: EventPaymentUpdateManyWithoutEventOrderNestedInput
   }
@@ -16323,6 +18876,8 @@ export namespace Prisma {
     confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    serviceFeeNGN?: FloatFieldUpdateOperationsInput | number
+    transportFeeNGN?: FloatFieldUpdateOperationsInput | number
     menuSelections?: EventMenuSelectionUncheckedUpdateManyWithoutEventOrderNestedInput
     payments?: EventPaymentUncheckedUpdateManyWithoutEventOrderNestedInput
   }
@@ -16365,6 +18920,8 @@ export namespace Prisma {
     confirmedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    serviceFeeNGN?: number
+    transportFeeNGN?: number
   }
 
   export type EventOrderUpdateManyMutationInput = {
@@ -16405,6 +18962,8 @@ export namespace Prisma {
     confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    serviceFeeNGN?: FloatFieldUpdateOperationsInput | number
+    transportFeeNGN?: FloatFieldUpdateOperationsInput | number
   }
 
   export type EventOrderUncheckedUpdateManyInput = {
@@ -16445,13 +19004,15 @@ export namespace Prisma {
     confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    serviceFeeNGN?: FloatFieldUpdateOperationsInput | number
+    transportFeeNGN?: FloatFieldUpdateOperationsInput | number
   }
 
   export type EventMenuSelectionCreateInput = {
     id?: string
-    quantityPerHead?: number
-    totalQuantity: number
-    unit: string
+    quantity?: number
+    unitPrice: number
+    totalPrice?: number
     notes?: string | null
     eventOrder: EventOrderCreateNestedOneWithoutMenuSelectionsInput
     menuItem: MenuItemCreateNestedOneWithoutEventMenuSelectionInput
@@ -16459,19 +19020,19 @@ export namespace Prisma {
 
   export type EventMenuSelectionUncheckedCreateInput = {
     id?: string
-    quantityPerHead?: number
-    totalQuantity: number
-    unit: string
+    menuItemId: string
+    quantity?: number
+    unitPrice: number
+    totalPrice?: number
     notes?: string | null
     eventOrderId: string
-    menuItemId: string
   }
 
   export type EventMenuSelectionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    quantityPerHead?: FloatFieldUpdateOperationsInput | number
-    totalQuantity?: FloatFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     eventOrder?: EventOrderUpdateOneRequiredWithoutMenuSelectionsNestedInput
     menuItem?: MenuItemUpdateOneRequiredWithoutEventMenuSelectionNestedInput
@@ -16479,46 +19040,232 @@ export namespace Prisma {
 
   export type EventMenuSelectionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    quantityPerHead?: FloatFieldUpdateOperationsInput | number
-    totalQuantity?: FloatFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
+    menuItemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     eventOrderId?: StringFieldUpdateOperationsInput | string
-    menuItemId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EventMenuSelectionCreateManyInput = {
     id?: string
-    quantityPerHead?: number
-    totalQuantity: number
-    unit: string
+    menuItemId: string
+    quantity?: number
+    unitPrice: number
+    totalPrice?: number
     notes?: string | null
     eventOrderId: string
-    menuItemId: string
   }
 
   export type EventMenuSelectionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    quantityPerHead?: FloatFieldUpdateOperationsInput | number
-    totalQuantity?: FloatFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EventMenuSelectionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    quantityPerHead?: FloatFieldUpdateOperationsInput | number
-    totalQuantity?: FloatFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
+    menuItemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     eventOrderId?: StringFieldUpdateOperationsInput | string
-    menuItemId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EventMenuCategoryCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    required?: boolean
+    minChoices?: number
+    maxChoices?: number
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    options?: EventMenuOptionCreateNestedManyWithoutCategoryInput
+  }
+
+  export type EventMenuCategoryUncheckedCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    required?: boolean
+    minChoices?: number
+    maxChoices?: number
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    options?: EventMenuOptionUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type EventMenuCategoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    required?: BoolFieldUpdateOperationsInput | boolean
+    minChoices?: IntFieldUpdateOperationsInput | number
+    maxChoices?: IntFieldUpdateOperationsInput | number
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    options?: EventMenuOptionUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type EventMenuCategoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    required?: BoolFieldUpdateOperationsInput | boolean
+    minChoices?: IntFieldUpdateOperationsInput | number
+    maxChoices?: IntFieldUpdateOperationsInput | number
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    options?: EventMenuOptionUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type EventMenuCategoryCreateManyInput = {
+    id?: string
+    name: string
+    description?: string | null
+    required?: boolean
+    minChoices?: number
+    maxChoices?: number
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventMenuCategoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    required?: BoolFieldUpdateOperationsInput | boolean
+    minChoices?: IntFieldUpdateOperationsInput | number
+    maxChoices?: IntFieldUpdateOperationsInput | number
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventMenuCategoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    required?: BoolFieldUpdateOperationsInput | boolean
+    minChoices?: IntFieldUpdateOperationsInput | number
+    maxChoices?: IntFieldUpdateOperationsInput | number
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventMenuOptionCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    pricePerPlate: number
+    includedInBase?: boolean
+    isActive?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: EventMenuCategoryCreateNestedOneWithoutOptionsInput
+  }
+
+  export type EventMenuOptionUncheckedCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    pricePerPlate: number
+    includedInBase?: boolean
+    isActive?: boolean
+    sortOrder?: number
+    categoryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventMenuOptionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    pricePerPlate?: FloatFieldUpdateOperationsInput | number
+    includedInBase?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EventMenuCategoryUpdateOneRequiredWithoutOptionsNestedInput
+  }
+
+  export type EventMenuOptionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    pricePerPlate?: FloatFieldUpdateOperationsInput | number
+    includedInBase?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventMenuOptionCreateManyInput = {
+    id?: string
+    name: string
+    description?: string | null
+    pricePerPlate: number
+    includedInBase?: boolean
+    isActive?: boolean
+    sortOrder?: number
+    categoryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventMenuOptionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    pricePerPlate?: FloatFieldUpdateOperationsInput | number
+    includedInBase?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventMenuOptionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    pricePerPlate?: FloatFieldUpdateOperationsInput | number
+    includedInBase?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EventPaymentCreateInput = {
     id?: string
     amountNGN: number
     paymentMethod: string
+    status?: $Enums.PaymentStatus
     reference?: string | null
     paidAt?: Date | string
     note?: string | null
@@ -16529,6 +19276,7 @@ export namespace Prisma {
     id?: string
     amountNGN: number
     paymentMethod: string
+    status?: $Enums.PaymentStatus
     reference?: string | null
     paidAt?: Date | string
     note?: string | null
@@ -16539,6 +19287,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amountNGN?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16549,6 +19298,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amountNGN?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16559,6 +19309,7 @@ export namespace Prisma {
     id?: string
     amountNGN: number
     paymentMethod: string
+    status?: $Enums.PaymentStatus
     reference?: string | null
     paidAt?: Date | string
     note?: string | null
@@ -16569,6 +19320,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amountNGN?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16578,6 +19330,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amountNGN?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17528,6 +20281,8 @@ export namespace Prisma {
     confirmedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    serviceFeeNGN?: SortOrder
+    transportFeeNGN?: SortOrder
   }
 
   export type EventOrderAvgOrderByAggregateInput = {
@@ -17541,6 +20296,8 @@ export namespace Prisma {
     depositAmtNGN?: SortOrder
     balanceDueNGN?: SortOrder
     servingStaffCount?: SortOrder
+    serviceFeeNGN?: SortOrder
+    transportFeeNGN?: SortOrder
   }
 
   export type EventOrderMaxOrderByAggregateInput = {
@@ -17580,6 +20337,8 @@ export namespace Prisma {
     confirmedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    serviceFeeNGN?: SortOrder
+    transportFeeNGN?: SortOrder
   }
 
   export type EventOrderMinOrderByAggregateInput = {
@@ -17619,6 +20378,8 @@ export namespace Prisma {
     confirmedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    serviceFeeNGN?: SortOrder
+    transportFeeNGN?: SortOrder
   }
 
   export type EventOrderSumOrderByAggregateInput = {
@@ -17632,6 +20393,8 @@ export namespace Prisma {
     depositAmtNGN?: SortOrder
     balanceDueNGN?: SortOrder
     servingStaffCount?: SortOrder
+    serviceFeeNGN?: SortOrder
+    transportFeeNGN?: SortOrder
   }
 
   export type EnumEventTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -17695,50 +20458,173 @@ export namespace Prisma {
     isNot?: EventOrderWhereInput
   }
 
+  export type EventMenuSelectionEventOrderIdMenuItemIdCompoundUniqueInput = {
+    eventOrderId: string
+    menuItemId: string
+  }
+
   export type EventMenuSelectionCountOrderByAggregateInput = {
     id?: SortOrder
-    quantityPerHead?: SortOrder
-    totalQuantity?: SortOrder
-    unit?: SortOrder
+    menuItemId?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
     notes?: SortOrder
     eventOrderId?: SortOrder
-    menuItemId?: SortOrder
   }
 
   export type EventMenuSelectionAvgOrderByAggregateInput = {
-    quantityPerHead?: SortOrder
-    totalQuantity?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
   }
 
   export type EventMenuSelectionMaxOrderByAggregateInput = {
     id?: SortOrder
-    quantityPerHead?: SortOrder
-    totalQuantity?: SortOrder
-    unit?: SortOrder
+    menuItemId?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
     notes?: SortOrder
     eventOrderId?: SortOrder
-    menuItemId?: SortOrder
   }
 
   export type EventMenuSelectionMinOrderByAggregateInput = {
     id?: SortOrder
-    quantityPerHead?: SortOrder
-    totalQuantity?: SortOrder
-    unit?: SortOrder
+    menuItemId?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
     notes?: SortOrder
     eventOrderId?: SortOrder
-    menuItemId?: SortOrder
   }
 
   export type EventMenuSelectionSumOrderByAggregateInput = {
-    quantityPerHead?: SortOrder
-    totalQuantity?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+  }
+
+  export type EventMenuOptionListRelationFilter = {
+    every?: EventMenuOptionWhereInput
+    some?: EventMenuOptionWhereInput
+    none?: EventMenuOptionWhereInput
+  }
+
+  export type EventMenuOptionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EventMenuCategoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    required?: SortOrder
+    minChoices?: SortOrder
+    maxChoices?: SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EventMenuCategoryAvgOrderByAggregateInput = {
+    minChoices?: SortOrder
+    maxChoices?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type EventMenuCategoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    required?: SortOrder
+    minChoices?: SortOrder
+    maxChoices?: SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EventMenuCategoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    required?: SortOrder
+    minChoices?: SortOrder
+    maxChoices?: SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EventMenuCategorySumOrderByAggregateInput = {
+    minChoices?: SortOrder
+    maxChoices?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type EventMenuCategoryRelationFilter = {
+    is?: EventMenuCategoryWhereInput
+    isNot?: EventMenuCategoryWhereInput
+  }
+
+  export type EventMenuOptionCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    pricePerPlate?: SortOrder
+    includedInBase?: SortOrder
+    isActive?: SortOrder
+    sortOrder?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EventMenuOptionAvgOrderByAggregateInput = {
+    pricePerPlate?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type EventMenuOptionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    pricePerPlate?: SortOrder
+    includedInBase?: SortOrder
+    isActive?: SortOrder
+    sortOrder?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EventMenuOptionMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    pricePerPlate?: SortOrder
+    includedInBase?: SortOrder
+    isActive?: SortOrder
+    sortOrder?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EventMenuOptionSumOrderByAggregateInput = {
+    pricePerPlate?: SortOrder
+    sortOrder?: SortOrder
   }
 
   export type EventPaymentCountOrderByAggregateInput = {
     id?: SortOrder
     amountNGN?: SortOrder
     paymentMethod?: SortOrder
+    status?: SortOrder
     reference?: SortOrder
     paidAt?: SortOrder
     note?: SortOrder
@@ -17753,6 +20639,7 @@ export namespace Prisma {
     id?: SortOrder
     amountNGN?: SortOrder
     paymentMethod?: SortOrder
+    status?: SortOrder
     reference?: SortOrder
     paidAt?: SortOrder
     note?: SortOrder
@@ -17763,6 +20650,7 @@ export namespace Prisma {
     id?: SortOrder
     amountNGN?: SortOrder
     paymentMethod?: SortOrder
+    status?: SortOrder
     reference?: SortOrder
     paidAt?: SortOrder
     note?: SortOrder
@@ -18419,6 +21307,62 @@ export namespace Prisma {
     upsert?: MenuItemUpsertWithoutEventMenuSelectionInput
     connect?: MenuItemWhereUniqueInput
     update?: XOR<XOR<MenuItemUpdateToOneWithWhereWithoutEventMenuSelectionInput, MenuItemUpdateWithoutEventMenuSelectionInput>, MenuItemUncheckedUpdateWithoutEventMenuSelectionInput>
+  }
+
+  export type EventMenuOptionCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<EventMenuOptionCreateWithoutCategoryInput, EventMenuOptionUncheckedCreateWithoutCategoryInput> | EventMenuOptionCreateWithoutCategoryInput[] | EventMenuOptionUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: EventMenuOptionCreateOrConnectWithoutCategoryInput | EventMenuOptionCreateOrConnectWithoutCategoryInput[]
+    createMany?: EventMenuOptionCreateManyCategoryInputEnvelope
+    connect?: EventMenuOptionWhereUniqueInput | EventMenuOptionWhereUniqueInput[]
+  }
+
+  export type EventMenuOptionUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<EventMenuOptionCreateWithoutCategoryInput, EventMenuOptionUncheckedCreateWithoutCategoryInput> | EventMenuOptionCreateWithoutCategoryInput[] | EventMenuOptionUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: EventMenuOptionCreateOrConnectWithoutCategoryInput | EventMenuOptionCreateOrConnectWithoutCategoryInput[]
+    createMany?: EventMenuOptionCreateManyCategoryInputEnvelope
+    connect?: EventMenuOptionWhereUniqueInput | EventMenuOptionWhereUniqueInput[]
+  }
+
+  export type EventMenuOptionUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<EventMenuOptionCreateWithoutCategoryInput, EventMenuOptionUncheckedCreateWithoutCategoryInput> | EventMenuOptionCreateWithoutCategoryInput[] | EventMenuOptionUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: EventMenuOptionCreateOrConnectWithoutCategoryInput | EventMenuOptionCreateOrConnectWithoutCategoryInput[]
+    upsert?: EventMenuOptionUpsertWithWhereUniqueWithoutCategoryInput | EventMenuOptionUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: EventMenuOptionCreateManyCategoryInputEnvelope
+    set?: EventMenuOptionWhereUniqueInput | EventMenuOptionWhereUniqueInput[]
+    disconnect?: EventMenuOptionWhereUniqueInput | EventMenuOptionWhereUniqueInput[]
+    delete?: EventMenuOptionWhereUniqueInput | EventMenuOptionWhereUniqueInput[]
+    connect?: EventMenuOptionWhereUniqueInput | EventMenuOptionWhereUniqueInput[]
+    update?: EventMenuOptionUpdateWithWhereUniqueWithoutCategoryInput | EventMenuOptionUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: EventMenuOptionUpdateManyWithWhereWithoutCategoryInput | EventMenuOptionUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: EventMenuOptionScalarWhereInput | EventMenuOptionScalarWhereInput[]
+  }
+
+  export type EventMenuOptionUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<EventMenuOptionCreateWithoutCategoryInput, EventMenuOptionUncheckedCreateWithoutCategoryInput> | EventMenuOptionCreateWithoutCategoryInput[] | EventMenuOptionUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: EventMenuOptionCreateOrConnectWithoutCategoryInput | EventMenuOptionCreateOrConnectWithoutCategoryInput[]
+    upsert?: EventMenuOptionUpsertWithWhereUniqueWithoutCategoryInput | EventMenuOptionUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: EventMenuOptionCreateManyCategoryInputEnvelope
+    set?: EventMenuOptionWhereUniqueInput | EventMenuOptionWhereUniqueInput[]
+    disconnect?: EventMenuOptionWhereUniqueInput | EventMenuOptionWhereUniqueInput[]
+    delete?: EventMenuOptionWhereUniqueInput | EventMenuOptionWhereUniqueInput[]
+    connect?: EventMenuOptionWhereUniqueInput | EventMenuOptionWhereUniqueInput[]
+    update?: EventMenuOptionUpdateWithWhereUniqueWithoutCategoryInput | EventMenuOptionUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: EventMenuOptionUpdateManyWithWhereWithoutCategoryInput | EventMenuOptionUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: EventMenuOptionScalarWhereInput | EventMenuOptionScalarWhereInput[]
+  }
+
+  export type EventMenuCategoryCreateNestedOneWithoutOptionsInput = {
+    create?: XOR<EventMenuCategoryCreateWithoutOptionsInput, EventMenuCategoryUncheckedCreateWithoutOptionsInput>
+    connectOrCreate?: EventMenuCategoryCreateOrConnectWithoutOptionsInput
+    connect?: EventMenuCategoryWhereUniqueInput
+  }
+
+  export type EventMenuCategoryUpdateOneRequiredWithoutOptionsNestedInput = {
+    create?: XOR<EventMenuCategoryCreateWithoutOptionsInput, EventMenuCategoryUncheckedCreateWithoutOptionsInput>
+    connectOrCreate?: EventMenuCategoryCreateOrConnectWithoutOptionsInput
+    upsert?: EventMenuCategoryUpsertWithoutOptionsInput
+    connect?: EventMenuCategoryWhereUniqueInput
+    update?: XOR<XOR<EventMenuCategoryUpdateToOneWithWhereWithoutOptionsInput, EventMenuCategoryUpdateWithoutOptionsInput>, EventMenuCategoryUncheckedUpdateWithoutOptionsInput>
   }
 
   export type EventOrderCreateNestedOneWithoutPaymentsInput = {
@@ -19527,18 +22471,18 @@ export namespace Prisma {
 
   export type EventMenuSelectionCreateWithoutMenuItemInput = {
     id?: string
-    quantityPerHead?: number
-    totalQuantity: number
-    unit: string
+    quantity?: number
+    unitPrice: number
+    totalPrice?: number
     notes?: string | null
     eventOrder: EventOrderCreateNestedOneWithoutMenuSelectionsInput
   }
 
   export type EventMenuSelectionUncheckedCreateWithoutMenuItemInput = {
     id?: string
-    quantityPerHead?: number
-    totalQuantity: number
-    unit: string
+    quantity?: number
+    unitPrice: number
+    totalPrice?: number
     notes?: string | null
     eventOrderId: string
   }
@@ -19623,12 +22567,12 @@ export namespace Prisma {
     OR?: EventMenuSelectionScalarWhereInput[]
     NOT?: EventMenuSelectionScalarWhereInput | EventMenuSelectionScalarWhereInput[]
     id?: StringFilter<"EventMenuSelection"> | string
-    quantityPerHead?: FloatFilter<"EventMenuSelection"> | number
-    totalQuantity?: FloatFilter<"EventMenuSelection"> | number
-    unit?: StringFilter<"EventMenuSelection"> | string
+    menuItemId?: StringFilter<"EventMenuSelection"> | string
+    quantity?: IntFilter<"EventMenuSelection"> | number
+    unitPrice?: IntFilter<"EventMenuSelection"> | number
+    totalPrice?: IntFilter<"EventMenuSelection"> | number
     notes?: StringNullableFilter<"EventMenuSelection"> | string | null
     eventOrderId?: StringFilter<"EventMenuSelection"> | string
-    menuItemId?: StringFilter<"EventMenuSelection"> | string
   }
 
   export type FoodPackOrderItemUpsertWithWhereUniqueWithoutMenuItemInput = {
@@ -19908,20 +22852,20 @@ export namespace Prisma {
 
   export type EventMenuSelectionCreateWithoutEventOrderInput = {
     id?: string
-    quantityPerHead?: number
-    totalQuantity: number
-    unit: string
+    quantity?: number
+    unitPrice: number
+    totalPrice?: number
     notes?: string | null
     menuItem: MenuItemCreateNestedOneWithoutEventMenuSelectionInput
   }
 
   export type EventMenuSelectionUncheckedCreateWithoutEventOrderInput = {
     id?: string
-    quantityPerHead?: number
-    totalQuantity: number
-    unit: string
-    notes?: string | null
     menuItemId: string
+    quantity?: number
+    unitPrice: number
+    totalPrice?: number
+    notes?: string | null
   }
 
   export type EventMenuSelectionCreateOrConnectWithoutEventOrderInput = {
@@ -19938,6 +22882,7 @@ export namespace Prisma {
     id?: string
     amountNGN: number
     paymentMethod: string
+    status?: $Enums.PaymentStatus
     reference?: string | null
     paidAt?: Date | string
     note?: string | null
@@ -19947,6 +22892,7 @@ export namespace Prisma {
     id?: string
     amountNGN: number
     paymentMethod: string
+    status?: $Enums.PaymentStatus
     reference?: string | null
     paidAt?: Date | string
     note?: string | null
@@ -20001,6 +22947,7 @@ export namespace Prisma {
     id?: StringFilter<"EventPayment"> | string
     amountNGN?: FloatFilter<"EventPayment"> | number
     paymentMethod?: StringFilter<"EventPayment"> | string
+    status?: EnumPaymentStatusFilter<"EventPayment"> | $Enums.PaymentStatus
     reference?: StringNullableFilter<"EventPayment"> | string | null
     paidAt?: DateTimeFilter<"EventPayment"> | Date | string
     note?: StringNullableFilter<"EventPayment"> | string | null
@@ -20045,6 +22992,8 @@ export namespace Prisma {
     confirmedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    serviceFeeNGN?: number
+    transportFeeNGN?: number
     payments?: EventPaymentCreateNestedManyWithoutEventOrderInput
   }
 
@@ -20086,6 +23035,8 @@ export namespace Prisma {
     confirmedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    serviceFeeNGN?: number
+    transportFeeNGN?: number
     payments?: EventPaymentUncheckedCreateNestedManyWithoutEventOrderInput
   }
 
@@ -20186,6 +23137,8 @@ export namespace Prisma {
     confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    serviceFeeNGN?: FloatFieldUpdateOperationsInput | number
+    transportFeeNGN?: FloatFieldUpdateOperationsInput | number
     payments?: EventPaymentUpdateManyWithoutEventOrderNestedInput
   }
 
@@ -20227,6 +23180,8 @@ export namespace Prisma {
     confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    serviceFeeNGN?: FloatFieldUpdateOperationsInput | number
+    transportFeeNGN?: FloatFieldUpdateOperationsInput | number
     payments?: EventPaymentUncheckedUpdateManyWithoutEventOrderNestedInput
   }
 
@@ -20279,6 +23234,140 @@ export namespace Prisma {
     FoodPackOrderItem?: FoodPackOrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
+  export type EventMenuOptionCreateWithoutCategoryInput = {
+    id?: string
+    name: string
+    description?: string | null
+    pricePerPlate: number
+    includedInBase?: boolean
+    isActive?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventMenuOptionUncheckedCreateWithoutCategoryInput = {
+    id?: string
+    name: string
+    description?: string | null
+    pricePerPlate: number
+    includedInBase?: boolean
+    isActive?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventMenuOptionCreateOrConnectWithoutCategoryInput = {
+    where: EventMenuOptionWhereUniqueInput
+    create: XOR<EventMenuOptionCreateWithoutCategoryInput, EventMenuOptionUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type EventMenuOptionCreateManyCategoryInputEnvelope = {
+    data: EventMenuOptionCreateManyCategoryInput | EventMenuOptionCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventMenuOptionUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: EventMenuOptionWhereUniqueInput
+    update: XOR<EventMenuOptionUpdateWithoutCategoryInput, EventMenuOptionUncheckedUpdateWithoutCategoryInput>
+    create: XOR<EventMenuOptionCreateWithoutCategoryInput, EventMenuOptionUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type EventMenuOptionUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: EventMenuOptionWhereUniqueInput
+    data: XOR<EventMenuOptionUpdateWithoutCategoryInput, EventMenuOptionUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type EventMenuOptionUpdateManyWithWhereWithoutCategoryInput = {
+    where: EventMenuOptionScalarWhereInput
+    data: XOR<EventMenuOptionUpdateManyMutationInput, EventMenuOptionUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type EventMenuOptionScalarWhereInput = {
+    AND?: EventMenuOptionScalarWhereInput | EventMenuOptionScalarWhereInput[]
+    OR?: EventMenuOptionScalarWhereInput[]
+    NOT?: EventMenuOptionScalarWhereInput | EventMenuOptionScalarWhereInput[]
+    id?: StringFilter<"EventMenuOption"> | string
+    name?: StringFilter<"EventMenuOption"> | string
+    description?: StringNullableFilter<"EventMenuOption"> | string | null
+    pricePerPlate?: FloatFilter<"EventMenuOption"> | number
+    includedInBase?: BoolFilter<"EventMenuOption"> | boolean
+    isActive?: BoolFilter<"EventMenuOption"> | boolean
+    sortOrder?: IntFilter<"EventMenuOption"> | number
+    categoryId?: StringFilter<"EventMenuOption"> | string
+    createdAt?: DateTimeFilter<"EventMenuOption"> | Date | string
+    updatedAt?: DateTimeFilter<"EventMenuOption"> | Date | string
+  }
+
+  export type EventMenuCategoryCreateWithoutOptionsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    required?: boolean
+    minChoices?: number
+    maxChoices?: number
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventMenuCategoryUncheckedCreateWithoutOptionsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    required?: boolean
+    minChoices?: number
+    maxChoices?: number
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventMenuCategoryCreateOrConnectWithoutOptionsInput = {
+    where: EventMenuCategoryWhereUniqueInput
+    create: XOR<EventMenuCategoryCreateWithoutOptionsInput, EventMenuCategoryUncheckedCreateWithoutOptionsInput>
+  }
+
+  export type EventMenuCategoryUpsertWithoutOptionsInput = {
+    update: XOR<EventMenuCategoryUpdateWithoutOptionsInput, EventMenuCategoryUncheckedUpdateWithoutOptionsInput>
+    create: XOR<EventMenuCategoryCreateWithoutOptionsInput, EventMenuCategoryUncheckedCreateWithoutOptionsInput>
+    where?: EventMenuCategoryWhereInput
+  }
+
+  export type EventMenuCategoryUpdateToOneWithWhereWithoutOptionsInput = {
+    where?: EventMenuCategoryWhereInput
+    data: XOR<EventMenuCategoryUpdateWithoutOptionsInput, EventMenuCategoryUncheckedUpdateWithoutOptionsInput>
+  }
+
+  export type EventMenuCategoryUpdateWithoutOptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    required?: BoolFieldUpdateOperationsInput | boolean
+    minChoices?: IntFieldUpdateOperationsInput | number
+    maxChoices?: IntFieldUpdateOperationsInput | number
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventMenuCategoryUncheckedUpdateWithoutOptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    required?: BoolFieldUpdateOperationsInput | boolean
+    minChoices?: IntFieldUpdateOperationsInput | number
+    maxChoices?: IntFieldUpdateOperationsInput | number
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type EventOrderCreateWithoutPaymentsInput = {
     id?: string
     orderRef: string
@@ -20317,6 +23406,8 @@ export namespace Prisma {
     confirmedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    serviceFeeNGN?: number
+    transportFeeNGN?: number
     menuSelections?: EventMenuSelectionCreateNestedManyWithoutEventOrderInput
   }
 
@@ -20358,6 +23449,8 @@ export namespace Prisma {
     confirmedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    serviceFeeNGN?: number
+    transportFeeNGN?: number
     menuSelections?: EventMenuSelectionUncheckedCreateNestedManyWithoutEventOrderInput
   }
 
@@ -20415,6 +23508,8 @@ export namespace Prisma {
     confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    serviceFeeNGN?: FloatFieldUpdateOperationsInput | number
+    transportFeeNGN?: FloatFieldUpdateOperationsInput | number
     menuSelections?: EventMenuSelectionUpdateManyWithoutEventOrderNestedInput
   }
 
@@ -20456,6 +23551,8 @@ export namespace Prisma {
     confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    serviceFeeNGN?: FloatFieldUpdateOperationsInput | number
+    transportFeeNGN?: FloatFieldUpdateOperationsInput | number
     menuSelections?: EventMenuSelectionUncheckedUpdateManyWithoutEventOrderNestedInput
   }
 
@@ -20733,9 +23830,9 @@ export namespace Prisma {
 
   export type EventMenuSelectionCreateManyMenuItemInput = {
     id?: string
-    quantityPerHead?: number
-    totalQuantity: number
-    unit: string
+    quantity?: number
+    unitPrice: number
+    totalPrice?: number
     notes?: string | null
     eventOrderId: string
   }
@@ -20750,27 +23847,27 @@ export namespace Prisma {
 
   export type EventMenuSelectionUpdateWithoutMenuItemInput = {
     id?: StringFieldUpdateOperationsInput | string
-    quantityPerHead?: FloatFieldUpdateOperationsInput | number
-    totalQuantity?: FloatFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     eventOrder?: EventOrderUpdateOneRequiredWithoutMenuSelectionsNestedInput
   }
 
   export type EventMenuSelectionUncheckedUpdateWithoutMenuItemInput = {
     id?: StringFieldUpdateOperationsInput | string
-    quantityPerHead?: FloatFieldUpdateOperationsInput | number
-    totalQuantity?: FloatFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     eventOrderId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EventMenuSelectionUncheckedUpdateManyWithoutMenuItemInput = {
     id?: StringFieldUpdateOperationsInput | string
-    quantityPerHead?: FloatFieldUpdateOperationsInput | number
-    totalQuantity?: FloatFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     eventOrderId?: StringFieldUpdateOperationsInput | string
   }
@@ -20833,17 +23930,18 @@ export namespace Prisma {
 
   export type EventMenuSelectionCreateManyEventOrderInput = {
     id?: string
-    quantityPerHead?: number
-    totalQuantity: number
-    unit: string
-    notes?: string | null
     menuItemId: string
+    quantity?: number
+    unitPrice: number
+    totalPrice?: number
+    notes?: string | null
   }
 
   export type EventPaymentCreateManyEventOrderInput = {
     id?: string
     amountNGN: number
     paymentMethod: string
+    status?: $Enums.PaymentStatus
     reference?: string | null
     paidAt?: Date | string
     note?: string | null
@@ -20851,35 +23949,36 @@ export namespace Prisma {
 
   export type EventMenuSelectionUpdateWithoutEventOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
-    quantityPerHead?: FloatFieldUpdateOperationsInput | number
-    totalQuantity?: FloatFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     menuItem?: MenuItemUpdateOneRequiredWithoutEventMenuSelectionNestedInput
   }
 
   export type EventMenuSelectionUncheckedUpdateWithoutEventOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
-    quantityPerHead?: FloatFieldUpdateOperationsInput | number
-    totalQuantity?: FloatFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
     menuItemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EventMenuSelectionUncheckedUpdateManyWithoutEventOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
-    quantityPerHead?: FloatFieldUpdateOperationsInput | number
-    totalQuantity?: FloatFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
     menuItemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EventPaymentUpdateWithoutEventOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
     amountNGN?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20889,6 +23988,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amountNGN?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20898,9 +23998,58 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amountNGN?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type EventMenuOptionCreateManyCategoryInput = {
+    id?: string
+    name: string
+    description?: string | null
+    pricePerPlate: number
+    includedInBase?: boolean
+    isActive?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventMenuOptionUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    pricePerPlate?: FloatFieldUpdateOperationsInput | number
+    includedInBase?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventMenuOptionUncheckedUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    pricePerPlate?: FloatFieldUpdateOperationsInput | number
+    includedInBase?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventMenuOptionUncheckedUpdateManyWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    pricePerPlate?: FloatFieldUpdateOperationsInput | number
+    includedInBase?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
@@ -20928,6 +24077,10 @@ export namespace Prisma {
      * @deprecated Use EventOrderCountOutputTypeDefaultArgs instead
      */
     export type EventOrderCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EventOrderCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use EventMenuCategoryCountOutputTypeDefaultArgs instead
+     */
+    export type EventMenuCategoryCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EventMenuCategoryCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */
@@ -20968,6 +24121,14 @@ export namespace Prisma {
      * @deprecated Use EventMenuSelectionDefaultArgs instead
      */
     export type EventMenuSelectionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EventMenuSelectionDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use EventMenuCategoryDefaultArgs instead
+     */
+    export type EventMenuCategoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EventMenuCategoryDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use EventMenuOptionDefaultArgs instead
+     */
+    export type EventMenuOptionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EventMenuOptionDefaultArgs<ExtArgs>
     /**
      * @deprecated Use EventPaymentDefaultArgs instead
      */

@@ -80,8 +80,8 @@ function LoginForm() {
           </div>
 
           {reason === "inactivity" && (
-            <div className="bg-amber-900/20 border border-amber-600/30 rounded-lg px-3 py-2 mb-5 text-center">
-              <p className="text-amber-400 text-xs">
+            <div className="bg-red-500/20 border border-red-600/30 rounded-lg px-3 py-2 mb-5 text-center">
+              <p className="text-red-400 text-xs font-semibold">
                 Session expired due to inactivity. Please log in again.
               </p>
             </div>

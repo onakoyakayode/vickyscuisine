@@ -20,7 +20,9 @@ const nextConfig = {
     ],
   },
   staticPageGenerationTimeout: 120,
-  serverExternalPackages: ["@prisma/client", "prisma"],
+  experimental: {
+    serverComponentsExternalPackages: ["package-name"],
+  },
 
   // Ensure environment variables are available
   env: {

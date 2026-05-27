@@ -43,6 +43,12 @@ const NAV = [
     roles: ["SUPERADMIN", "ADMIN", "CASHIER"],
   },
   {
+    href: "/admin/events",
+    label: "Events",
+    icon: ChefHat,
+    roles: ["SUPERADMIN", "ADMIN", "CASHIER"],
+  },
+  {
     href: "/admin/users",
     label: "Users",
     icon: Users,

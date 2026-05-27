@@ -266,23 +266,52 @@ exports.Prisma.EventOrderScalarFieldEnum = {
   quoteSentAt: 'quoteSentAt',
   confirmedAt: 'confirmedAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  serviceFeeNGN: 'serviceFeeNGN',
+  transportFeeNGN: 'transportFeeNGN'
 };
 
 exports.Prisma.EventMenuSelectionScalarFieldEnum = {
   id: 'id',
-  quantityPerHead: 'quantityPerHead',
-  totalQuantity: 'totalQuantity',
-  unit: 'unit',
+  menuItemId: 'menuItemId',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  totalPrice: 'totalPrice',
   notes: 'notes',
-  eventOrderId: 'eventOrderId',
-  menuItemId: 'menuItemId'
+  eventOrderId: 'eventOrderId'
+};
+
+exports.Prisma.EventMenuCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  required: 'required',
+  minChoices: 'minChoices',
+  maxChoices: 'maxChoices',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EventMenuOptionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  pricePerPlate: 'pricePerPlate',
+  includedInBase: 'includedInBase',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  categoryId: 'categoryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.EventPaymentScalarFieldEnum = {
   id: 'id',
   amountNGN: 'amountNGN',
   paymentMethod: 'paymentMethod',
+  status: 'status',
   reference: 'reference',
   paidAt: 'paidAt',
   note: 'note',
@@ -414,6 +443,8 @@ exports.Prisma.ModelName = {
   FoodPackOrderItem: 'FoodPackOrderItem',
   EventOrder: 'EventOrder',
   EventMenuSelection: 'EventMenuSelection',
+  EventMenuCategory: 'EventMenuCategory',
+  EventMenuOption: 'EventMenuOption',
   EventPayment: 'EventPayment'
 };
 

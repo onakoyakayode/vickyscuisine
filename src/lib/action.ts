@@ -5,12 +5,25 @@ import { EventType, VenueType, ServiceType } from "@/generated/prisma";
 
 import { revalidatePath } from "next/cache";
 import { db } from "./db";
+import { prisma } from "./prisma";
+import { nanoid } from "nanoid";
 
 // ─── Generate human-readable order ref ───────────────────────
 function generateOrderRef(): string {
   const year = new Date().getFullYear();
   const rand = Math.floor(1000 + Math.random() * 9000);
   return `EVT-${year}-${rand}`;
+}
+
+function getBasePriceForService(serviceType: ServiceType): number {
+  const prices: Record<ServiceType, number> = {
+    DELIVERY_ONLY: 3000,
+    PACKED_MEALS: 3500,
+    BUFFET_SETUP: 6000,
+    FULL_CATERING: 9000,
+    SMALL_CHOPS_ONLY: 0,
+  };
+  return prices[serviceType] || 0;
 }
 
 // ─── Submit Event / Bulk Order ────────────────────────────────
@@ -20,23 +33,134 @@ export type EventOrderInput = {
   clientEmail?: string;
   clientWhatsApp?: string;
   eventType: EventType;
-  eventDate: string; // ISO string from date input
+  eventDate: string;
   eventTime?: string;
   guestCount: number;
   venueType?: VenueType;
   venueAddress?: string;
   venueLGA?: string;
   serviceType: ServiceType;
-  menuItemIds?: string[]; // selected menu item IDs
-  dietaryNotes?: string;
+  menuSelections: Array<{
+    menuItemId: string;
+    quantity: number;
+    unitPrice: number;
+  }>;
   specialRequests?: string;
 };
 
-export async function submitEventOrder(input: EventOrderInput) {
+type MenuSelectionInput = {
+  menuItemId: string;
+  quantity: number; // number of plates
+  unitPrice: number; // price per plate (₦)
+};
+
+type SubmitEventOrderInput = {
+  clientName: string;
+  clientPhone: string;
+  clientEmail?: string;
+  clientWhatsApp?: string;
+  eventType: EventType;
+  eventDate: string; // "YYYY-MM-DD"
+  eventTime?: string;
+  guestCount: number;
+  venueType?: VenueType;
+  venueLGA: string;
+  venueAddress: string;
+  landmark?: string; // NEW — closest landmark for easy navigation
+  serviceType: ServiceType;
+  specialRequests?: string;
+  menuSelections: MenuSelectionInput[];
+  estimatedTotal?: number; // client-side pre-calc for reference
+};
+
+// export async function submitEventOrder(input: EventOrderInput) {
+//   try {
+//     const basePricePerHead = getBasePriceForService(input.serviceType);
+//     const extrasPerPerson = input.menuSelections.reduce(
+//       (sum, item) => sum + (item.unitPrice || 0),
+//       0,
+//     );
+//     const totalPerPerson = basePricePerHead + extrasPerPerson;
+//     const subtotalNGN = input.guestCount * totalPerPerson;
+
+//     // Create the event order WITH menu selections as relations
+//     const order = await db.eventOrder.create({
+//       data: {
+//         orderRef: generateOrderRef(),
+//         clientName: input.clientName,
+//         clientPhone: input.clientPhone,
+//         clientEmail: input.clientEmail,
+//         clientWhatsApp: input.clientWhatsApp,
+//         eventType: input.eventType,
+//         eventDate: new Date(input.eventDate),
+//         eventTime: input.eventTime,
+//         guestCount: input.guestCount,
+//         venueType: input.venueType ?? "NOT_SPECIFIED",
+//         venueAddress: input.venueAddress,
+//         venueLGA: input.venueLGA,
+//         serviceType: input.serviceType,
+//         subtotalNGN: subtotalNGN,
+//         totalNGN: subtotalNGN,
+//         status: "PENDING_REVIEW",
+//         specialRequests: input.specialRequests,
+//         // Create menu selections as related records
+//         menuSelections: {
+//           create: input.menuSelections.map((selection) => ({
+//             menuItemId: selection.menuItemId,
+//             quantity: selection.quantity,
+//             unitPrice: selection.unitPrice,
+//             // totalPrice: selection.quantity * selection.unitPrice,
+//             // totalQuantity: selection.quantity,
+//             // unit: "plate",
+//           })),
+//         },
+//       },
+//       include: {
+//         menuSelections: true, // Include the relations in response
+//       },
+//     });
+
+//     return {
+//       success: true,
+//       orderRef: order.orderRef,
+//       id: order.id,
+//     };
+//   } catch (err) {
+//     console.error("submitEventOrder error:", err);
+//     return {
+//       success: false,
+//       error: err instanceof Error ? err.message : "Failed to submit order",
+//     };
+//   }
+// }
+
+// ─── Fetch all available menu items ──────────────────────────
+export async function submitEventOrder(input: SubmitEventOrderInput) {
   try {
-    const order = await db.eventOrder.create({
+    // Validate menu items exist
+    const itemIds = input.menuSelections.map((s) => s.menuItemId);
+    const dbItems = await prisma.menuItem.findMany({
+      where: { id: { in: itemIds } },
+      select: { id: true, priceNGN: true },
+    });
+
+    if (dbItems.length !== itemIds.length) {
+      return { success: false, error: "One or more menu items are invalid." };
+    }
+
+    // Re-calculate total server-side using DB prices (don't trust client prices)
+    const itemPriceMap = Object.fromEntries(
+      dbItems.map((i) => [i.id, i.priceNGN]),
+    );
+    const menuSubtotal = input.menuSelections.reduce((sum, s) => {
+      return sum + s.quantity * (itemPriceMap[s.menuItemId] ?? s.unitPrice);
+    }, 0);
+
+    const orderRef = `EVT-${nanoid(8).toUpperCase()}`;
+
+    const order = await prisma.eventOrder.create({
       data: {
-        orderRef: generateOrderRef(),
+        orderRef,
         clientName: input.clientName,
         clientPhone: input.clientPhone,
         clientEmail: input.clientEmail,
@@ -46,19 +170,31 @@ export async function submitEventOrder(input: EventOrderInput) {
         eventTime: input.eventTime,
         guestCount: input.guestCount,
         venueType: input.venueType ?? "NOT_SPECIFIED",
-        venueAddress: input.venueAddress,
         venueLGA: input.venueLGA,
+        venueAddress: input.venueAddress,
+        // Store landmark in specialRequests prefixed, or add a DB column (see schema note)
+        specialRequests: input.landmark
+          ? `[Landmark: ${input.landmark}]${input.specialRequests ? "\n" + input.specialRequests : ""}`
+          : input.specialRequests,
         serviceType: input.serviceType,
-        dietaryNotes: input.dietaryNotes,
-        specialRequests: input.specialRequests,
-        // Menu selections created separately after quote confirmation
+        subtotalNGN: menuSubtotal,
+        // totalNGN left null — admin calculates final after reviewing service fee etc.
+        menuSelections: {
+          create: input.menuSelections.map((s) => ({
+            optionId: s.menuItemId,
+            menuItemId: s.menuItemId,
+            quantity: s.quantity,
+            unitPrice: itemPriceMap[s.menuItemId] ?? s.unitPrice,
+            totalPrice:
+              s.quantity * (itemPriceMap[s.menuItemId] ?? s.unitPrice),
+          })),
+        },
       },
     });
 
-    revalidatePath("/events");
-    return { success: true, orderRef: order.orderRef, id: order.id };
-  } catch (err) {
-    console.error("submitEventOrder error:", err);
+    return { success: true, orderRef: order.orderRef };
+  } catch (error: any) {
+    console.error("[submitEventOrder]", error);
     return {
       success: false,
       error: "Failed to submit order. Please try again.",
@@ -66,7 +202,6 @@ export async function submitEventOrder(input: EventOrderInput) {
   }
 }
 
-// ─── Fetch all available menu items ──────────────────────────
 export async function getMenuItems() {
   return db.menuItem.findMany({
     where: { isAvailable: true },
@@ -83,8 +218,6 @@ export async function getMenuItems() {
     orderBy: [{ category: { name: "asc" } }, { name: "asc" }],
   });
 }
-
-console.log(getMenuItems(), "get Menu");
 
 // ─── Fetch featured menu items (for landing page) ────────────
 export async function getFeaturedMenuItems() {

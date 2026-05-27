@@ -1,13 +1,51 @@
-// src/app/events/page.tsx
 "use client";
 
+import { useState, useEffect } from "react";
 import { EventType, ServiceType, VenueType } from "@/generated/prisma";
 import { submitEventOrder } from "@/lib/action";
-import Image from "next/image";
-import Link from "next/link";
-import { useState, useTransition } from "react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import AiOrderBox from "@/components/AiOrderBox";
 
-// ─── Types ───────────────────────────────────────────────────
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+type MenuOption = {
+  id: string;
+  name: string;
+  description?: string;
+  priceNGN: number; // base price per plate (set by admin)
+  isAvailable: boolean;
+};
+
+type MenuCategory = {
+  id: string;
+  name: string;
+  slug: string;
+  sortOrder: number;
+  items: MenuOption[];
+  // rules injected by the API based on slug
+  required?: boolean;
+  minPlates?: number; // minimum plates customer must order
+  minProtein?: number; // for protein categories: must pick ≥ N proteins
+};
+
+type ServicePackage = {
+  id: string;
+  name: string;
+  serviceType: ServiceType;
+  basePricePerHead: number;
+  fromPrice: string;
+};
+
+type PlateSelection = {
+  menuItemId: string;
+  menuItemName: string;
+  categoryId: string;
+  categoryName: string;
+  plates: number; // number of plates ordered
+  pricePerPlate: number;
+};
+
 type FormState = {
   clientName: string;
   clientPhone: string;
@@ -20,11 +58,12 @@ type FormState = {
   venueType: VenueType | "";
   venueLGA: string;
   venueAddress: string;
+  landmark: string;
   serviceType: ServiceType | "";
-  menuItemIds: string[];
-  dietaryNotes: string;
   specialRequests: string;
 };
+
+// ─── Constants ────────────────────────────────────────────────────────────────
 
 const EVENT_TYPES: {
   value: EventType;
@@ -77,83 +116,27 @@ const EVENT_TYPES: {
   },
 ];
 
-const SERVICE_TYPES: {
-  value: ServiceType;
-  label: string;
-  fromPrice: string;
-}[] = [
-  {
-    value: "FULL_CATERING",
-    label: "Full Catering (Cook, Serve & Setup)",
-    fromPrice: "From ₦9,000/head",
-  },
-  {
-    value: "BUFFET_SETUP",
-    label: "Buffet Setup",
-    fromPrice: "From ₦6,000/head",
-  },
-  {
-    value: "PACKED_MEALS",
-    label: "Packed Meals / Party Packs",
-    fromPrice: "From ₦3,500/head",
-  },
-  {
-    value: "DELIVERY_ONLY",
-    label: "Food Delivery Only",
-    fromPrice: "From ₦3,000/head",
-  },
-  {
-    value: "SMALL_CHOPS_ONLY",
-    label: "Small Chops & Appetizers",
-    fromPrice: "Quote on request",
-  },
-];
-
-const STEPS = [
-  {
-    n: "1",
-    title: "Submit Request",
-    desc: "Fill out the event form with your details and preferences.",
-  },
-  {
-    n: "2",
-    title: "Get a Quote",
-    desc: "We review and send a personalised quote within 24 hours.",
-  },
-  {
-    n: "3",
-    title: "Confirm & Pay",
-    desc: "Approve the quote and pay 50% deposit to lock your date.",
-  },
-  {
-    n: "4",
-    title: "We Deliver!",
-    desc: "Sit back while we cook, set up and make your event legendary.",
-  },
-];
-
-const TESTIMONIALS = [
-  {
-    quote:
-      "Vicky's handled our daughter's wedding reception for 400 guests flawlessly. The jollof rice was the talk of the entire event!",
-    author: "Mrs. Funmilayo Adeyemi",
-    event: "Wedding Reception · Ikoyi",
-    stars: 5,
-  },
-  {
-    quote:
-      "Our company retreat was a hit largely because of the food. Vicky's team was professional, punctual and the variety was amazing.",
-    author: "Mr. Chukwuemeka Eze",
-    event: "Corporate Retreat · Victoria Island",
-    stars: 5,
-  },
-  {
-    quote:
-      "From booking to the last plate — everything was seamless. The egusi soup had everyone going back for more. Absolute 10/10!",
-    author: "Aisha Bello",
-    event: "Birthday Party · Surulere",
-    stars: 5,
-  },
+const LAGOS_LGAS = [
+  "Agege",
+  "Ajeromi-Ifelodun",
+  "Alimosho",
+  "Amuwo-Odofin",
+  "Apapa",
+  "Badagry",
+  "Epe",
+  "Eti-Osa",
+  "Ibeju-Lekki",
+  "Ifako-Ijaiye",
+  "Ikeja",
+  "Ikorodu",
+  "Kosofe",
+  "Lagos Island",
+  "Lagos Mainland",
+  "Mushin",
+  "Ojo",
+  "Oshodi-Isolo",
+  "Shomolu",
+  "Surulere",
 ];
 
 const INITIAL_FORM: FormState = {
@@ -168,214 +151,286 @@ const INITIAL_FORM: FormState = {
   venueType: "",
   venueLGA: "",
   venueAddress: "",
+  landmark: "",
   serviceType: "",
-  menuItemIds: [],
-  dietaryNotes: "",
   specialRequests: "",
 };
 
+// ─── Component ────────────────────────────────────────────────────────────────
+
 export default function EventsPage() {
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
-  const [result, setResult] = useState<{
-    success: boolean;
-    orderRef?: string;
-    error?: string;
-  } | null>(null);
-  const [isPending, startTransition] = useTransition();
+  const [categories, setCategories] = useState<MenuCategory[]>([]);
+  const [servicePackages, setServicePackages] = useState<ServicePackage[]>([]);
+  const [plateSelections, setPlateSelections] = useState<
+    Record<string, PlateSelection>
+  >({});
+  const [selectedService, setSelectedService] = useState<ServicePackage | null>(
+    null,
+  );
+  const [loadingMenu, setLoadingMenu] = useState(true);
+  const [result, setResult] = useState<any>(null);
+  const [isPending, setIsPending] = useState(false);
   const [activeEventType, setActiveEventType] = useState<EventType | null>(
     null,
   );
+  const [mobileTab, setMobileTab] = useState<"menu" | "details">("menu");
+  const [step, setStep] = useState<1 | 2>(1); // step 1 = menu, step 2 = details
 
   const set = (field: keyof FormState, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
-  function handleEventTypeClick(val: EventType) {
-    setActiveEventType(val);
-    set("eventType", val);
-  }
+  // ── Fetch menu from admin-configured DB ──────────────────────────────────
+  useEffect(() => {
+    const fetchMenu = async () => {
+      setLoadingMenu(true);
+      try {
+        const [catRes, pkgRes] = await Promise.all([
+          fetch("/api/events/menu-categories"),
+          fetch("/api/events/service-packages"),
+        ]);
+        const catData = await catRes.json();
+        const pkgData = await pkgRes.json();
+        if (catData.success) setCategories(catData.data);
+        if (pkgData.success) setServicePackages(pkgData.data);
+      } catch (err) {
+        console.error("Failed to load menu", err);
+      } finally {
+        setLoadingMenu(false);
+      }
+    };
+    fetchMenu();
+  }, []);
 
-  function handleSubmit() {
+  // ── Plate quantity controls ───────────────────────────────────────────────
+  const setPlates = (item: MenuOption, category: MenuCategory, qty: number) => {
+    const value = Math.max(0, qty);
+    setPlateSelections((prev) => {
+      if (value === 0) {
+        const { [item.id]: _, ...rest } = prev;
+        return rest;
+      }
+      return {
+        ...prev,
+        [item.id]: {
+          menuItemId: item.id,
+          menuItemName: item.name,
+          categoryId: category.id,
+          categoryName: category.name,
+          plates: value,
+          pricePerPlate: item.priceNGN,
+        },
+      };
+    });
+  };
+
+  const getPlates = (itemId: string) => plateSelections[itemId]?.plates || 0;
+
+  // ── Protein validation: categories with "protein" in slug need ≥ 2 items ─
+  const proteinCats = categories.filter(
+    (c) =>
+      c.slug.toLowerCase().includes("protein") ||
+      c.name.toLowerCase().includes("protein") ||
+      c.slug.toLowerCase().includes("swallow"),
+  );
+
+  const validateProtein = () => {
+    for (const cat of proteinCats) {
+      const selectedItems = cat.items.filter((i) => getPlates(i.id) > 0);
+      const minRequired = cat.minProtein ?? 2;
+      if (cat.required && selectedItems.length < minRequired) return false;
+    }
+    return true;
+  };
+
+  const validateRequiredCategories = () => {
+    for (const cat of categories) {
+      if (!cat.required) continue;
+      const hasSelection = cat.items.some((i) => getPlates(i.id) > 0);
+      if (!hasSelection) return false;
+    }
+    return validateProtein();
+  };
+
+  // ── Pricing calculations ─────────────────────────────────────────────────
+  const menuTotal = Object.values(plateSelections).reduce(
+    (sum, s) => sum + s.plates * s.pricePerPlate,
+    0,
+  );
+  const guestCountNum = parseInt(form.guestCount) || 0;
+  const serviceBase = selectedService
+    ? selectedService.basePricePerHead * guestCountNum
+    : 0;
+  const grandTotal = serviceBase + menuTotal;
+
+  // ── Submit ────────────────────────────────────────────────────────────────
+  async function handleSubmit() {
     if (
       !form.clientName ||
       !form.clientPhone ||
       !form.eventType ||
       !form.guestCount ||
       !form.eventDate ||
-      !form.serviceType
+      !form.serviceType ||
+      !form.venueAddress ||
+      !form.venueLGA
     ) {
       alert("Please fill in all required fields (*).");
       return;
     }
-    startTransition(async () => {
-      const res = await submitEventOrder({
-        clientName: form.clientName,
-        clientPhone: form.clientPhone,
-        clientEmail: form.clientEmail || undefined,
-        clientWhatsApp: form.clientWhatsApp || undefined,
-        eventType: form.eventType as EventType,
-        eventDate: form.eventDate,
-        eventTime: form.eventTime || undefined,
-        guestCount: parseInt(form.guestCount),
-        venueType: (form.venueType as VenueType) || undefined,
-        venueLGA: form.venueLGA || undefined,
-        venueAddress: form.venueAddress || undefined,
-        serviceType: form.serviceType as ServiceType,
-        dietaryNotes: form.dietaryNotes || undefined,
-        specialRequests: form.specialRequests || undefined,
+    if (!validateRequiredCategories()) {
+      alert(
+        "Please complete all required menu selections (minimum 2 proteins per category).",
+      );
+      return;
+    }
+    setIsPending(true);
+
+    const menuSelections = Object.values(plateSelections).map((s) => ({
+      menuItemId: s.menuItemId,
+      quantity: s.plates,
+      unitPrice: s.pricePerPlate,
+    }));
+
+    try {
+      // Direct API call instead of server action
+      const response = await fetch("/api/events/order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          clientName: form.clientName,
+          clientPhone: form.clientPhone,
+          clientEmail: form.clientEmail || undefined,
+          clientWhatsApp: form.clientWhatsApp || undefined,
+          eventType: form.eventType,
+          eventDate: form.eventDate,
+          eventTime: form.eventTime || undefined,
+          guestCount: guestCountNum,
+          venueType: form.venueType || undefined,
+          venueLGA: form.venueLGA,
+          venueAddress: form.venueAddress,
+          serviceType: form.serviceType,
+          specialRequests: form.specialRequests || undefined,
+          menuSelections,
+        }),
       });
+
+      const res = await response.json();
       setResult(res);
-      if (res.success) setForm(INITIAL_FORM);
-      // scroll to result
+
+      if (res.success) {
+        setForm(INITIAL_FORM);
+        setPlateSelections({});
+        setSelectedService(null);
+        setActiveEventType(null);
+      }
+
       document
         .getElementById("form-result")
         ?.scrollIntoView({ behavior: "smooth" });
-    });
+    } catch (error) {
+      console.error("Submit error:", error);
+      setResult({ success: false, error: "Failed to submit order" });
+    } finally {
+      setIsPending(false);
+    }
   }
 
+  // ─────────────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#fff] font-sans overflow-x-hidden">
-      {/* NAV */}
+    <div className="min-h-screen bg-white font-sans overflow-x-hidden">
+      <Navbar
+        transparent
+        active="/events"
+        buttonText="Get a Quote"
+        onButtonClick={() =>
+          document
+            .getElementById("booking-form")
+            ?.scrollIntoView({ behavior: "smooth" })
+        }
+      />
+      {/* <AiOrderBox
+  onResult={(draft) => {
+    // 1. Fill form
+    setForm((f) => ({
+      ...f,
+      eventType: draft.eventType || "",
+      guestCount: String(draft.guestCount || ""),
+      venueLGA: draft.venueLGA || "",
+    }));
 
-      <nav
-        className="fixed top-0 inset-x-0 z-50 flex items-center justify-between
-                              px-6 md:px-16 py-4 bg-[#FDF9F4]/92 backdrop-blur-md
-                              border-b border-[#C8963E]/10"
-      >
-        <Link
-          href="/"
-          className="font-sans text-2xl font-black text-[#1A0F05] tracking-tight"
-        >
-          <Image
-            src="/logo.jpg"
-            alt="Vicky's Cuisine Logo"
-            width={55}
-            height={32}
-            className="inline-block mr-2 drop-shadow-lg rounded-full"
-          />
-        </Link>
-        <ul className="hidden md:flex gap-8 list-none">
-          {[
-            { label: "Home", href: "/" },
-            { label: "Menu", href: "/menu" },
-            { label: "Events & Bulk", href: "/events" },
-            { label: "Food Packs", href: "/order" },
-          ].map((l) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                className={`text-sm font-semibold transition-colors
-                          ${
-                            l.href === "/events"
-                              ? "text-[#C8963E] border-b-2 border-[#C8963E] pb-0.5"
-                              : "text-[#085208] hover:text-[#C8963E]"
-                          }`}
-              >
-                {l.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <button
-          onClick={() =>
-            document
-              .getElementById("booking-form")
-              ?.scrollIntoView({ behavior: "smooth" })
-          }
-          className="bg-white text-[#21c55e] text-sm font-sans font-semibold px-5 py-2.5
-                             rounded-lg hover:bg-transparent hover:border hover:border-white hover:text-white transition-colors shadow"
-        >
-          Get a Quote
-        </button>
-      </nav>
+    // 2. Auto-scroll to form
+    document.getElementById("booking-form")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }}
+/> */}
 
-      {/* ── HERO ──────────────────────────────────────────────── */}
-      <section className="bg-gradient-to-r from-black to-[#21c55e] pt-28 pb-20 px-6 text-center relative overflow-hidden font-sans">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(200,150,62,0.22)_0%,transparent_65%)] pointer-events-none" />
+      {/* ── Hero ── */}
+      <section className="bg-gradient-to-r from-black to-green-500 pt-20 sm:pt-28 pb-12 sm:pb-20 px-5 sm:px-8 text-center relative overflow-hidden">
         <div className="relative z-10 max-w-3xl mx-auto">
-          <div
-            className="inline-flex items-center gap-2 bg-[#C8963E]/15 border border-[#C8963E]/35
-                          px-4 py-1.5 rounded-full text-xs font-semibold text-[#E8B96A]
-                          tracking-widest uppercase mb-6"
-          >
+          <div className="inline-flex items-center gap-2 bg-[#C8963E]/15 border border-[#C8963E]/35 px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-semibold text-[#E8B96A] tracking-widest uppercase mb-4 sm:mb-6">
             ✦ Events & Bulk Orders
           </div>
-          <h1
-            className="font-sans text-[clamp(2.5rem,5.5vw,4.5rem)] font-black
-                         text-white leading-[1.08] mb-4"
-          >
+          <h1 className="text-[clamp(2rem,6vw,4.5rem)] font-black text-white leading-[1.08] mb-3 sm:mb-4">
             Feed a Crowd with{" "}
             <em className="not-italic text-[#E8B96A] block">
               Flavour & Pride.
             </em>
           </h1>
-          <p className="text-white/65 font-sans text-base leading-relaxed mb-8 max-w-xl mx-auto">
-            From intimate family gatherings to grand weddings and corporate
-            events — Vicky&apos;s Cuisine handles it all with warmth, precision
-            and unforgettable taste.
+          <p className="text-white/65 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-xl mx-auto">
+            From intimate family gatherings to grand weddings — Vicky&apos;s
+            Cuisine handles it all with warmth, precision and unforgettable
+            taste.
           </p>
-          <div className="flex flex-wrap gap-2 justify-center">
-            {[
-              "💍 Weddings",
-              "🎂 Birthdays",
-              "🏢 Corporate",
-              "⛪ Church",
-              "🎓 Graduations",
-              "🥁 Owambes",
-            ].map((c) => (
-              <span
-                key={c}
-                className="bg-white/07 border border-white/10 text-white/70 text-xs bg-white/20
-                           px-4 py-1.5 rounded-full"
-              >
-                {c}
-              </span>
-            ))}
-          </div>
+          <button
+            onClick={() =>
+              document
+                .getElementById("booking-form")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="bg-[#e9bd6b] text-white font-semibold px-7 py-3.5 rounded-full text-sm hover:bg-[#d4a455] transition-all"
+          >
+            Get a Free Quote →
+          </button>
         </div>
       </section>
 
-      {/* ── EVENT TYPE CARDS ──────────────────────────────────── */}
-      <section className="px-6 md:px-16 py-20">
-        <div
-          className="flex items-center gap-3 text-xs font-semibold text-[#C8963E]
-                        tracking-[2px] uppercase mb-4"
-        >
-          <span className="w-8 h-px bg-[#C8963E]" /> Event Types
+      {/* ── Event Type Cards ── */}
+      <section className="px-4 sm:px-8 md:px-16 py-12 sm:py-20">
+        <div className="flex items-center gap-3 text-xs font-semibold text-[#C8963E] tracking-[2px] uppercase mb-3 sm:mb-4">
+          <span className="w-6 sm:w-8 h-px bg-[#C8963E]" /> Event Types
         </div>
-        <h2 className="font-sans text-[clamp(1.8rem,3vw,2.8rem)] font-black text-[#1A0F05] mb-10">
+        <h2 className="text-[clamp(1.5rem,4vw,2.8rem)] font-black text-[#1A0F05] mb-6 sm:mb-10">
           Every Occasion, Done Right
         </h2>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
           {EVENT_TYPES.map((et) => (
             <button
               key={et.value}
-              onClick={() => handleEventTypeClick(et.value)}
-              className={`text-left rounded-[20px] p-6 border transition-all duration-200
-                         hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(26,15,5,0.1)]
-                         relative overflow-hidden group
-                         ${
-                           activeEventType === et.value
-                             ? "bg-[#fff] border-[#21c55e] shadow-[0_16px_40px_rgba(26,15,5,0.15)]"
-                             : "bg-white border-[#C8963E]/12"
-                         }`}
+              onClick={() => {
+                setActiveEventType(et.value);
+                set("eventType", et.value);
+                document
+                  .getElementById("booking-form")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className={`text-left rounded-[16px] sm:rounded-[20px] p-4 sm:p-6 border transition-all duration-200 hover:-translate-y-0.5
+                ${
+                  activeEventType === et.value
+                    ? "bg-white border-green-500 shadow-lg"
+                    : "bg-white border-[#C8963E]/12 hover:border-[#C8963E]/30"
+                }`}
             >
-              <div
-                className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#21c55e]
-                               transform scale-x-0 group-hover:scale-x-100 transition-transform
-                               ${activeEventType === et.value ? "scale-x-100" : ""}`}
-              />
-              <span className="text-3xl block mb-3">{et.icon}</span>
-              <div
-                className={`font-mono font-bold text-base mb-1
-                               ${activeEventType === et.value ? "text-gray-800" : "text-[#1A0F05]"}`}
-              >
+              <span className="text-2xl sm:text-3xl block mb-2 sm:mb-3">
+                {et.icon}
+              </span>
+              <div className="font-bold text-sm sm:text-base mb-0.5 sm:mb-1 leading-tight">
                 {et.label}
               </div>
-              <div
-                className={`text-xs font-semibold
-                               ${activeEventType === et.value ? "text-gray-600" : "text-gray-400"}`}
-              >
+              <div className="text-[10px] sm:text-xs text-gray-400">
                 {et.minGuests}
               </div>
             </button>
@@ -383,426 +438,481 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* ── HOW IT WORKS ─────────────────────────────────────── */}
-      <section className="bg-gradient-to-br to-[#000000] from-[#21c55e] px-6 md:px-16 py-20">
-        <div
-          className="flex items-center gap-3 text-xs font-semibold text-[#fff]
-                        tracking-[2px] uppercase mb-4"
-        >
-          <span className="w-8 h-px bg-[#fff]" /> How It Works
-        </div>
-        <h2 className="font-sans text-[clamp(1.8rem,3vw,2.8rem)] font-bold text-[#fff] mb-12">
-          Simple, Stress-Free Booking
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative">
-          {/* connector line */}
-          <div
-            className="hidden md:block absolute top-[24px] left-[12%] right-[12%] h-px
-                          bg-[repeating-linear-gradient(to_right,#fff_0,#fff_6px,transparent_6px,transparent_14px)]"
-          />
-          {STEPS.map((s) => (
-            <div key={s.n} className="text-center relative z-10">
-              <div
-                className="w-12 h-12 rounded-full bg-[#1A0F05] border-[3px] border-[#fff]
-                              flex items-center justify-center mx-auto mb-4
-                              font-mono text-lg font-black text-[#fff]"
-              >
-                {s.n}
+      {/* ── Booking Form ── */}
+      <section
+        id="booking-form"
+        className="px-4 sm:px-8 md:px-16 py-12 sm:py-20 bg-gray-50"
+      >
+        <div className="max-w-7xl mx-auto">
+          <div id="form-result">
+            {result?.success && (
+              <div className="mb-6 sm:mb-8 bg-green-50 border border-green-200 rounded-2xl p-4 sm:p-5">
+                <div className="font-semibold text-green-800 text-base sm:text-lg mb-1">
+                  ✅ Order Submitted!
+                </div>
+                <p className="text-green-700 text-sm">
+                  Your reference: <strong>{result.orderRef}</strong>. We&apos;ll
+                  review your selections and send you an invoice within 24
+                  hours.
+                </p>
               </div>
-              <div className="font-semibold text-[#fff] mb-2">{s.title}</div>
-              <p className="text-sm text-gray-300 leading-relaxed">{s.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── BOOKING FORM ─────────────────────────────────────── */}
-      <section id="booking-form" className="px-6 md:px-16 py-20">
-        <div
-          className="flex items-center gap-3 text-xs font-semibold text-[#C8963E]
-                        tracking-[2px] uppercase mb-4"
-        >
-          <span className="w-8 h-px bg-[#C8963E]" /> Book Now
-        </div>
-        <h2 className="font-sans text-[clamp(1.8rem,3vw,2.8rem)] font-bold text-gray-800 mb-10">
-          Request an Event Quote
-        </h2>
-
-        {/* Success / Error banner */}
-        <div id="form-result">
-          {result?.success && (
-            <div className="mb-8 bg-green-50 border border-green-200 rounded-2xl p-5">
-              <div className="font-semibold text-green-800 text-lg mb-1">
-                ✅ Request Submitted!
+            )}
+            {result?.error && (
+              <div className="mb-6 sm:mb-8 bg-red-50 border border-red-200 rounded-2xl p-4 sm:p-5">
+                <p className="text-red-700 text-sm">{result.error}</p>
               </div>
-              <p className="text-green-700 text-sm">
-                Your reference: <strong>{result.orderRef}</strong>. We&apos;ll
-                contact you within 24 hours with a personalised quote.
-              </p>
+            )}
+          </div>
+
+          {/* Mobile price summary */}
+          <div className="lg:hidden mb-4 bg-gradient-to-r from-green-600 to-green-500 rounded-2xl p-4 text-white">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs text-green-100 mb-0.5">Estimated Total</p>
+                <p className="text-2xl font-black">
+                  ₦{grandTotal.toLocaleString()}
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="text-xs text-green-100 mb-0.5">Menu Cost</p>
+                <p className="text-lg font-bold">
+                  ₦{menuTotal.toLocaleString()}
+                </p>
+              </div>
             </div>
-          )}
-          {result?.error && (
-            <div className="mb-8 bg-red-50 border border-red-200 rounded-2xl p-5">
-              <p className="text-red-700 text-sm">{result.error}</p>
-            </div>
-          )}
-        </div>
+          </div>
 
-        <div className="grid md:grid-cols-[1fr_380px] gap-8 items-start">
-          {/* FORM */}
-          <div
-            className="bg-white rounded-3xl p-8 border border-[#C8963E]/12
-                          shadow-[0_8px_40px_rgba(26,15,5,0.05)]"
-          >
-            <h3 className="font-sans text-xl font-bold text-gray-700 mb-1">
-              Event Details
-            </h3>
-            <p className="text-sm text-[#6B5540] mb-7">
-              Fields marked <span className="text-[#C8963E]">*</span> are
-              required.
-            </p>
-
-            {/* Row 1 */}
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <Field label="Full Name" req>
-                <input
-                  value={form.clientName}
-                  onChange={(e) => set("clientName", e.target.value)}
-                  placeholder="e.g. Adaeze Okafor"
-                  className={inputCls}
-                />
-              </Field>
-              <Field label="Phone Number" req>
-                <input
-                  value={form.clientPhone}
-                  onChange={(e) => set("clientPhone", e.target.value)}
-                  placeholder="+234 800 000 0000"
-                  type="tel"
-                  className={inputCls}
-                />
-              </Field>
-            </div>
-
-            {/* Row 2 */}
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <Field label="Email Address">
-                <input
-                  value={form.clientEmail}
-                  onChange={(e) => set("clientEmail", e.target.value)}
-                  placeholder="adaeze@email.com"
-                  type="email"
-                  className={inputCls}
-                />
-              </Field>
-              <Field label="WhatsApp Number">
-                <input
-                  value={form.clientWhatsApp}
-                  onChange={(e) => set("clientWhatsApp", e.target.value)}
-                  placeholder="+234 800 000 0000"
-                  type="tel"
-                  className={inputCls}
-                />
-              </Field>
-            </div>
-
-            {/* Row 3 */}
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <Field label="Event Type" req>
-                <select
-                  value={form.eventType}
-                  onChange={(e) =>
-                    set("eventType", e.target.value as EventType)
-                  }
-                  className={inputCls}
-                >
-                  <option value="">Select event type</option>
-                  {EVENT_TYPES.map((et) => (
-                    <option key={et.value} value={et.value}>
-                      {et.label}
-                    </option>
-                  ))}
-                </select>
-              </Field>
-              <Field label="Guest Count" req>
-                <input
-                  value={form.guestCount}
-                  onChange={(e) => set("guestCount", e.target.value)}
-                  placeholder="e.g. 250"
-                  type="number"
-                  min="1"
-                  className={inputCls}
-                />
-              </Field>
-            </div>
-
-            {/* Row 4 */}
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <Field label="Event Date" req>
-                <input
-                  value={form.eventDate}
-                  onChange={(e) => set("eventDate", e.target.value)}
-                  type="date"
-                  className={inputCls}
-                  min={new Date().toISOString().split("T")[0]}
-                />
-              </Field>
-              <Field label="Preferred Time">
-                <input
-                  value={form.eventTime}
-                  onChange={(e) => set("eventTime", e.target.value)}
-                  type="time"
-                  className={inputCls}
-                />
-              </Field>
-            </div>
-
-            {/* Row 5 */}
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <Field label="LGA / Area">
-                <input
-                  value={form.venueLGA}
-                  onChange={(e) => set("venueLGA", e.target.value)}
-                  placeholder="e.g. Lekki, Surulere"
-                  className={inputCls}
-                />
-              </Field>
-              <Field label="Venue Address">
-                <input
-                  value={form.venueAddress}
-                  onChange={(e) => set("venueAddress", e.target.value)}
-                  placeholder="Full address (optional)"
-                  className={inputCls}
-                />
-              </Field>
-            </div>
-
-            {/* Service type */}
-            <Field label="Service Type" req>
-              <select
-                value={form.serviceType}
-                onChange={(e) =>
-                  set("serviceType", e.target.value as ServiceType)
-                }
-                className={inputCls}
-              >
-                <option value="">Select service type</option>
-                {SERVICE_TYPES.map((st) => (
-                  <option key={st.value} value={st.value}>
-                    {st.label} — {st.fromPrice}
-                  </option>
-                ))}
-              </select>
-            </Field>
-
-            <div className="mt-4">
-              <Field label="Preferred Menu Items">
-                <textarea
-                  value={form.dietaryNotes}
-                  onChange={(e) => set("dietaryNotes", e.target.value)}
-                  placeholder="e.g. Jollof Rice, Egusi Soup, Grilled Chicken, Moi Moi, Pounded Yam..."
-                  className={`${inputCls} min-h-[90px] resize-y`}
-                />
-              </Field>
-            </div>
-
-            <div className="mt-4 mb-7">
-              <Field label="Special Requests / Dietary Notes">
-                <textarea
-                  value={form.specialRequests}
-                  onChange={(e) => set("specialRequests", e.target.value)}
-                  placeholder="Dietary restrictions, halal requirements, budget range, special setup needs..."
-                  className={`${inputCls} min-h-[80px] resize-y`}
-                />
-              </Field>
-            </div>
-
+          {/* Mobile tab switcher */}
+          <div className="flex lg:hidden mb-4 bg-white rounded-xl border border-gray-200 p-1">
             <button
-              onClick={handleSubmit}
-              disabled={isPending}
-              className="w-full bg-green-500 hover:bg-green-600 active:scale-[0.99]
-              disabled:bg-cream-200 disabled:text-cream-400 disabled:cursor-not-allowed
-              text-white font-bold py-4 rounded-2xl transition-all duration-200
-              flex items-center justify-center gap-2 text-sm shadow-sm hover:shadow-md"
+              onClick={() => setMobileTab("menu")}
+              className={`flex-1 py-2.5 text-sm font-semibold rounded-lg transition-all
+                ${mobileTab === "menu" ? "bg-green-500 text-white shadow-sm" : "text-gray-500"}`}
             >
-              {isPending ? "Submitting…" : "Send Quote Request →"}
+              🍽️ Choose Menu
+            </button>
+            <button
+              onClick={() => setMobileTab("details")}
+              className={`flex-1 py-2.5 text-sm font-semibold rounded-lg transition-all
+                ${mobileTab === "details" ? "bg-green-500 text-white shadow-sm" : "text-gray-500"}`}
+            >
+              📋 Your Details
             </button>
           </div>
 
-          {/* SIDEBAR INFO */}
-          <div className="space-y-4">
-            <InfoCard title="📋 What's Included">
-              {[
-                "Freshly prepared dishes on event day",
-                "Experienced serving staff (full catering)",
-                "Chafing dishes & buffet setup equipment",
-                "Branded serving wear & napkins",
-                "Free delivery within Lagos Island*",
-                "Post-event cleanup (full catering only)",
-              ].map((t) => (
-                <div
-                  key={t}
-                  className="flex gap-2.5 items-start py-2 border-b border-gray-200 last:border-0"
-                >
-                  <span className="text-[#C8963E] text-lg leading-none mt-[-1px]">
-                    ✦
-                  </span>
-                  <span className="text-sm text-gray-600 leading-relaxed">
-                    {t}
-                  </span>
-                </div>
-              ))}
-            </InfoCard>
+          <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
+            {/* ── Menu Panel ── */}
+            <div
+              className={`lg:col-span-2 space-y-4 sm:space-y-6 ${mobileTab === "details" ? "hidden lg:block" : ""}`}
+            >
+              <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm border">
+                <h2 className="text-xl sm:text-2xl font-bold mb-1 sm:mb-2">
+                  Build Your Menu
+                </h2>
+                <p className="text-gray-500 text-sm mb-2">
+                  Enter the number of plates for each dish. Prices are per
+                  plate. Protein dishes require a minimum of 2 types.
+                </p>
 
-            <InfoCard title="💰 Pricing Guide">
-              {[
-                ["Packed meals", "From ₦3,500/head"],
-                ["Buffet service", "From ₦6,000/head"],
-                ["Full catering", "From ₦9,000/head"],
-                ["Deposit required", "50% to confirm booking"],
-                ["Balance due", "3 days before event"],
-              ].map(([k, v]) => (
-                <div
-                  key={k}
-                  className="flex justify-between items-center py-2 border-b border-[#1A0F05]/05 last:border-0 font-sans"
-                >
-                  <span className="text-sm text-gray-500">{k}</span>
-                  <span className="text-sm font-semibold text-gray-600">
-                    {v}
-                  </span>
-                </div>
-              ))}
-            </InfoCard>
-
-            <InfoCard title="📅 Booking Policy">
-              {[
-                "Book at least 2 weeks in advance",
-                "Saturday dates fill up quickly",
-                "Menu changes allowed up to 7 days before",
-                "Cancellations within 72hrs forfeit deposit",
-              ].map((t) => (
-                <div
-                  key={t}
-                  className="flex gap-2.5 items-start py-2 border-b border-gray-200 last:border-0 font-sans"
-                >
-                  <span className="text-gray-400 text-lg leading-none">•</span>
-                  <span className="text-sm text-gray-600">{t}</span>
-                </div>
-              ))}
-            </InfoCard>
-
-            <div className="bg-[#1A0F05] rounded-2xl p-6 text-white">
-              <h4 className="font-sans font-bold text-[#E8B96A] mb-4">
-                📞 Prefer to Call?
-              </h4>
-              {[
-                ["📱", "Phone", "+234 800 VCK FOOD"],
-                ["💬", "WhatsApp", "+234 800 VCK FOOD"],
-                ["📧", "Email", "events@vickyscuisine.ng"],
-                ["📍", "Location", "Lagos, Nigeria"],
-              ].map(([icon, label, val]) => (
-                <div
-                  key={label}
-                  className="flex items-center gap-3 mb-3 last:mb-0 font-sans"
-                >
-                  <span className="text-lg">{icon}</span>
-                  <div>
-                    <div className="text-[10px] text-white/80 uppercase tracking-widest">
-                      {label}
-                    </div>
-                    <div className="text-sm text-white/80">{val}</div>
+                {loadingMenu ? (
+                  <div className="py-16 text-center text-gray-400">
+                    <div className="w-8 h-8 border-2 border-green-400 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+                    Loading menu...
                   </div>
+                ) : categories.length === 0 ? (
+                  <div className="py-16 text-center text-gray-400">
+                    Menu is being configured. Please check back soon.
+                  </div>
+                ) : (
+                  categories.map((category) => {
+                    const isProteinCat =
+                      category.slug.toLowerCase().includes("protein") ||
+                      category.name.toLowerCase().includes("protein") ||
+                      category.slug.toLowerCase().includes("swallow");
+                    const selectedItems = category.items.filter(
+                      (i) => getPlates(i.id) > 0,
+                    );
+                    const minRequired = isProteinCat
+                      ? (category.minProtein ?? 2)
+                      : 1;
+                    const isComplete =
+                      !category.required || selectedItems.length >= minRequired;
+
+                    return (
+                      <div
+                        key={category.id}
+                        className="mb-6 sm:mb-8 pb-5 sm:pb-6 border-b last:border-0"
+                      >
+                        <div className="flex justify-between items-start mb-3 gap-2">
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-base sm:text-lg font-semibold leading-tight">
+                              {category.name}
+                              {category.required && (
+                                <span className="text-red-500 ml-1">*</span>
+                              )}
+                            </h3>
+                            {isProteinCat && category.required && (
+                              <p className="text-xs text-orange-600 mt-0.5">
+                                Select at least {minRequired} protein types
+                              </p>
+                            )}
+                          </div>
+                          {category.required && (
+                            <span
+                              className={`text-xs font-medium px-2 py-1 rounded flex-shrink-0
+                              ${isComplete ? "bg-green-100 text-green-700" : "bg-orange-100 text-orange-700"}`}
+                            >
+                              {isComplete
+                                ? "✓ Done"
+                                : `${selectedItems.length}/${minRequired} min`}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="space-y-2">
+                          {category.items
+                            .filter((i) => i.isAvailable)
+                            .map((item) => {
+                              const qty = getPlates(item.id);
+                              return (
+                                <div
+                                  key={item.id}
+                                  className={`flex items-center gap-3 p-3 rounded-xl border-2 transition-all
+                                    ${qty > 0 ? "border-green-400 bg-green-50" : "border-gray-100 bg-gray-50 hover:border-gray-200"}`}
+                                >
+                                  {/* Name + price */}
+                                  <div className="flex-1 min-w-0">
+                                    <div className="font-medium text-sm leading-tight">
+                                      {item.name}
+                                    </div>
+                                    <div className="text-xs text-green-700 font-semibold mt-0.5">
+                                      ₦{item.priceNGN.toLocaleString()} / plate
+                                    </div>
+                                    {item.description && (
+                                      <div className="text-xs text-gray-400 mt-0.5">
+                                        {item.description}
+                                      </div>
+                                    )}
+                                  </div>
+
+                                  {/* Plate counter */}
+                                  <div className="flex items-center gap-2 flex-shrink-0">
+                                    <button
+                                      onClick={() =>
+                                        setPlates(item, category, qty - 1)
+                                      }
+                                      disabled={qty === 0}
+                                      className="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center font-bold text-gray-600
+                                        hover:border-green-400 hover:text-green-600 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                                    >
+                                      −
+                                    </button>
+                                    <input
+                                      type="number"
+                                      min={0}
+                                      value={qty === 0 ? "" : qty}
+                                      placeholder="0"
+                                      onChange={(e) =>
+                                        setPlates(
+                                          item,
+                                          category,
+                                          parseInt(e.target.value) || 0,
+                                        )
+                                      }
+                                      className="w-14 text-center border-2 border-gray-200 rounded-lg py-1.5 text-sm font-bold
+                                        focus:border-green-400 focus:outline-none focus:ring-2 focus:ring-green-100 transition-all"
+                                    />
+                                    <button
+                                      onClick={() =>
+                                        setPlates(item, category, qty + 1)
+                                      }
+                                      className="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center font-bold text-gray-600
+                                        hover:border-green-400 hover:text-green-600 transition-all"
+                                    >
+                                      +
+                                    </button>
+                                  </div>
+
+                                  {/* Line total */}
+                                  <div className="w-20 text-right flex-shrink-0">
+                                    {qty > 0 ? (
+                                      <span className="text-sm font-bold text-green-700">
+                                        ₦
+                                        {(qty * item.priceNGN).toLocaleString()}
+                                      </span>
+                                    ) : (
+                                      <span className="text-xs text-gray-300">
+                                        —
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+
+                {/* Menu subtotal */}
+                {menuTotal > 0 && (
+                  <div className="mt-4 pt-4 border-t flex justify-between items-center">
+                    <span className="font-semibold text-gray-700">
+                      Menu Subtotal
+                    </span>
+                    <span className="text-xl font-black text-green-600">
+                      ₦{menuTotal.toLocaleString()}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Mobile: continue to details */}
+              <button
+                onClick={() => setMobileTab("details")}
+                className="w-full lg:hidden bg-green-500 text-white font-bold py-3.5 rounded-xl text-sm"
+              >
+                Continue to Your Details →
+              </button>
+            </div>
+
+            {/* ── Sidebar ── */}
+            <div
+              className={`space-y-4 sm:space-y-6 ${mobileTab === "menu" ? "hidden lg:block" : ""}`}
+            >
+              {/* Order Summary — desktop */}
+              <div className="hidden lg:block bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-5 sm:p-6 text-white sticky top-24">
+                <h3 className="font-bold text-base sm:text-lg mb-4">
+                  Order Summary
+                </h3>
+                <div className="space-y-2 text-sm max-h-64 overflow-y-auto pr-1">
+                  {Object.values(plateSelections).map((s) => (
+                    <div
+                      key={s.menuItemId}
+                      className="flex justify-between gap-2"
+                    >
+                      <span className="text-green-100 truncate">
+                        {s.menuItemName} ×{s.plates}
+                      </span>
+                      <span className="font-semibold flex-shrink-0">
+                        ₦{(s.plates * s.pricePerPlate).toLocaleString()}
+                      </span>
+                    </div>
+                  ))}
+                  {Object.keys(plateSelections).length === 0 && (
+                    <p className="text-green-200 text-xs italic">
+                      No items selected yet
+                    </p>
+                  )}
                 </div>
-              ))}
+                <div className="border-t border-white/20 pt-3 mt-3 space-y-2">
+                  {selectedService && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-green-100">
+                        Service base ({guestCountNum} guests):
+                      </span>
+                      <span>₦{serviceBase.toLocaleString()}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between text-sm">
+                    <span className="text-green-100">Menu total:</span>
+                    <span>₦{menuTotal.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between text-lg font-bold border-t border-white/20 pt-2 mt-2">
+                    <span>Est. Total:</span>
+                    <span>₦{grandTotal.toLocaleString()}</span>
+                  </div>
+                  <p className="text-green-200 text-[10px] mt-1">
+                    * Final invoice issued by admin after review
+                  </p>
+                </div>
+              </div>
+
+              {/* Details Form */}
+              <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border">
+                <h3 className="font-bold text-base sm:text-lg mb-4">
+                  Your Details
+                </h3>
+                <div className="space-y-3 sm:space-y-4">
+                  {/* Contact */}
+                  <input
+                    type="text"
+                    placeholder="Full Name *"
+                    value={form.clientName}
+                    onChange={(e) => set("clientName", e.target.value)}
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-100 transition-all"
+                  />
+                  <input
+                    type="tel"
+                    placeholder="Phone Number *"
+                    value={form.clientPhone}
+                    onChange={(e) => set("clientPhone", e.target.value)}
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-100 transition-all"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email Address"
+                    value={form.clientEmail}
+                    onChange={(e) => set("clientEmail", e.target.value)}
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-100 transition-all"
+                  />
+                  <input
+                    type="tel"
+                    placeholder="WhatsApp Number"
+                    value={form.clientWhatsApp}
+                    onChange={(e) => set("clientWhatsApp", e.target.value)}
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-100 transition-all"
+                  />
+
+                  {/* Event */}
+                  <select
+                    value={form.eventType}
+                    onChange={(e) =>
+                      set("eventType", e.target.value as EventType)
+                    }
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-400 transition-all"
+                  >
+                    <option value="">Select Event Type *</option>
+                    {EVENT_TYPES.map((et) => (
+                      <option key={et.value} value={et.value}>
+                        {et.label}
+                      </option>
+                    ))}
+                  </select>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <input
+                      type="number"
+                      placeholder="No. of Guests *"
+                      value={form.guestCount}
+                      onChange={(e) => set("guestCount", e.target.value)}
+                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-400 transition-all"
+                    />
+                    <input
+                      type="time"
+                      value={form.eventTime}
+                      onChange={(e) => set("eventTime", e.target.value)}
+                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-400 transition-all"
+                    />
+                  </div>
+
+                  <input
+                    type="date"
+                    value={form.eventDate}
+                    onChange={(e) => set("eventDate", e.target.value)}
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-400 transition-all"
+                  />
+
+                  {/* Service package */}
+                  <select
+                    value={form.serviceType}
+                    onChange={(e) => {
+                      set("serviceType", e.target.value as ServiceType);
+                      const pkg = servicePackages.find(
+                        (s) => s.serviceType === e.target.value,
+                      );
+                      setSelectedService(pkg || null);
+                    }}
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-400 transition-all"
+                  >
+                    <option value="">Select Service Package *</option>
+                    {servicePackages.map((pkg) => (
+                      <option key={pkg.id} value={pkg.serviceType}>
+                        {pkg.name} — {pkg.fromPrice}
+                      </option>
+                    ))}
+                  </select>
+
+                  {/* Venue */}
+                  <div className="pt-1">
+                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
+                      Venue / Location
+                    </p>
+                    <div className="space-y-3">
+                      <select
+                        value={form.venueType}
+                        onChange={(e) =>
+                          set("venueType", e.target.value as VenueType)
+                        }
+                        className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-400 transition-all"
+                      >
+                        <option value="">Venue Type</option>
+                        <option value="INDOOR">Indoor</option>
+                        <option value="OUTDOOR">Outdoor</option>
+                        <option value="OPEN_FIELD">Open Field</option>
+                        <option value="HALL">Hall / Banquet</option>
+                        <option value="HOME">Home / Residence</option>
+                      </select>
+
+                      <select
+                        value={form.venueLGA}
+                        onChange={(e) => set("venueLGA", e.target.value)}
+                        className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-400 transition-all"
+                      >
+                        <option value="">Local Government Area (LGA) *</option>
+                        {LAGOS_LGAS.map((lga) => (
+                          <option key={lga} value={lga}>
+                            {lga}
+                          </option>
+                        ))}
+                      </select>
+
+                      <input
+                        type="text"
+                        placeholder="Full Venue Address *"
+                        value={form.venueAddress}
+                        onChange={(e) => set("venueAddress", e.target.value)}
+                        className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-100 transition-all"
+                      />
+
+                      <input
+                        type="text"
+                        placeholder="Closest Landmark (e.g., beside GTBank, opposite Shoprite)"
+                        value={form.landmark}
+                        onChange={(e) => set("landmark", e.target.value)}
+                        className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-100 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <textarea
+                    placeholder="Special Requests (dietary needs, setup requirements, budget notes...)"
+                    value={form.specialRequests}
+                    onChange={(e) => set("specialRequests", e.target.value)}
+                    rows={3}
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm resize-none focus:outline-none focus:border-green-400 transition-all"
+                  />
+
+                  {/* Payment note */}
+                  <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800">
+                    <strong>💳 Payment Options:</strong> Pay in full before the
+                    event, or split into 2 instalments — 50% deposit to confirm,
+                    balance due 2 weeks before event day.
+                  </div>
+
+                  <button
+                    onClick={handleSubmit}
+                    disabled={
+                      isPending ||
+                      !validateRequiredCategories() ||
+                      !selectedService
+                    }
+                    className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3.5 rounded-xl transition-all
+                      disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed text-sm sm:text-base"
+                  >
+                    {isPending
+                      ? "Submitting..."
+                      : `Submit Order (₦${grandTotal.toLocaleString()}) →`}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ─────────────────────────────────────── */}
-      <section className="bg-[#FBF5EC] px-6 md:px-16 py-20">
-        <div
-          className="flex items-center gap-3 text-xs font-semibold text-[#C8963E]
-                        tracking-[2px] uppercase mb-4"
-        >
-          <span className="w-8 h-px bg-[#C8963E]" /> Client Love
-        </div>
-        <h2 className="font-sans text-[clamp(1.8rem,3vw,2.8rem)] font-bold text-[#1A0F05] mb-10">
-          What Our Event Clients Say
-        </h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {TESTIMONIALS.map((t) => (
-            <div
-              key={t.author}
-              className="bg-white shadow-xl shadow-gray-700/20 rounded-2xl p-7 border border-[#C8963E]/10"
-            >
-              <div className="text-[#C8963E] tracking-[3px] mb-4">
-                {"★".repeat(t.stars)}
-              </div>
-              <p className="text-sm text-[#6B5540] leading-relaxed italic mb-5">
-                &ldquo;{t.quote}&rdquo;
-              </p>
-              <div className="font-semibold text-sm text-[#1A0F05]">
-                {t.author}
-              </div>
-              <div className="text-xs text-[#C8963E] mt-0.5">{t.event}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="text-center px-6 py-6 border-t border-[#1A0F05]/08 text-sm text-[#6B5540]">
-        © {new Date().getFullYear()}{" "}
-        <strong className="text-[#C8963E]">Vicky&apos;s Cuisine</strong>. Lagos,
-        Nigeria.
-      </footer>
-
-      <style>{`
-        .font-playfair { font-family: 'Playfair Display', Georgia, serif; }
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
-      `}</style>
-    </div>
-  );
-}
-
-// ─── Small helpers ────────────────────────────────────────────
-const inputCls = `w-full px-4 py-3 bg-cream-50 border border-cream-200 rounded-xl
- text-sm text-green-900 placeholder-cream-500
-  focus:outline-none  focus:border-green-400 focus:ring-2 focus:ring-green-100  focus:outline-none focus:bg-white
-  transition-all font-sans`;
-
-function Field({
-  label,
-  req,
-  children,
-}: {
-  label: string;
-  req?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <label className="block text-xs font-semibold text-[#1A0F05] mb-1.5 tracking-wide">
-        {label} {req && <span className="text-[#C8963E]">*</span>}
-      </label>
-      {children}
-    </div>
-  );
-}
-
-function InfoCard({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="bg-white rounded-2xl p-5 border border-gray-200">
-      <h4 className="font-sans font-bold text-gray-600 mb-4 text-sm">
-        {title}
-      </h4>
-      {children}
+      <Footer />
     </div>
   );
 }
